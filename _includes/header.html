@@ -4,6 +4,9 @@
       <span class="logo-text">I<span>D</span>eA</span>
       <span class="logo-subtitle">Research Group</span>
     </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <nav class="site-nav">
       {% for link in site.nav_links %}
         <a href="{{ link.url | relative_url }}"
@@ -14,3 +17,23 @@
     </nav>
   </div>
 </header>
+
+<script>
+  (function() {
+    var btn = document.querySelector('.nav-toggle');
+    var nav = document.querySelector('.site-nav');
+
+    function closeNav() {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', function() {
+      var open = nav.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open);
+    });
+
+    // Close nav on back/forward navigation (bfcache restore)
+    window.addEventListener('pageshow', closeNav);
+  })();
+</script>

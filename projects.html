@@ -30,11 +30,13 @@ permalink: /projects/
 
       {% for proj in sorted_projects %}
         <div class="project-card" data-status="{{ proj.status }}">
-          {% if proj.image %}
-            <img class="project-image" src="{{ proj.image }}" alt="{{ proj.title }}">
-          {% else %}
-            <div class="project-image-placeholder">&#128300;</div>
-          {% endif %}
+          <div class="project-image-wrap">
+            {% if proj.image %}
+              <img class="project-image" src="{{ proj.image }}" alt="{{ proj.title }}">
+            {% else %}
+              <div class="project-image-placeholder">&#128300;</div>
+            {% endif %}
+          </div>
           <div class="project-body">
             <div class="project-header">
               <h3 class="project-title">{{ proj.title }}</h3>

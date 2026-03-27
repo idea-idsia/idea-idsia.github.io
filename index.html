@@ -71,11 +71,13 @@ title: Home
     <div class="projects-grid">
       {% for proj in active_projects limit:3 %}
         <div class="project-card">
-          {% if proj.image %}
-            <img class="project-image" src="{{ proj.image }}" alt="{{ proj.title }}">
-          {% else %}
-            <div class="project-image-placeholder">&#128300;</div>
-          {% endif %}
+          <div class="project-image-wrap">
+            {% if proj.image %}
+              <img class="project-image" src="{{ proj.image }}" alt="{{ proj.title }}">
+            {% else %}
+              <div class="project-image-placeholder">&#128300;</div>
+            {% endif %}
+          </div>
           <div class="project-body">
             <div class="project-header">
               <h3 class="project-title">{{ proj.title }}</h3>
