@@ -1,0 +1,16 @@
+title: "Language Emergence in Cooperative Multi-Agent Reinforcement Learning"
+authors:
+  - John Smith
+  - Jane Doe
+venue: ICML 2023
+year: 2023
+type: conference
+abstract: >
+  We analyse the conditions under which symbolic communication protocols
+  emerge in cooperative multi-agent settings and show that compositional
+  languages arise when agents face compositional tasks.
+pdf: https://arxiv.org/abs/2301.00000
+code: https://github.com/idea-group/marl-language
+tags:
+  - Multi-Agent Systems
+  - Reinforcement Learning

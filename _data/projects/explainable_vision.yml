@@ -1,0 +1,16 @@
+title: Explainable Vision Systems
+status: active
+start: 2023
+end:
+description: >
+  Building computer vision models whose decisions can be explained to
+  non-expert users through natural language and visual highlights.
+image:        # /assets/images/projects/explainable_vision.jpg
+tags:
+  - Computer Vision
+  - Explainable AI
+  - Deep Learning
+members:
+  - Anna Rossi
+  - John Smith
+funding: EU Horizon Europe

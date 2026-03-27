@@ -1,0 +1,16 @@
+title: "Towards Grounded Explanations for Vision Transformers"
+authors:
+  - Anna Rossi
+  - Jane Doe
+venue: CVPR 2024
+year: 2024
+type: conference
+abstract: >
+  We introduce a post-hoc explanation method for Vision Transformers that
+  generates both visual saliency maps and natural language justifications
+  aligned with human annotator judgements.
+pdf: https://arxiv.org/abs/2402.00000
+code:
+tags:
+  - Explainable AI
+  - Computer Vision

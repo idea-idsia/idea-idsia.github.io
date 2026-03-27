@@ -1,0 +1,141 @@
+---
+layout: home
+title: Home
+---
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <h1>IDeA<br>Research Group</h1>
+      <p class="hero-tagline">Intelligent Decision-making &amp; Autonomous Systems</p>
+      <p>
+        We develop algorithms and systems that enable machines to perceive,
+        reason, and act intelligently in complex real-world environments.
+      </p>
+    </div>
+    <div class="hero-image">
+      <!-- Replace with an actual photo: <img src="/assets/images/hero.jpg" alt="IDeA lab"> -->
+      <div class="hero-image-placeholder">&#127981;</div>
+    </div>
+  </div>
+</section>
+
+<!-- Stat strip -->
+<div class="stat-strip">
+  <div class="container stat-strip-inner">
+    {% assign total_people = site.data.people | size %}
+    {% assign total_projects = site.data.projects | size %}
+    {% assign total_pubs = site.data.publications | size %}
+    <div class="stat-item">
+      <div class="stat-number">{{ total_people }}</div>
+      <div class="stat-label">Researchers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">{{ total_projects }}</div>
+      <div class="stat-label">Projects</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">{{ total_pubs }}</div>
+      <div class="stat-label">Publications</div>
+    </div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">About IDeA</h2>
+    <p style="max-width:720px; font-size:1.05rem; line-height:1.8;">
+      The IDeA Research Group investigates the foundations and applications of
+      intelligent systems. Our work spans reinforcement learning, robotics,
+      computer vision, and human-machine interaction, with the goal of building
+      autonomous agents that are safe, efficient, and understandable.
+    </p>
+  </div>
+</section>
+
+<!-- Featured projects -->
+{% assign active_projects = "" | split: "" %}
+{% for proj_hash in site.data.projects %}
+  {% assign proj = proj_hash[1] %}
+  {% if proj.status == "active" %}
+    {% assign active_projects = active_projects | push: proj %}
+  {% endif %}
+{% endfor %}
+
+{% if active_projects.size > 0 %}
+<section class="section section--tinted">
+  <div class="container">
+    <h2 class="section-title">Active Projects</h2>
+    <div class="projects-grid">
+      {% for proj in active_projects limit:3 %}
+        <div class="project-card">
+          {% if proj.image %}
+            <img class="project-image" src="{{ proj.image }}" alt="{{ proj.title }}">
+          {% else %}
+            <div class="project-image-placeholder">&#128300;</div>
+          {% endif %}
+          <div class="project-body">
+            <div class="project-header">
+              <h3 class="project-title">{{ proj.title }}</h3>
+              <span class="badge badge--active">Active</span>
+            </div>
+            <p class="project-description">{{ proj.description }}</p>
+            <div class="project-tags">
+              {% for tag in proj.tags limit:3 %}
+                <span class="tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <p style="margin-top:1.5rem;">
+      <a href="{{ '/projects/' | relative_url }}" class="btn btn--outline">View all projects &rarr;</a>
+    </p>
+  </div>
+</section>
+{% endif %}
+
+<!-- Recent publications -->
+{% assign all_pubs = "" | split: "" %}
+{% for pub_hash in site.data.publications %}
+  {% assign all_pubs = all_pubs | push: pub_hash[1] %}
+{% endfor %}
+{% assign recent_pubs = all_pubs | sort: "year" | reverse %}
+
+{% if recent_pubs.size > 0 %}
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Recent Publications</h2>
+    <div class="publications-year-group">
+      {% for pub in recent_pubs limit:4 %}
+        <div class="publication-entry">
+          <div class="pub-type-col">
+            <span class="badge badge--{{ pub.type }}">{{ pub.type }}</span>
+          </div>
+          <div class="pub-body">
+            <div class="pub-title">
+              {% if pub.pdf %}
+                <a href="{{ pub.pdf }}" target="_blank" rel="noopener">{{ pub.title }}</a>
+              {% else %}
+                {{ pub.title }}
+              {% endif %}
+            </div>
+            <div class="pub-authors">{{ pub.authors | join: ", " }}</div>
+            <div class="pub-venue">{{ pub.venue }}, {{ pub.year }}</div>
+            <div class="pub-links">
+              {% if pub.pdf %}<a href="{{ pub.pdf }}" target="_blank">&#128196; PDF</a>{% endif %}
+              {% if pub.code %}<a href="{{ pub.code }}" target="_blank">&#128187; Code</a>{% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <p>
+      <a href="{{ '/publications/' | relative_url }}" class="btn btn--outline">All publications &rarr;</a>
+    </p>
+  </div>
+</section>
+{% endif %}

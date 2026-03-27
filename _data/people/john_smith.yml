@@ -1,0 +1,10 @@
+name: John Smith
+role: PhD Student
+email: john.smith@example.com
+website:
+photo:        # /assets/images/people/john_smith.jpg
+bio: Working on multi-agent systems and emergent communication.
+interests:
+  - Multi-Agent Systems
+  - Game Theory
+  - Deep Learning

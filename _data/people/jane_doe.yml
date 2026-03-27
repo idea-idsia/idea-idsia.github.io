@@ -1,0 +1,14 @@
+# Each field is optional except name and role.
+# Valid roles: Professor, Associate Professor, Assistant Professor,
+#              Postdoc, Research Scientist, PhD Student, Master Student, Visiting Researcher
+
+name: Jane Doe
+role: Professor
+email: jane.doe@example.com
+website: https://janedoe.example.com
+photo:        # /assets/images/people/jane_doe.jpg
+bio: Researching safe reinforcement learning and human-robot collaboration.
+interests:
+  - Reinforcement Learning
+  - Robotics
+  - Safe AI

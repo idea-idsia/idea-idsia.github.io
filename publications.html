@@ -1,0 +1,81 @@
+---
+layout: default
+title: Publications
+description: Our research publications
+permalink: /publications/
+---
+
+<div class="page-header">
+  <div class="container">
+    <h1>Publications</h1>
+    <p>Our research publications</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    {% comment %} Collect all publications and sort by year descending {% endcomment %}
+    {% assign all_pubs = "" | split: "" %}
+    {% for pub_hash in site.data.publications %}
+      {% assign all_pubs = all_pubs | push: pub_hash[1] %}
+    {% endfor %}
+    {% assign sorted_pubs = all_pubs | sort: "year" | reverse %}
+
+    {% comment %} Get unique years {% endcomment %}
+    {% assign years = "" | split: "" %}
+    {% for pub in sorted_pubs %}
+      {% unless years contains pub.year %}
+        {% assign years = years | push: pub.year %}
+      {% endunless %}
+    {% endfor %}
+
+    {% for year in years %}
+      <div class="publications-year-group">
+        <div class="year-label">{{ year }}</div>
+        {% for pub in sorted_pubs %}
+          {% if pub.year == year %}
+            <div class="publication-entry">
+              <div class="pub-type-col">
+                <span class="badge badge--{{ pub.type }}">{{ pub.type | capitalize }}</span>
+              </div>
+              <div class="pub-body">
+                <div class="pub-title">
+                  {% if pub.pdf %}
+                    <a href="{{ pub.pdf }}" target="_blank" rel="noopener">{{ pub.title }}</a>
+                  {% else %}
+                    {{ pub.title }}
+                  {% endif %}
+                </div>
+                <div class="pub-authors">{{ pub.authors | join: ", " }}</div>
+                <div class="pub-venue">{{ pub.venue }}</div>
+                {% if pub.tags %}
+                  <div style="margin: 4px 0 6px;">
+                    {% for tag in pub.tags %}
+                      <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+                <div class="pub-links">
+                  {% if pub.pdf %}
+                    <a href="{{ pub.pdf }}" target="_blank" rel="noopener">&#128196; PDF</a>
+                  {% endif %}
+                  {% if pub.code %}
+                    <a href="{{ pub.code }}" target="_blank" rel="noopener">&#128187; Code</a>
+                  {% endif %}
+                  {% if pub.abstract %}
+                    <details style="display:inline;">
+                      <summary style="cursor:pointer; font-size:0.875rem; color:#3aa8bb;">&#128214; Abstract</summary>
+                      <p style="margin-top:6px; font-size:0.875rem; color:#6b7280; max-width:680px;">{{ pub.abstract }}</p>
+                    </details>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+  </div>
+</section>

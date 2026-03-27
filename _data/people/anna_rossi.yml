@@ -1,0 +1,10 @@
+name: Anna Rossi
+role: Postdoc
+email: anna.rossi@example.com
+website: https://annarossi.example.com
+photo:        # /assets/images/people/anna_rossi.jpg
+bio: Developing explainable AI methods for autonomous decision-making.
+interests:
+  - Explainable AI
+  - Computer Vision
+  - Human-Machine Interaction

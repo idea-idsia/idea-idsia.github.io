@@ -1,0 +1,83 @@
+---
+layout: default
+title: Projects
+description: Our research projects
+permalink: /projects/
+---
+
+<div class="page-header">
+  <div class="container">
+    <h1>Projects</h1>
+    <p>Our research projects</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="active">Active</button>
+      <button class="filter-btn" data-filter="completed">Completed</button>
+    </div>
+
+    <div class="projects-grid" id="projects-grid">
+      {% assign all_projects = "" | split: "" %}
+      {% for proj_hash in site.data.projects %}
+        {% assign all_projects = all_projects | push: proj_hash[1] %}
+      {% endfor %}
+      {% assign sorted_projects = all_projects | sort: "start" | reverse %}
+
+      {% for proj in sorted_projects %}
+        <div class="project-card" data-status="{{ proj.status }}">
+          {% if proj.image %}
+            <img class="project-image" src="{{ proj.image }}" alt="{{ proj.title }}">
+          {% else %}
+            <div class="project-image-placeholder">&#128300;</div>
+          {% endif %}
+          <div class="project-body">
+            <div class="project-header">
+              <h3 class="project-title">{{ proj.title }}</h3>
+              <span class="badge badge--{{ proj.status }}">{{ proj.status | capitalize }}</span>
+            </div>
+            <p class="project-description">{{ proj.description }}</p>
+            <div class="project-tags">
+              {% for tag in proj.tags %}
+                <span class="tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            <div class="project-meta">
+              {% if proj.members.size > 0 %}
+                <span>&#128100; {{ proj.members | join: ", " }}</span>
+              {% endif %}
+              {% if proj.funding %}
+                <span>&#128176; {{ proj.funding }}</span>
+              {% endif %}
+              <span>
+                {{ proj.start }}{% if proj.end %}&ndash;{{ proj.end }}{% else %}&ndash;present{% endif %}
+              </span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.dataset.filter;
+      document.querySelectorAll('.project-card').forEach(function(card) {
+        if (filter === 'all' || card.dataset.status === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,106 @@
+---
+layout: default
+title: People
+description: Meet the IDeA research team
+permalink: /people/
+---
+
+<div class="page-header">
+  <div class="container">
+    <h1>People</h1>
+    <p>Meet the IDeA research team</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    {% assign role_order = "Professor,Associate Professor,Assistant Professor,Postdoc,Research Scientist,PhD Student,Master Student,Visiting Researcher" | split: "," %}
+
+    {% for role in role_order %}
+      {% assign members = "" | split: "" %}
+      {% for person_hash in site.data.people %}
+        {% assign person = person_hash[1] %}
+        {% if person.role == role %}
+          {% assign members = members | push: person %}
+        {% endif %}
+      {% endfor %}
+
+      {% if members.size > 0 %}
+        <div class="role-group">
+          <div class="role-label">{{ role }}s</div>
+          <div class="people-grid">
+            {% for person in members %}
+              <div class="person-card">
+                {% if person.photo %}
+                  <img class="person-photo" src="{{ person.photo }}" alt="{{ person.name }}">
+                {% else %}
+                  <div class="person-photo-placeholder">{{ person.name | slice: 0 }}</div>
+                {% endif %}
+                <div class="person-info">
+                  <div class="person-name">
+                    {% if person.website %}
+                      <a href="{{ person.website }}" target="_blank" rel="noopener">{{ person.name }}</a>
+                    {% else %}
+                      {{ person.name }}
+                    {% endif %}
+                  </div>
+                  <div class="person-role">{{ person.role }}</div>
+                  {% if person.bio %}
+                    <p class="person-bio">{{ person.bio }}</p>
+                  {% endif %}
+                  {% if person.interests %}
+                    <div class="person-interests">
+                      {% for interest in person.interests limit:3 %}
+                        <span class="tag">{{ interest }}</span>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                  <div class="person-links">
+                    {% if person.email %}
+                      <a href="mailto:{{ person.email }}">&#9993; Email</a>
+                    {% endif %}
+                    {% if person.website %}
+                      <a href="{{ person.website }}" target="_blank" rel="noopener">&#127760; Web</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    {% comment %} Catch-all for people with unrecognised roles {% endcomment %}
+    {% assign covered = "Professor,Associate Professor,Assistant Professor,Postdoc,Research Scientist,PhD Student,Master Student,Visiting Researcher" | split: "," %}
+    {% assign others = "" | split: "" %}
+    {% for person_hash in site.data.people %}
+      {% assign person = person_hash[1] %}
+      {% unless covered contains person.role %}
+        {% assign others = others | push: person %}
+      {% endunless %}
+    {% endfor %}
+    {% if others.size > 0 %}
+      <div class="role-group">
+        <div class="role-label">Other Members</div>
+        <div class="people-grid">
+          {% for person in others %}
+            <div class="person-card">
+              {% if person.photo %}
+                <img class="person-photo" src="{{ person.photo }}" alt="{{ person.name }}">
+              {% else %}
+                <div class="person-photo-placeholder">{{ person.name | slice: 0 }}</div>
+              {% endif %}
+              <div class="person-info">
+                <div class="person-name">{{ person.name }}</div>
+                <div class="person-role">{{ person.role }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</section>

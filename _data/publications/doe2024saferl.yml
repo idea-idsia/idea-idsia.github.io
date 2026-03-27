@@ -1,0 +1,19 @@
+# type: conference | journal | workshop | preprint
+# pdf and code are optional — remove lines if not applicable.
+
+title: "Constrained Policy Optimization with Adaptive Safety Boundaries"
+authors:
+  - Jane Doe
+  - John Smith
+venue: NeurIPS 2024
+year: 2024
+type: conference
+abstract: >
+  We propose an adaptive constraint-tightening scheme for safe reinforcement
+  learning that reduces constraint violations during training by 60% compared
+  to state-of-the-art baselines while preserving task performance.
+pdf: https://arxiv.org/abs/2401.00000
+code: https://github.com/idea-group/safe-rl
+tags:
+  - Reinforcement Learning
+  - Safety
