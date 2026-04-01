@@ -3,106 +3,122 @@
 
 // Base resets and typography
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
-  font-size: $font-size-md;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+    font-size: $font-size-md;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
-  font-family: $font-sans;
-  font-size: $font-size-md;
-  line-height: $line-height;
-  color: $color-text;
-  background-color: $color-gray-100;
-  overflow-x: hidden;
+    font-family: $font-sans;
+    font-size: $font-size-md;
+    line-height: $line-height;
+    color: $color-text;
+    background-color: $color-gray-100;
+    overflow-x: hidden;
 }
 
 a {
-  color: $color-teal-dark;
-  text-decoration: none;
-  transition: color 0.2s;
+    color: $color-teal-dark;
+    text-decoration: none;
+    transition: color 0.2s;
 
-  &:hover {
-    color: $color-teal;
-    text-decoration: underline;
-  }
+    &:hover {
+        color: $color-teal;
+        text-decoration: underline;
+    }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  line-height: 1.25;
-  color: $color-navy;
-  margin-bottom: $spacing-sm;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    line-height: 1.25;
+    color: $color-navy;
+    margin-bottom: $spacing-sm;
 }
 
-h1 { font-size: $font-size-3xl; }
-h2 { font-size: $font-size-2xl; }
-h3 { font-size: $font-size-xl; }
-h4 { font-size: $font-size-lg; }
+h1 {
+    font-size: $font-size-3xl;
+}
+h2 {
+    font-size: $font-size-2xl;
+}
+h3 {
+    font-size: $font-size-xl;
+}
+h4 {
+    font-size: $font-size-lg;
+}
 
 p {
-  margin-bottom: $spacing-sm;
+    margin-bottom: $spacing-sm;
 }
 
-ul, ol {
-  padding-left: $spacing-md;
-  margin-bottom: $spacing-sm;
+ul,
+ol {
+    padding-left: $spacing-md;
+    margin-bottom: $spacing-sm;
 }
 
 img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 .container {
-  max-width: $max-width;
-  margin: 0 auto;
-  padding: 0 $spacing-md;
+    max-width: $max-width;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
 }
 
 .section {
-  padding: 6rem 0;
+    padding: 6rem 0;
 }
 
 .section--tinted {
-  background-color: $color-teal-light;
-  border-top: 1px solid color.adjust($color-teal-light, $lightness: -6%);
-  border-bottom: 1px solid color.adjust($color-teal-light, $lightness: -6%);
+    background-color: $color-teal-light;
+    border-top: 1px solid color.adjust($color-teal-light, $lightness: -6%);
+    border-bottom: 1px solid color.adjust($color-teal-light, $lightness: -6%);
 }
 
 .section-title {
-  font-size: $font-size-2xl;
-  color: $color-navy;
-  margin-bottom: $spacing-lg;
-  padding-bottom: $spacing-xs;
-  border-bottom: 3px solid $color-teal;
-  display: inline-block;
+    font-size: $font-size-2xl;
+    color: $color-navy;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-xs;
+    border-bottom: 3px solid $color-teal;
+    display: inline-block;
 }
 
 .page-header {
-  background-color: $color-navy;
-  color: $color-white;
-  padding: $spacing-lg 0;
-
-  h1 {
+    background-color: $color-navy;
     color: $color-white;
-    font-size: $font-size-2xl;
-    margin-bottom: $spacing-xs;
-  }
+    padding: $spacing-lg 0;
 
-  p {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: $font-size-lg;
-    margin-bottom: 0;
-  }
+    h1 {
+        color: $color-white;
+        font-size: $font-size-2xl;
+        margin-bottom: $spacing-xs;
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: $font-size-lg;
+        margin-bottom: 0;
+    }
 }

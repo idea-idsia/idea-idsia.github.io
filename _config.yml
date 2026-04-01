@@ -1,37 +1,39 @@
 title: IDeA Research Group
 email: idea@example.com
 description: >-
-  IDeA is a research group working on intelligent decision-making and autonomous systems.
+    IDeA is a research group working on intelligent decision-making and autonomous systems.
 baseurl: ""
 url: ""
 
 # Navigation links (order matters)
 nav_links:
-  - title: People
-    url: /people/
-  - title: Projects
-    url: /projects/
-  - title: Publications
-    url: /publications/
+    - title: Home
+      url: /
+    - title: People
+      url: /people/
+    - title: Projects
+      url: /projects/
+    - title: Publications
+      url: /publications/
 
 collections:
-  projects:
-    output: true
-    permalink: /projects/:name/
-  publications:
-    output: true
-    permalink: /publications/:name/
+    projects:
+        output: true
+        permalink: /projects/:name/
+    publications:
+        output: true
+        permalink: /publications/:name/
 
 # Build settings
 plugins:
-  - jekyll-feed
+    - jekyll-feed
 
 sass:
-  sass_dir: _sass
-  style: compressed
+    sass_dir: _sass
+    style: compressed
 
 exclude:
-  - Gemfile
-  - Gemfile.lock
-  - vendor/
-  - .bundle/
+    - Gemfile
+    - Gemfile.lock
+    - vendor/
+    - .bundle/

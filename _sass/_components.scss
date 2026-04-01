@@ -1,695 +1,805 @@
 @use "variables" as *;
-
-// =============================================================================
-// Cards, tags, badges, and shared UI components
-// =============================================================================
+@use "sass:color";
 
 // --- Tag / Badge -------------------------------------------------------------
 .tag {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  background-color: $color-teal-light;
-  color: $color-teal-dark;
-  text-decoration: none;
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: $color-teal-light;
+    color: $color-teal-dark;
+    text-decoration: none;
 
-  &--navy {
-    background-color: $color-navy;
-    color: $color-white;
-  }
+    &--navy {
+        background-color: $color-navy;
+        color: $color-white;
+    }
 }
 
 .badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 4px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 
-  &--active   { background-color: #d1fae5; color: #065f46; }
-  &--completed { background-color: $color-gray-200; color: $color-text-muted; }
-  &--conference { background-color: #dbeafe; color: #1e40af; }
-  &--journal    { background-color: #ede9fe; color: #5b21b6; }
-  &--workshop   { background-color: #fef3c7; color: #92400e; }
-  &--preprint   { background-color: #fee2e2; color: #991b1b; }
+    &--active {
+        background-color: #d1fae5;
+        color: #065f46;
+    }
+    &--completed {
+        background-color: $color-gray-200;
+        color: $color-text-muted;
+    }
+    &--conference {
+        background-color: #dbeafe;
+        color: #1e40af;
+    }
+    &--journal {
+        background-color: #ede9fe;
+        color: #5b21b6;
+    }
+    &--workshop {
+        background-color: #fef3c7;
+        color: #92400e;
+    }
+    &--preprint {
+        background-color: #fee2e2;
+        color: #991b1b;
+    }
 }
 
 // --- Person Card -------------------------------------------------------------
 .people-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: $spacing-md;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: $spacing-md;
 }
 
 .person-card {
-  background: $color-white;
-  border-radius: $border-radius;
-  box-shadow: $shadow-card;
-  transition: box-shadow 0.25s, transform 0.25s;
-  text-align: center;
+    background: $color-white;
+    border-radius: $border-radius;
+    box-shadow: $shadow-card;
+    transition:
+        box-shadow 0.25s,
+        transform 0.25s;
+    text-align: center;
 
-  &:hover {
-    box-shadow: $shadow-hover;
-    transform: translateY(-3px);
-  }
-
-  .person-photo-wrap {
-    position: relative;
-    border-radius: $border-radius $border-radius 0 0;
-    overflow: hidden;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 36px; height: 36px;
-      border-top: 7px solid $color-teal;
-      border-left: 7px solid $color-teal;
-      z-index: 1;
-      pointer-events: none;
+    &:hover {
+        box-shadow: $shadow-hover;
+        transform: translateY(-3px);
     }
 
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0; right: 0;
-      width: 36px; height: 36px;
-      border-bottom: 7px solid $color-teal;
-      border-right: 7px solid $color-teal;
-      z-index: 1;
-      pointer-events: none;
-    }
-  }
+    .person-photo-wrap {
+        position: relative;
+        border-radius: $border-radius $border-radius 0 0;
+        overflow: hidden;
 
-  .person-photo {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    display: block;
-  }
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 36px;
+            height: 36px;
+            border-top: 7px solid $color-teal;
+            border-left: 7px solid $color-teal;
+            z-index: 1;
+            pointer-events: none;
+        }
 
-  .person-photo-placeholder {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background: linear-gradient(135deg, $color-navy 0%, $color-teal 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    color: rgba(255,255,255,0.6);
-    font-weight: 700;
-  }
-
-  .person-info {
-    padding: $spacing-sm;
-
-    .person-name {
-      font-size: $font-size-md;
-      font-weight: 600;
-      color: $color-navy;
-      margin-bottom: 2px;
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 36px;
+            height: 36px;
+            border-bottom: 7px solid $color-teal;
+            border-right: 7px solid $color-teal;
+            z-index: 1;
+            pointer-events: none;
+        }
     }
 
-    .person-role {
-      font-size: $font-size-sm;
-      color: $color-teal-dark;
-      font-weight: 500;
-      margin-bottom: $spacing-xs;
+    .person-photo {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        display: block;
     }
 
-    .person-bio {
-      font-size: $font-size-sm;
-      color: $color-text-muted;
-      margin-bottom: $spacing-xs;
+    .person-photo-placeholder {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        background: linear-gradient(135deg, $color-navy 0%, $color-teal 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 700;
     }
 
-    .person-interests {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      justify-content: center;
-      margin-bottom: $spacing-xs;
-    }
+    .person-info {
+        padding: $spacing-sm;
 
-    .person-links {
-      display: flex;
-      justify-content: center;
-      gap: $spacing-sm;
-      font-size: $font-size-sm;
+        .person-name {
+            font-size: $font-size-md;
+            font-weight: 600;
+            color: $color-navy;
+            margin-bottom: 2px;
+        }
+
+        .person-role {
+            font-size: $font-size-sm;
+            color: $color-teal-dark;
+            font-weight: 500;
+            margin-bottom: $spacing-xs;
+        }
+
+        .person-bio {
+            font-size: $font-size-sm;
+            color: $color-text-muted;
+            margin-bottom: $spacing-xs;
+        }
+
+        .person-interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            margin-bottom: $spacing-xs;
+        }
+
+        .person-links {
+            display: flex;
+            justify-content: center;
+            gap: $spacing-sm;
+            font-size: $font-size-sm;
+        }
     }
-  }
 }
 
 // --- Team Cards (home page) --------------------------------------------------
 .team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: $spacing-md;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: $spacing-md;
 }
 
 .team-card {
-  background: $color-white;
-  border-radius: $border-radius;
-  box-shadow: $shadow-card;
-  text-align: center;
-  overflow: hidden;
-  transition: box-shadow 0.25s, transform 0.25s;
-
-  &:hover {
-    box-shadow: $shadow-hover;
-    transform: translateY(-3px);
-  }
-
-  .team-photo-wrap {
-    position: relative;
+    background: $color-white;
+    border-radius: $border-radius;
+    box-shadow: $shadow-card;
+    text-align: center;
     overflow: hidden;
+    transition:
+        box-shadow 0.25s,
+        transform 0.25s;
 
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 28px; height: 28px;
-      border-top: 5px solid $color-teal;
-      border-left: 5px solid $color-teal;
-      z-index: 1;
-      pointer-events: none;
+    &:hover {
+        box-shadow: $shadow-hover;
+        transform: translateY(-3px);
     }
 
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0; right: 0;
-      width: 28px; height: 28px;
-      border-bottom: 5px solid $color-teal;
-      border-right: 5px solid $color-teal;
-      z-index: 1;
-      pointer-events: none;
+    .team-photo-wrap {
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 28px;
+            height: 28px;
+            border-top: 5px solid $color-teal;
+            border-left: 5px solid $color-teal;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 28px;
+            height: 28px;
+            border-bottom: 5px solid $color-teal;
+            border-right: 5px solid $color-teal;
+            z-index: 1;
+            pointer-events: none;
+        }
     }
-  }
 
-  .team-photo {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    display: block;
-  }
-
-  .team-photo-placeholder {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background: linear-gradient(135deg, $color-navy 0%, $color-teal 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: rgba(255,255,255,0.6);
-    font-weight: 700;
-  }
-
-  .team-info {
-    padding: $spacing-xs $spacing-xs $spacing-sm;
-  }
-
-  .team-name {
-    font-size: $font-size-sm;
-    font-weight: 600;
-    color: $color-navy;
-    margin-bottom: 2px;
-    line-height: 1.3;
-
-    a {
-      color: $color-navy;
-      text-decoration: none;
-      &:hover { color: $color-teal-dark; }
+    .team-photo {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        display: block;
     }
-  }
 
-  .team-role {
-    font-size: 0.75rem;
-    color: $color-teal-dark;
-    font-weight: 500;
-    margin-bottom: $spacing-xs;
-  }
-
-  .team-socials {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    flex-wrap: wrap;
-
-    a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background-color: $color-gray-100;
-      color: $color-text-muted;
-      font-size: 0.75rem;
-      text-decoration: none;
-      transition: background-color 0.2s, color 0.2s;
-
-      &:hover {
-        background-color: $color-teal;
-        color: $color-white;
-        text-decoration: none;
-      }
+    .team-photo-placeholder {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        background: linear-gradient(135deg, $color-navy 0%, $color-teal 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 700;
     }
-  }
+
+    .team-info {
+        padding: $spacing-xs $spacing-xs $spacing-sm;
+    }
+
+    .team-name {
+        font-size: $font-size-sm;
+        font-weight: 600;
+        color: $color-navy;
+        margin-bottom: 2px;
+        line-height: 1.3;
+
+        a {
+            color: $color-navy;
+            text-decoration: none;
+            &:hover {
+                color: $color-teal-dark;
+            }
+        }
+    }
+
+    .team-role {
+        font-size: 0.75rem;
+        color: $color-teal-dark;
+        font-weight: 500;
+        margin-bottom: $spacing-xs;
+    }
+
+    .team-socials {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        flex-wrap: wrap;
+
+        a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background-color: $color-gray-100;
+            color: $color-text-muted;
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition:
+                background-color 0.2s,
+                color 0.2s;
+
+            &:hover {
+                background-color: $color-teal;
+                color: $color-white;
+                text-decoration: none;
+            }
+        }
+    }
 }
 
 // --- Former Members ----------------------------------------------------------
 .former-members-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: $spacing-sm;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: $spacing-sm;
 }
 
 .former-member-card {
-  background: $color-white;
-  border-radius: $border-radius;
-  padding: $spacing-sm $spacing-md;
-  border-left: 4px solid $color-teal;
-  box-shadow: $shadow-card;
+    background: $color-white;
+    border-radius: $border-radius;
+    padding: $spacing-sm $spacing-md;
+    border-left: 4px solid $color-teal;
+    box-shadow: $shadow-card;
 
-  .former-member-name {
-    font-weight: 600;
-    color: $color-navy;
-    font-size: $font-size-md;
-    margin-bottom: 2px;
+    .former-member-name {
+        font-weight: 600;
+        color: $color-navy;
+        font-size: $font-size-md;
+        margin-bottom: 2px;
 
-    a {
-      color: $color-navy;
-      &:hover { color: $color-teal-dark; text-decoration: underline; }
+        a {
+            color: $color-navy;
+            &:hover {
+                color: $color-teal-dark;
+                text-decoration: underline;
+            }
+        }
     }
-  }
 
-  .former-member-role {
-    font-size: $font-size-sm;
-    color: $color-text-muted;
-    margin-bottom: 4px;
-  }
+    .former-member-role {
+        font-size: $font-size-sm;
+        color: $color-text-muted;
+        margin-bottom: 4px;
+    }
 
-  .former-member-now {
-    font-size: $font-size-sm;
-    color: $color-teal-dark;
-    font-weight: 500;
-    margin-bottom: 6px;
-  }
+    .former-member-now {
+        font-size: $font-size-sm;
+        color: $color-teal-dark;
+        font-weight: 500;
+        margin-bottom: 6px;
+    }
 
-  .former-member-interests {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
+    .former-member-interests {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
 }
 
 // --- Project Card ------------------------------------------------------------
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: $spacing-md;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: $spacing-md;
 }
 
 .project-card {
-  background: $color-white;
-  border-radius: $border-radius;
-  box-shadow: $shadow-card;
-  overflow: hidden;
-  transition: box-shadow 0.25s, transform 0.25s;
-  display: flex;
-  flex-direction: column;
-
-  &:hover {
-    box-shadow: $shadow-hover;
-    transform: translateY(-3px);
-  }
-
-  .project-image-wrap {
-    position: relative;
-    border-radius: $border-radius $border-radius 0 0;
+    background: $color-white;
+    border-radius: $border-radius;
+    box-shadow: $shadow-card;
     overflow: hidden;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 36px; height: 36px;
-      border-top: 7px solid $color-teal;
-      border-left: 7px solid $color-teal;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0; right: 0;
-      width: 36px; height: 36px;
-      border-bottom: 7px solid $color-teal;
-      border-right: 7px solid $color-teal;
-      z-index: 1;
-      pointer-events: none;
-    }
-  }
-
-  .project-image {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    display: block;
-  }
-
-  .project-image-placeholder {
-    width: 100%;
-    height: 180px;
-    background: linear-gradient(135deg, $color-navy 0%, $color-teal 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,0.4);
-    font-size: 3rem;
-  }
-
-  .project-body {
-    padding: $spacing-md;
-    flex: 1;
+    transition:
+        box-shadow 0.25s,
+        transform 0.25s;
     display: flex;
     flex-direction: column;
 
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: $spacing-xs;
-      gap: $spacing-xs;
+    &:hover {
+        box-shadow: $shadow-hover;
+        transform: translateY(-3px);
     }
 
-    .project-title {
-      font-size: $font-size-lg;
-      font-weight: 600;
-      color: $color-navy;
-      margin: 0;
-      flex: 1;
+    .project-image-wrap {
+        position: relative;
+        border-radius: $border-radius $border-radius 0 0;
+        overflow: hidden;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 36px;
+            height: 36px;
+            border-top: 7px solid $color-teal;
+            border-left: 7px solid $color-teal;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 36px;
+            height: 36px;
+            border-bottom: 7px solid $color-teal;
+            border-right: 7px solid $color-teal;
+            z-index: 1;
+            pointer-events: none;
+        }
     }
 
-    .project-description {
-      font-size: $font-size-sm;
-      color: $color-text-muted;
-      margin-bottom: $spacing-sm;
-      flex: 1;
+    .project-image {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
     }
 
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-bottom: $spacing-sm;
+    .project-image-placeholder {
+        width: 100%;
+        height: 180px;
+        background: linear-gradient(135deg, $color-navy 0%, $color-teal 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 3rem;
     }
 
-    .project-readmore {
-      margin-top: $spacing-xs;
-      font-size: $font-size-sm;
-      font-weight: 500;
+    .project-body {
+        padding: $spacing-md;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
 
-      a {
-        color: $color-teal-dark;
-        text-decoration: none;
-        &:hover { color: $color-teal; text-decoration: underline; }
-      }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: $spacing-xs;
+            gap: $spacing-xs;
+        }
+
+        .project-title {
+            font-size: $font-size-lg;
+            font-weight: 600;
+            color: $color-navy;
+            margin: 0;
+            flex: 1;
+        }
+
+        .project-description {
+            font-size: $font-size-sm;
+            color: $color-text-muted;
+            margin-bottom: $spacing-sm;
+            flex: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: $spacing-sm;
+        }
+
+        .project-readmore {
+            margin-top: $spacing-xs;
+            font-size: $font-size-sm;
+            font-weight: 500;
+
+            a {
+                color: $color-teal-dark;
+                text-decoration: none;
+                &:hover {
+                    color: $color-teal;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .project-meta {
+            font-size: $font-size-sm;
+            color: $color-text-muted;
+            border-top: 1px solid $color-gray-200;
+            padding-top: $spacing-xs;
+            margin-top: auto;
+
+            span {
+                margin-right: $spacing-sm;
+            }
+        }
     }
-
-    .project-meta {
-      font-size: $font-size-sm;
-      color: $color-text-muted;
-      border-top: 1px solid $color-gray-200;
-      padding-top: $spacing-xs;
-      margin-top: auto;
-
-      span { margin-right: $spacing-sm; }
-    }
-  }
 }
 
 // Filter bar (projects page)
 .filter-bar {
-  display: flex;
-  gap: $spacing-xs;
-  margin-bottom: $spacing-lg;
-  flex-wrap: wrap;
+    display: flex;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-lg;
+    flex-wrap: wrap;
 
-  .filter-btn {
-    padding: 6px 18px;
-    border: 2px solid $color-teal;
-    background: transparent;
-    color: $color-teal-dark;
-    border-radius: 20px;
-    font-size: $font-size-sm;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
+    .filter-btn {
+        padding: 6px 18px;
+        border: 2px solid $color-teal;
+        background: transparent;
+        color: $color-teal-dark;
+        border-radius: 20px;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
 
-    &:hover, &.active {
-      background: $color-teal;
-      color: $color-white;
+        &:hover,
+        &.active {
+            background: $color-teal;
+            color: $color-white;
+        }
     }
-  }
 }
 
 // --- Publications ------------------------------------------------------------
 .publications-year-group {
-  margin-bottom: $spacing-xl;
+    margin-bottom: $spacing-xl;
 
-  .year-label {
-    font-size: $font-size-xl;
-    font-weight: 700;
-    color: $color-teal-dark;
-    margin-bottom: $spacing-md;
-    padding-bottom: $spacing-xs;
-    border-bottom: 2px solid $color-teal-light;
-  }
+    &--two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0 $spacing-lg;
+      margin-bottom: 0;
+
+      @media (max-width: 700px) {
+        grid-template-columns: 1fr;
+      }
+
+      .publication-entry {
+        padding: $spacing-xs 0;
+      }
+    }
+
+    .year-label {
+        font-size: $font-size-xl;
+        font-weight: 700;
+        color: $color-teal-dark;
+        margin-bottom: $spacing-md;
+        padding-bottom: $spacing-xs;
+        border-bottom: 2px solid $color-teal-light;
+    }
 }
 
 .publication-entry {
-  display: flex;
-  gap: $spacing-md;
-  padding: $spacing-md 0;
-  border-bottom: 1px solid $color-gray-200;
+    display: flex;
+    gap: $spacing-md;
+    padding: $spacing-md 0;
+    border-bottom: 1px solid $color-gray-200;
 
-  &:last-child { border-bottom: none; }
-
-  .pub-type-col {
-    flex-shrink: 0;
-    width: 90px;
-    padding-top: 3px;
-  }
-
-  .pub-body {
-    flex: 1;
-
-    .pub-title {
-      font-size: $font-size-md;
-      font-weight: 600;
-      color: $color-navy;
-      margin-bottom: 4px;
-
-      a {
-        color: $color-navy;
-        &:hover { color: $color-teal-dark; text-decoration: underline; }
-      }
+    &:last-child {
+        border-bottom: none;
     }
 
-    .pub-authors {
-      font-size: $font-size-sm;
-      color: $color-text-muted;
-      margin-bottom: 4px;
+    .pub-type-col {
+        flex-shrink: 0;
+        width: 90px;
+        padding-top: 3px;
     }
 
-    .pub-venue {
-      font-size: $font-size-sm;
-      color: $color-text;
-      font-style: italic;
-      margin-bottom: $spacing-xs;
+    .pub-body {
+        flex: 1;
+
+        .pub-title {
+            font-size: $font-size-md;
+            font-weight: 600;
+            color: $color-navy;
+            margin-bottom: 4px;
+
+            a {
+                color: $color-navy;
+                &:hover {
+                    color: $color-teal-dark;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .pub-authors {
+            font-size: $font-size-sm;
+            color: $color-text-muted;
+            margin-bottom: 4px;
+        }
+
+        .pub-venue {
+            font-size: $font-size-sm;
+            color: $color-text;
+            font-style: italic;
+            margin-bottom: $spacing-xs;
+        }
+
+        .pub-links {
+            display: flex;
+            gap: $spacing-sm;
+            flex-wrap: wrap;
+
+            a {
+                font-size: $font-size-sm;
+                font-weight: 500;
+                color: $color-teal-dark;
+                display: flex;
+                align-items: center;
+                gap: 3px;
+                text-decoration: none;
+
+                &:hover {
+                    color: $color-teal;
+                    text-decoration: underline;
+                }
+            }
+        }
     }
-
-    .pub-links {
-      display: flex;
-      gap: $spacing-sm;
-      flex-wrap: wrap;
-
-      a {
-        font-size: $font-size-sm;
-        font-weight: 500;
-        color: $color-teal-dark;
-        display: flex;
-        align-items: center;
-        gap: 3px;
-        text-decoration: none;
-
-        &:hover { color: $color-teal; text-decoration: underline; }
-      }
-    }
-  }
 }
 
 // --- Hero (homepage) ---------------------------------------------------------
 .hero {
-  background-color: $color-navy;
-  color: $color-white;
-  padding: $spacing-xl 0;
-  position: relative;
-  overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: $color-teal;
-  }
-
-  .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $spacing-xl;
+    background: linear-gradient(
+        160deg,
+        $color-navy 0%,
+        color.adjust($color-navy, $lightness: -4%) 60%,
+        #0a1520 100%
+    );
+    color: $color-white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    padding-top: 12vh; // push center slightly below vertical middle
+    padding-bottom: 6vh;
+    position: relative;
+    overflow: hidden;
 
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
+    // Subtle grid texture
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba($color-teal, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba($color-teal, 0.04) 1px, transparent 1px);
+        background-size: 48px 48px;
+        pointer-events: none;
     }
-  }
 
-  .hero-text {
-    h1 {
-      font-size: $font-size-3xl;
-      color: $color-white;
-      margin-bottom: $spacing-sm;
+    // Teal glow
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 300px;
+        background: radial-gradient(
+            ellipse,
+            rgba($color-teal, 0.12) 0%,
+            transparent 70%
+        );
+        pointer-events: none;
+    }
 
-      @media (max-width: 768px) {
-        font-size: $font-size-2xl;
-      }
+    .hero-center {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        max-width: 720px;
+        padding: 0 $spacing-md;
+    }
+
+    .hero-logo-large {
+        font-size: clamp(4rem, 12vw, 8rem);
+        font-weight: 800;
+        color: $color-white;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        margin-bottom: $spacing-sm;
+
+        span {
+            color: $color-teal;
+        }
+    }
+
+    .hero-full-name {
+        font-size: clamp(0.85rem, 2vw, 1.1rem);
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        margin-bottom: $spacing-md;
     }
 
     .hero-tagline {
-      font-size: $font-size-lg;
-      color: $color-teal;
-      font-weight: 500;
-      margin-bottom: $spacing-md;
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+        color: $color-teal;
+        font-style: italic;
+        font-weight: 400;
+        margin-bottom: $spacing-md;
     }
 
-    p {
-      color: rgba(255,255,255,0.75);
-      font-size: $font-size-md;
-      margin-bottom: 0;
-    }
-  }
-
-  .hero-image {
-    position: relative;
-    border-radius: $border-radius;
-    overflow: hidden;
-    box-shadow: $shadow-hover;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 50px; height: 50px;
-      border-top: 8px solid $color-teal;
-      border-left: 8px solid $color-teal;
-      z-index: 1;
-      pointer-events: none;
+    .hero-description {
+        font-size: $font-size-md;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.75;
+        max-width: 560px;
+        margin: 0 auto $spacing-lg;
     }
 
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0; right: 0;
-      width: 50px; height: 50px;
-      border-bottom: 8px solid $color-teal;
-      border-right: 8px solid $color-teal;
-      z-index: 1;
-      pointer-events: none;
+    .hero-actions {
+        display: flex;
+        gap: $spacing-sm;
+        justify-content: center;
+        flex-wrap: wrap;
     }
 
-    img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      display: block;
-    }
+    .hero-scroll-hint {
+        position: absolute;
+        bottom: $spacing-lg;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
 
-    .hero-image-placeholder {
-      width: 100%;
-      height: 320px;
-      background: linear-gradient(135deg, $color-navy-light 0%, $color-teal 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.3);
-      font-size: 5rem;
+        span {
+            display: block;
+            width: 1px;
+            height: 48px;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba($color-teal, 0.6)
+            );
+            margin: 0 auto;
+            animation: scroll-hint 2s ease-in-out infinite;
+        }
     }
-  }
+}
+
+@keyframes scroll-hint {
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scaleY(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scaleY(0.6);
+    }
 }
 
 // --- Stat strip (homepage) ---------------------------------------------------
 .stat-strip {
-  background: $color-teal;
-  padding: $spacing-md 0;
+    background: $color-teal;
+    padding: $spacing-md 0;
 
-  .stat-strip-inner {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: $spacing-sm;
-  }
-
-  .stat-item {
-    text-align: center;
-
-    .stat-number {
-      font-size: $font-size-2xl;
-      font-weight: 700;
-      color: $color-navy;
-      line-height: 1;
+    .stat-strip-inner {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: $spacing-sm;
     }
 
-    .stat-label {
-      font-size: $font-size-sm;
-      color: $color-navy;
-      opacity: 0.8;
+    .stat-item {
+        text-align: center;
+
+        .stat-number {
+            font-size: $font-size-2xl;
+            font-weight: 700;
+            color: $color-navy;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: $font-size-sm;
+            color: $color-navy;
+            opacity: 0.8;
+        }
     }
-  }
 }
 
 // --- Buttons -----------------------------------------------------------------
 .btn {
-  display: inline-block;
-  padding: 10px 24px;
-  border-radius: $border-radius;
-  font-weight: 600;
-  font-size: $font-size-sm;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s;
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: $border-radius;
+    font-weight: 600;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
 
-  &--primary {
-    background: $color-teal;
-    color: $color-navy;
-    &:hover { background: $color-teal-dark; color: $color-white; text-decoration: none; }
-  }
+    &--primary {
+        background: $color-teal;
+        color: $color-navy;
+        &:hover {
+            background: $color-teal-dark;
+            color: $color-white;
+            text-decoration: none;
+        }
+    }
 
-  &--outline {
-    border: 2px solid $color-teal;
-    color: $color-teal;
-    background: transparent;
-    &:hover { background: $color-teal; color: $color-white; text-decoration: none; }
-  }
+    &--outline {
+        border: 2px solid $color-teal;
+        color: $color-teal;
+        background: transparent;
+        &:hover {
+            background: $color-teal;
+            color: $color-white;
+            text-decoration: none;
+        }
+    }
 }

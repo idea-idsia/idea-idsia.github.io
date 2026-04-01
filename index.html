@@ -5,19 +5,21 @@ title: Home
 
 <!-- Hero -->
 <section class="hero">
-  <div class="container hero-inner">
-    <div class="hero-text">
-      <h1>IDeA<br>Research Group</h1>
-      <p class="hero-tagline">Intelligent Decision-making &amp; Autonomous Systems</p>
-      <p>
-        We develop algorithms and systems that enable machines to perceive,
-        reason, and act intelligently in complex real-world environments.
-      </p>
+  <div class="hero-center">
+    <div class="hero-logo-large">I<span>D</span>eA</div>
+    <div class="hero-full-name">Intelligent Decision-making &amp; Autonomous Systems</div>
+    <p class="hero-tagline">Pragmatic Approaches to Fundamental Research</p>
+    <p class="hero-description">
+      We develop algorithms and systems that enable machines to perceive,
+      reason, and act intelligently in complex real-world environments.
+    </p>
+    <div class="hero-actions">
+      <a href="{{ '/projects/' | relative_url }}" class="btn btn--primary">Our Projects</a>
+      <a href="{{ '/people/' | relative_url }}" class="btn btn--outline">Meet the Team</a>
     </div>
-    <div class="hero-image">
-      <!-- Replace with an actual photo: <img src="/assets/images/hero.jpg" alt="IDeA lab"> -->
-      <div class="hero-image-placeholder">&#127981;</div>
-    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span></span>
   </div>
 </section>
 
@@ -165,7 +167,7 @@ title: Home
 <section class="section section--tinted">
   <div class="container">
     <h2 class="section-title">Recent Publications</h2>
-    <div class="publications-year-group">
+    <div class="publications-year-group publications-year-group--two-col">
       {% for pub in recent_pubs limit:4 %}
         <div class="publication-entry">
           <div class="pub-type-col">

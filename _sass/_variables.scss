@@ -1,38 +1,34 @@
-// =============================================================================
-// EDIT THIS FILE TO CUSTOMIZE THE SITE'S VISUAL STYLE
-// =============================================================================
-
 // --- Colors ------------------------------------------------------------------
-$color-navy:        #0d1b2a;   // Header & footer background
-$color-navy-light:  #1a2e42;   // Hover state on nav
-$color-teal:        #5ec4d6;   // Primary accent: links, tags, badges, borders
-$color-teal-dark:   #3aa8bb;   // Accent hover state
-$color-teal-light:  #ddf0f5;   // Section background highlight
-$color-white:       #ffffff;
-$color-gray-100:    #f8f9fa;   // Page background
-$color-gray-200:    #e9ecef;   // Card borders, dividers
-$color-gray-400:    #adb5bd;   // Subtle borders
-$color-text:        #1a1a1a;   // Primary body text
-$color-text-muted:  #6b7280;   // Secondary / meta text
+$color-navy: #0d1b2a; // Header & footer background
+$color-navy-light: #1a2e42; // Hover state on nav
+$color-teal: #5ec4d6; // Primary accent: links, tags, badges, borders
+$color-teal-dark: #3aa8bb; // Accent hover state
+$color-teal-light: #ddf0f5; // Section background highlight
+$color-white: #ffffff;
+$color-gray-100: #f8f9fa; // Page background
+$color-gray-200: #e9ecef; // Card borders, dividers
+$color-gray-400: #adb5bd; // Subtle borders
+$color-text: #1a1a1a; // Primary body text
+$color-text-muted: #6b7280; // Secondary / meta text
 
 // --- Typography --------------------------------------------------------------
-$font-sans:    'Inter', 'Helvetica Neue', Arial, sans-serif;
-$font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+$font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+$font-mono: "JetBrains Mono", "Fira Code", monospace;
 $font-size-sm: 0.875rem;
 $font-size-md: 1rem;
 $font-size-lg: 1.125rem;
 $font-size-xl: 1.5rem;
 $font-size-2xl: 2rem;
 $font-size-3xl: 2.75rem;
-$line-height:  1.65;
+$line-height: 1.65;
 
 // --- Spacing & Layout --------------------------------------------------------
-$spacing-xs:  0.5rem;
-$spacing-sm:  1rem;
-$spacing-md:  1.5rem;
-$spacing-lg:  2.5rem;
-$spacing-xl:  4rem;
-$max-width:   1100px;
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2.5rem;
+$spacing-xl: 4rem;
+$max-width: 1100px;
 $border-radius: 6px;
 
 // --- Shadows -----------------------------------------------------------------

@@ -1,9 +1,14 @@
 <header class="site-header">
   <div class="container header-inner">
-    <a href="{{ '/' | relative_url }}" class="site-logo">
-      <span class="logo-text">I<span>D</span>eA</span>
-      <span class="logo-subtitle">Research Group</span>
-    </a>
+    <div class="site-logo">
+      <a href="{{ '/' | relative_url }}">
+        <span class="logo-text">I<span>D</span>eA</span>
+      </a>
+      <span class="logo-divider">|</span>
+      <a href="https://idsia.usi-supsi.ch/" target="_blank" rel="noopener">
+        <img class="logo-idsia-img" src="{{ '/assets/images/idsia.png' | relative_url }}" alt="IDSIA">
+      </a>
+    </div>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>

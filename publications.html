@@ -36,7 +36,11 @@ permalink: /publications/
               </div>
               <div class="pub-body">
                 <div class="pub-title">
+                  {% if pub.content.size > 5 %}
                   <a href="{{ pub.url | relative_url }}">{{ pub.title }}</a>
+                  {% else %}
+                  {{ pub.title }}
+                  {% endif %}
                 </div>
                 <div class="pub-authors">{{ pub.authors | join: ", " }}</div>
                 <div class="pub-venue">{{ pub.venue }}</div>

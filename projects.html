@@ -26,7 +26,11 @@ permalink: /projects/
 
       {% for proj in sorted_projects %}
         <div class="project-card" data-status="{{ proj.status }}">
+          {% if proj.content.size > 5 %}
           <a class="project-card-link" href="{{ proj.url | relative_url }}">
+          {% else %}
+          <div class="project-card-link">
+          {% endif %}
             <div class="project-image-wrap">
               {% if proj.image %}
                 <img class="project-image" src="{{ proj.image }}" alt="{{ proj.title }}">
@@ -34,11 +38,19 @@ permalink: /projects/
                 <div class="project-image-placeholder">&#128300;</div>
               {% endif %}
             </div>
+          {% if proj.content.size > 5 %}
           </a>
+          {% else %}
+          </div>
+          {% endif %}
           <div class="project-body">
             <div class="project-header">
               <h3 class="project-title">
+                {% if proj.content.size > 5 %}
                 <a href="{{ proj.url | relative_url }}">{{ proj.title }}</a>
+                {% else %}
+                {{ proj.title }}
+                {% endif %}
               </h3>
               <span class="badge badge--{{ proj.status }}">{{ proj.status | capitalize }}</span>
             </div>
