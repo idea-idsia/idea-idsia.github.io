@@ -146,33 +146,44 @@
 .site-footer {
     background-color: $color-navy;
     color: rgba(255, 255, 255, 0.6);
-    padding: $spacing-sm 0;
+    padding: $spacing-lg 0 $spacing-md;
     border-top: 4px solid $color-teal;
 
     .footer-inner {
-        display: flex;
-        flex-wrap: wrap;
-        gap: $spacing-md;
-        justify-content: space-between;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: $spacing-lg;
+        align-items: start;
     }
 
     .footer-brand {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.25rem;
+
         .logo-text {
-            font-size: $font-size-md;
+            font-size: 2rem;
             font-weight: 700;
             color: $color-white;
+            letter-spacing: -0.03em;
+            line-height: 1;
 
             span {
                 color: $color-teal;
             }
         }
 
-        p {
-            margin-top: 0.25rem;
-            font-size: $font-size-sm;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 0;
+        .footer-brand-rule {
+            display: block;
+            width: 1px;
+            height: 2.5rem;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .footer-idsia-logo {
+            height: 32px;
+            width: auto;
         }
     }
 
@@ -183,6 +194,10 @@
             text-transform: uppercase;
             letter-spacing: 0.08em;
             margin-bottom: $spacing-xs;
+
+            &:not(:first-child) {
+                margin-top: $spacing-sm;
+            }
         }
 
         ul {
@@ -191,7 +206,7 @@
             margin: 0;
 
             li {
-                margin-bottom: 0.25rem;
+                margin-bottom: 0.35rem;
             }
 
             a {
@@ -208,8 +223,16 @@
         }
     }
 
+    .footer-address {
+        margin-top: 0;
+        font-style: normal;
+        font-size: $font-size-sm;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.7;
+    }
+
     .footer-bottom {
-        margin-top: $spacing-sm;
+        margin-top: $spacing-md;
         padding-top: $spacing-xs;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         font-size: $font-size-sm;
