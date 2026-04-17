@@ -32,11 +32,12 @@ permalink: /projects/
           <div class="project-card-link">
           {% endif %}
             <div class="project-image-wrap">
-              {% if proj.image %}
-                <img class="project-image" src="{{ proj.image }}" alt="{{ proj.title }}">
+              {% if proj.cover_image %}
+                <img class="project-image" src="{{ proj.cover_image }}" alt="{{ proj.project_name }}">
               {% else %}
                 <div class="project-image-placeholder">&#128300;</div>
               {% endif %}
+              <span class="project-status-chip project-status-chip--{{ proj.status }}">{{ proj.status | capitalize }}</span>
             </div>
           {% if proj.content.size > 5 %}
           </a>
@@ -44,36 +45,26 @@ permalink: /projects/
           </div>
           {% endif %}
           <div class="project-body">
-            <div class="project-header">
-              <h3 class="project-title">
-                {% if proj.content.size > 5 %}
-                <a href="{{ proj.url | relative_url }}">{{ proj.title }}</a>
-                {% else %}
-                {{ proj.title }}
-                {% endif %}
-              </h3>
-              <span class="badge badge--{{ proj.status }}">{{ proj.status | capitalize }}</span>
+            <h3 class="project-title">
+              {% if proj.content.size > 5 %}
+              <a href="{{ proj.url | relative_url }}">{{ proj.project_name }}</a>
+              {% else %}
+              {{ proj.project_name }}
+              {% endif %}
+            </h3>
+            <div class="project-meta-header">
+              <span class="project-date-chip">{{ proj.start }}{% if proj.end %} &ndash; {{ proj.end }}{% else %} &ndash; present{% endif %}</span>
+              {% if proj.funding %}<span class="project-funding-badge">{{ proj.funding }}</span>{% endif %}
             </div>
-            <p class="project-description">{{ proj.description }}</p>
+            <p class="project-description">{{ proj.short_summary }}</p>
             <div class="project-tags">
-              {% for tag in proj.tags %}
-                <span class="tag">{{ tag }}</span>
+              {% for kw in proj.keywords %}
+                <span class="tag">{{ kw }}</span>
               {% endfor %}
-            </div>
-            <div class="project-meta">
-              {% if proj.members.size > 0 %}
-                <span>&#128100; {{ proj.members | join: ", " }}</span>
-              {% endif %}
-              {% if proj.funding %}
-                <span>&#128176; {{ proj.funding }}</span>
-              {% endif %}
-              <span>
-                {{ proj.start }}{% if proj.end %}&ndash;{{ proj.end }}{% else %}&ndash;present{% endif %}
-              </span>
             </div>
             {% if proj.content.size > 5 %}
             <div class="project-readmore">
-              <a href="{{ proj.url | relative_url }}">Read more &rarr;</a>
+              <a href="{{ proj.url | relative_url }}">Read more</a>
             </div>
             {% endif %}
           </div>

@@ -1,6 +1,6 @@
-# IDeA Research Group Website
+# IDeA — Industrial Decision Analytics — Research Group Website
 
-Static website for the IDeA research group, built with [Jekyll](https://jekyllrb.com/) and deployed to GitHub Pages.
+Static website for the IDeA (Industrial Decision Analytics) research group, built with [Jekyll](https://jekyllrb.com/) and deployed to GitHub Pages.
 
 ## Prerequisites
 
@@ -85,33 +85,48 @@ Place profile photos in `assets/images/people/` and set the `photo` field to the
 
 ### Adding a project
 
-Create a new Markdown file in `_projects/` named after the project (use underscores, e.g. `my_project.md`):
+Create a new Markdown file in `_projects/` named after the project (use underscores, e.g. `my_project.md`). A complete template is available at [_projects/project_template.md](_projects/project_template.md):
 
 ```markdown
 ---
 layout: project
-title: My Project Title
+published: false           # Set to true when ready to publish
+
+project_name: "My Project Title"
 status: active             # active | completed
-start: 2024
-end:                       # Leave blank if ongoing
-description: >
-  One-paragraph description shown on the projects listing page.
-image:                     # /assets/images/projects/my_project.jpg
-tags:
-  - Tag One
-  - Tag Two
-members:
-  - Jane Doe               # Must match the `name` field in _data/people/
-funding: Grant or funder name
+start: 2024                # Start year (or YYYY-MM-DD)
+end:                       # End year — leave blank if ongoing
+
+short_summary: >
+    One or two sentence summary shown on project cards and in search previews.
+
+cover_image:               # /assets/images/projects/my_project.jpg (or a URL)
+
+website:                   # Official project website, if any
+code_repository:           # URL to the code repository (GitHub, GitLab, etc.)
+project_coordinator:       # Name of the coordinator if not IDeA
+
+funding:                   # Funding source, e.g. Swiss National Science Foundation
+aramis_url:                # URL to the ARAMIS project page
+
 plotly: false              # Set to true to enable Plotly chart support
+
+keywords:
+    - Keyword One
+    - Keyword Two
+
+contributors:
+    - Contributor One      # IDeA team members
+    - Contributor Two
+
+partners:
+    - Partner One          # External partners, if any
 ---
 
-## Overview
-
-Write the full project description in Markdown here.
+Write the detailed project description here using standard Markdown.
 ```
 
-The project will appear on the Projects listing page and get its own page at `/projects/my_project/`. The Markdown content below the front matter is optional.
+The project will appear on the Projects listing page and get its own page at `/projects/my_project/`. Set `published: true` to make it visible. The Markdown body supports tables, Mermaid diagrams, and Plotly charts (set `plotly: true` to enable charts).
 
 ### Adding a publication
 

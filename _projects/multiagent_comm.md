@@ -1,21 +1,26 @@
 ---
 layout: project
-title: Emergent Communication in Multi-Agent Systems
+project_name: Emergent Communication in Multi-Agent Systems
 status: completed
 start: 2020
 end: 2023
-description: >
+short_summary: >
   Studied how communication protocols emerge spontaneously among cooperative
   agents trained with multi-agent reinforcement learning.
-image:        # /assets/images/projects/multiagent_comm.jpg
-tags:
+cover_image:        # /assets/images/projects/multiagent_comm.jpg
+website:
+code_repository:
+project_coordinator:
+funding: Internal Research Fund
+aramis_url:
+plotly: false
+keywords:
   - Multi-Agent Systems
   - Game Theory
   - Reinforcement Learning
-members:
+contributors:
   - Jane Doe
-funding: Internal Research Fund
-plotly: false
+partners:
 ---
 
 ## Overview

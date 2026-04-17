@@ -1,0 +1,11 @@
+name: Hans Müller
+role: Postdoc
+visiting: true
+former: true
+years: "2022–2023"
+current_position: Assistant Professor at TU Munich
+email:
+website: https://hansmueller.example.com
+interests:
+  - Formal Verification
+  - Safe AI

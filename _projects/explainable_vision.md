@@ -1,22 +1,27 @@
 ---
 layout: project
-title: Explainable Vision Systems
+project_name: Explainable Vision Systems
 status: active
 start: 2023
 end:
-description: >
+short_summary: >
   Building computer vision models whose decisions can be explained to
   non-expert users through natural language and visual highlights.
-image:        # /assets/images/projects/explainable_vision.jpg
-tags:
+cover_image:        # /assets/images/projects/explainable_vision.jpg
+website:
+code_repository:
+project_coordinator:
+funding: EU Horizon Europe
+aramis_url:
+plotly: false
+keywords:
   - Computer Vision
   - Explainable AI
   - Deep Learning
-members:
+contributors:
   - Anna Rossi
   - John Smith
-funding: EU Horizon Europe
-plotly: false
+partners:
 ---
 
 ## Overview

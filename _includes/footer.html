@@ -2,8 +2,9 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="logo-text">I<span>D</span>eA</div>
-        <p>{{ site.description }}</p>
+        <span class="logo-text">I<span>D</span>eA</span>
+        <span class="footer-brand-rule"></span>
+        <img src="{{ '/assets/images/idsia.png' | relative_url }}" alt="IDSIA" class="footer-idsia-logo">
       </div>
       <div class="footer-links">
         <h4>Navigation</h4>
@@ -19,6 +20,13 @@
         <ul>
           <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
         </ul>
+        <h4>Address</h4>
+        <address class="footer-address">
+          Polo Universitario Lugano<br>
+          East Campus<br>
+          Via la Santa 1<br>
+          CH-6900 Lugano
+        </address>
       </div>
     </div>
     <div class="footer-bottom">

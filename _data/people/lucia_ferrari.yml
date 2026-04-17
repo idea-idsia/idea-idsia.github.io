@@ -1,0 +1,11 @@
+name: Lucia Ferrari
+role: Associate Professor
+visiting: true
+email: lucia.ferrari@example.com
+website: https://luciaferrari.example.com
+photo:
+affiliation: University of Bologna
+interests:
+  - Probabilistic Planning
+  - Bayesian Methods
+  - Human-Robot Interaction
