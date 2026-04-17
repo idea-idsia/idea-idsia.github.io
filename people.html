@@ -5,6 +5,8 @@ description: Meet the IDeA research team
 permalink: /people/
 ---
 
+{% comment %} Shared card macro — include as a capture block {% endcomment %}
+
 <div class="page-header">
   <div class="container">
     <h1>People</h1>
@@ -15,9 +17,10 @@ permalink: /people/
 <section class="section">
   <div class="container">
 
-    {% comment %} Build current members ordered by seniority {% endcomment %}
+    {% comment %} Seniority order {% endcomment %}
     {% assign role_order = "Professor,Associate Professor,Assistant Professor,Postdoc,Research Scientist,PhD Student,Master Student,Visiting Researcher" | split: "," %}
 
+    {% comment %} All current members — visiting badge shown inline {% endcomment %}
     {% assign current_members = "" | split: "" %}
     {% for role in role_order %}
       {% for person_hash in site.data.people %}
@@ -27,12 +30,10 @@ permalink: /people/
         {% endif %}
       {% endfor %}
     {% endfor %}
-
-    {% comment %} Catch-all: roles not in the seniority list {% endcomment %}
-    {% assign covered = role_order %}
+    {% comment %} Catch-all: unknown roles {% endcomment %}
     {% for person_hash in site.data.people %}
       {% assign person = person_hash[1] %}
-      {% unless covered contains person.role or person.former == true %}
+      {% unless role_order contains person.role or person.former == true %}
         {% assign current_members = current_members | push: person %}
       {% endunless %}
     {% endfor %}
@@ -46,6 +47,7 @@ permalink: /people/
             {% else %}
               <div class="person-photo-placeholder">{{ person.name | slice: 0 }}</div>
             {% endif %}
+            {% if person.visiting == true %}<span class="person-visiting-badge">Visiting</span>{% endif %}
           </div>
           <div class="person-info">
             <div class="person-name">
@@ -56,9 +58,14 @@ permalink: /people/
               {% endif %}
             </div>
             <div class="person-role">{{ person.role }}</div>
-            {% if person.bio %}
-              <p class="person-bio">{{ person.bio }}</p>
-            {% endif %}
+            <div class="person-links">
+              {% if person.email %}<a href="mailto:{{ person.email }}" title="Email"><i class="fas fa-envelope"></i></a>{% endif %}
+              {% if person.website %}<a href="{{ person.website }}" target="_blank" rel="noopener" title="Website"><i class="fas fa-globe"></i></a>{% endif %}
+              {% if person.scholar %}<a href="{{ person.scholar }}" target="_blank" rel="noopener" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>{% endif %}
+              {% if person.orcid %}<a href="{{ person.orcid }}" target="_blank" rel="noopener" title="ORCID"><i class="ai ai-orcid"></i></a>{% endif %}
+              {% if person.linkedin %}<a href="{{ person.linkedin }}" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin"></i></a>{% endif %}
+              {% if person.github %}<a href="{{ person.github }}" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>{% endif %}
+            </div>
             {% if person.interests %}
               <div class="person-interests">
                 {% for interest in person.interests limit:3 %}
@@ -66,14 +73,6 @@ permalink: /people/
                 {% endfor %}
               </div>
             {% endif %}
-            <div class="person-links">
-              {% if person.email %}
-                <a href="mailto:{{ person.email }}">&#9993; Email</a>
-              {% endif %}
-              {% if person.website %}
-                <a href="{{ person.website }}" target="_blank" rel="noopener">&#127760; Web</a>
-              {% endif %}
-            </div>
           </div>
         </div>
       {% endfor %}
@@ -87,24 +86,47 @@ permalink: /people/
 {% for role in role_order %}
   {% for person_hash in site.data.people %}
     {% assign person = person_hash[1] %}
-    {% if person.former == true and person.role == role %}
+    {% if person.former == true and person.visiting != true and person.role == role %}
       {% assign former_members = former_members | push: person %}
     {% endif %}
   {% endfor %}
 {% endfor %}
+{% comment %} Catch-all: former, non-visiting, unknown roles {% endcomment %}
 {% for person_hash in site.data.people %}
   {% assign person = person_hash[1] %}
-  {% if person.former == true %}
+  {% if person.former == true and person.visiting != true %}
     {% unless role_order contains person.role %}
       {% assign former_members = former_members | push: person %}
     {% endunless %}
   {% endif %}
 {% endfor %}
 
-{% if former_members.size > 0 %}
+{% comment %} Former visiting {% endcomment %}
+{% assign former_visiting = "" | split: "" %}
+{% for role in role_order %}
+  {% for person_hash in site.data.people %}
+    {% assign person = person_hash[1] %}
+    {% if person.former == true and person.visiting == true and person.role == role %}
+      {% assign former_visiting = former_visiting | push: person %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+{% comment %} Catch-all: former, visiting, unknown roles {% endcomment %}
+{% for person_hash in site.data.people %}
+  {% assign person = person_hash[1] %}
+  {% if person.former == true and person.visiting == true %}
+    {% unless role_order contains person.role %}
+      {% assign former_visiting = former_visiting | push: person %}
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+
+{% if former_members.size > 0 or former_visiting.size > 0 %}
 <section class="section section--tinted">
   <div class="container">
     <h2 class="section-title">Former Members</h2>
+
+    {% if former_members.size > 0 %}
     <div class="former-members-grid">
       {% for person in former_members %}
         <div class="former-member-card">
@@ -117,7 +139,10 @@ permalink: /people/
           </div>
           <div class="former-member-role">{{ person.role }}{% if person.years %} &middot; {{ person.years }}{% endif %}</div>
           {% if person.current_position %}
-            <div class="former-member-now">&#8594; {{ person.current_position }}</div>
+          <div class="former-member-now">
+            <span class="former-member-label">Now</span>
+            {{ person.current_position }}
+          </div>
           {% endif %}
           {% if person.interests %}
             <div class="former-member-interests">
@@ -129,6 +154,38 @@ permalink: /people/
         </div>
       {% endfor %}
     </div>
+    {% endif %}
+
+    {% if former_visiting.size > 0 %}
+    <div class="people-subsection">
+      <h3 class="subsection-title">Former Visiting Researchers</h3>
+      <div class="former-members-grid">
+        {% for person in former_visiting %}
+          <div class="former-member-card">
+            <div class="former-member-name">
+              {% if person.website %}
+                <a href="{{ person.website }}" target="_blank" rel="noopener">{{ person.name }}</a>
+              {% else %}
+                {{ person.name }}
+              {% endif %}
+            </div>
+            <div class="former-member-role">{{ person.role }}{% if person.years %} &middot; {{ person.years }}{% endif %}</div>
+            {% if person.current_position %}
+              <div class="former-member-now">{{ person.current_position }}</div>
+            {% endif %}
+            {% if person.interests %}
+              <div class="former-member-interests">
+                {% for interest in person.interests limit:2 %}
+                  <span class="tag">{{ interest }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
   </div>
 </section>
 {% endif %}

@@ -5,193 +5,260 @@ title: Home
 
 <!-- Hero -->
 <section class="hero">
-  <div class="hero-center">
-    <div class="hero-logo-large">I<span>D</span>eA</div>
-    <div class="hero-full-name">Intelligent Decision-making &amp; Autonomous Systems</div>
-    <p class="hero-tagline">Pragmatic Approaches to Fundamental Research</p>
-    <p class="hero-description">
-      We develop algorithms and systems that enable machines to perceive,
-      reason, and act intelligently in complex real-world environments.
-    </p>
-    <div class="hero-actions">
-      <a href="{{ '/projects/' | relative_url }}" class="btn btn--primary">Our Projects</a>
-      <a href="{{ '/people/' | relative_url }}" class="btn btn--outline">Meet the Team</a>
+    <div class="hero-center">
+        <div class="hero-logo-large">I<span>D</span>eA</div>
+        <div class="hero-full-name">Industrial Decision Analytics</div>
+        <p class="hero-tagline">Pragmatic Approaches to Fundamental Research</p>
+        <p class="hero-description">
+            We develop algorithms and systems that enable machines to perceive,
+            reason, and act intelligently in complex real-world environments.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ '/projects/' | relative_url }}" class="btn btn--primary"
+                >Our Projects</a
+            >
+            <a href="{{ '/people/' | relative_url }}" class="btn btn--outline"
+                >Meet the Team</a
+            >
+        </div>
     </div>
-  </div>
-  <div class="hero-scroll-hint">
-    <span></span>
-  </div>
+    <div class="hero-scroll-hint">
+        <span></span>
+    </div>
 </section>
 
 <!-- Stat strip -->
 <div class="stat-strip">
-  <div class="container stat-strip-inner">
-    {% assign total_people = site.data.people | size %}
-    {% assign total_projects = site.projects | size %}
-    {% assign total_pubs = site.publications | size %}
-    <div class="stat-item">
-      <div class="stat-number">{{ total_people }}</div>
-      <div class="stat-label">Researchers</div>
+    <div class="container stat-strip-inner">
+        {% assign total_people = site.data.people | size %} {% assign
+        total_projects = site.projects | size %} {% assign total_pubs =
+        site.publications | size %}
+        <div class="stat-item">
+            <div class="stat-number">{{ total_people }}</div>
+            <div class="stat-label">Researchers</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">{{ total_projects }}</div>
+            <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">{{ total_pubs }}</div>
+            <div class="stat-label">Publications</div>
+        </div>
     </div>
-    <div class="stat-item">
-      <div class="stat-number">{{ total_projects }}</div>
-      <div class="stat-label">Projects</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">{{ total_pubs }}</div>
-      <div class="stat-label">Publications</div>
-    </div>
-  </div>
 </div>
 
-<!-- About -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">About IDeA</h2>
-    <p style="max-width:720px; font-size:1.05rem; line-height:1.8;">
-      The IDeA Research Group investigates the foundations and applications of
-      intelligent systems. Our work spans reinforcement learning, robotics,
-      computer vision, and human-machine interaction, with the goal of building
-      autonomous agents that are safe, efficient, and understandable.
-    </p>
-  </div>
-</section>
-
 <!-- Team -->
-{% assign role_order = "Professor,Associate Professor,Assistant Professor,Postdoc,Research Scientist,PhD Student,Master Student,Visiting Researcher" | split: "," %}
-{% assign current_members = "" | split: "" %}
-{% for role in role_order %}
-  {% for person_hash in site.data.people %}
-    {% assign person = person_hash[1] %}
-    {% if person.role == role and person.former != true %}
-      {% assign current_members = current_members | push: person %}
-    {% endif %}
-  {% endfor %}
-{% endfor %}
-
-{% if current_members.size > 0 %}
+{% assign role_order = "Professor,Associate Professor,Assistant
+Professor,Postdoc,Research Scientist,PhD Student,Master Student,Visiting
+Researcher" | split: "," %} {% assign current_members = "" | split: "" %} {% for
+role in role_order %} {% for person_hash in site.data.people %} {% assign person
+= person_hash[1] %} {% if person.role == role and person.former != true %} {%
+assign current_members = current_members | push: person %} {% endif %} {% endfor
+%} {% endfor %} {% if current_members.size > 0 %}
 <section class="section section--tinted">
-  <div class="container">
-    <h2 class="section-title">Our Team</h2>
-    <div class="team-grid">
-      {% for person in current_members %}
-        <div class="team-card">
-          <div class="team-photo-wrap">
-            {% if person.photo %}
-              <img class="team-photo" src="{{ person.photo }}" alt="{{ person.name }}">
-            {% else %}
-              <div class="team-photo-placeholder">{{ person.name | slice: 0 }}</div>
-            {% endif %}
-          </div>
-          <div class="team-info">
-            <div class="team-name">
-              {% if person.website %}
-                <a href="{{ person.website }}" target="_blank" rel="noopener">{{ person.name }}</a>
-              {% else %}
-                {{ person.name }}
-              {% endif %}
+    <div class="container">
+        <h2 class="section-title">Our Team</h2>
+        <div class="team-grid">
+            {% for person in current_members %}
+            <div class="team-card">
+                <div class="team-photo-wrap">
+                    {% if person.photo %}
+                    <img
+                        class="team-photo"
+                        src="{{ person.photo }}"
+                        alt="{{ person.name }}"
+                    />
+                    {% else %}
+                    <div class="team-photo-placeholder">
+                        {{ person.name | slice: 0 }}
+                    </div>
+                    {% endif %}
+                    {% if person.visiting == true %}<span class="team-visiting-badge">Visiting</span>{% endif %}
+                </div>
+                <div class="team-info">
+                    <div class="team-name">
+                        {% if person.website %}
+                        <a
+                            href="{{ person.website }}"
+                            target="_blank"
+                            rel="noopener"
+                            >{{ person.name }}</a
+                        >
+                        {% else %} {{ person.name }} {% endif %}
+                    </div>
+                    <div class="team-role">{{ person.role }}</div>
+                    <div class="team-socials">
+                        {% if person.email %}<a
+                            href="mailto:{{ person.email }}"
+                            title="Email"
+                            ><i class="fas fa-envelope"></i></a
+                        >{% endif %} {% if person.orcid %}<a
+                            href="{{ person.orcid }}"
+                            target="_blank"
+                            rel="noopener"
+                            title="ORCID"
+                            ><i class="ai ai-orcid"></i></a
+                        >{% endif %} {% if person.scholar %}<a
+                            href="{{ person.scholar }}"
+                            target="_blank"
+                            rel="noopener"
+                            title="Google Scholar"
+                            ><i class="ai ai-google-scholar"></i></a
+                        >{% endif %} {% if person.linkedin %}<a
+                            href="{{ person.linkedin }}"
+                            target="_blank"
+                            rel="noopener"
+                            title="LinkedIn"
+                            ><i class="fab fa-linkedin"></i></a
+                        >{% endif %} {% if person.github %}<a
+                            href="{{ person.github }}"
+                            target="_blank"
+                            rel="noopener"
+                            title="GitHub"
+                            ><i class="fab fa-github"></i></a
+                        >{% endif %} {% if person.twitter %}<a
+                            href="{{ person.twitter }}"
+                            target="_blank"
+                            rel="noopener"
+                            title="Twitter / X"
+                            ><i class="fab fa-x-twitter"></i></a
+                        >{% endif %} {% if person.website %}<a
+                            href="{{ person.website }}"
+                            target="_blank"
+                            rel="noopener"
+                            title="Website"
+                            ><i class="fas fa-globe"></i></a
+                        >{% endif %}
+                    </div>
+                </div>
             </div>
-            <div class="team-role">{{ person.role }}</div>
-            <div class="team-socials">
-              {% if person.email %}<a href="mailto:{{ person.email }}" title="Email"><i class="fas fa-envelope"></i></a>{% endif %}
-              {% if person.orcid %}<a href="{{ person.orcid }}" target="_blank" rel="noopener" title="ORCID"><i class="ai ai-orcid"></i></a>{% endif %}
-              {% if person.scholar %}<a href="{{ person.scholar }}" target="_blank" rel="noopener" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>{% endif %}
-              {% if person.linkedin %}<a href="{{ person.linkedin }}" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin"></i></a>{% endif %}
-              {% if person.github %}<a href="{{ person.github }}" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>{% endif %}
-              {% if person.twitter %}<a href="{{ person.twitter }}" target="_blank" rel="noopener" title="Twitter / X"><i class="fab fa-x-twitter"></i></a>{% endif %}
-              {% if person.website %}<a href="{{ person.website }}" target="_blank" rel="noopener" title="Website"><i class="fas fa-globe"></i></a>{% endif %}
-            </div>
-          </div>
+            {% endfor %}
         </div>
-      {% endfor %}
+        <p style="margin-top: 1.5rem">
+            <a href="{{ '/people/' | relative_url }}" class="btn btn--outline"
+                >Meet the full team &rarr;</a
+            >
+        </p>
     </div>
-    <p style="margin-top:1.5rem;">
-      <a href="{{ '/people/' | relative_url }}" class="btn btn--outline">Meet the full team &rarr;</a>
-    </p>
-  </div>
 </section>
 {% endif %}
 
 <!-- Featured projects -->
-{% assign active_projects = site.projects | where: "status", "active" %}
-
-{% if active_projects.size > 0 %}
+{% assign active_projects = site.projects | where: "status", "active" %} {% if
+active_projects.size > 0 %}
 <section class="section">
-  <div class="container">
-    <h2 class="section-title">Active Projects</h2>
-    <div class="projects-grid">
-      {% for proj in active_projects limit:3 %}
-        <div class="project-card">
-          <a class="project-card-link" href="{{ proj.url | relative_url }}">
-            <div class="project-image-wrap">
-              {% if proj.image %}
-                <img class="project-image" src="{{ proj.image }}" alt="{{ proj.title }}">
-              {% else %}
-                <div class="project-image-placeholder">&#128300;</div>
-              {% endif %}
+    <div class="container">
+        <h2 class="section-title">Active Projects</h2>
+        <div class="projects-grid">
+            {% for proj in active_projects limit:3 %}
+            <div class="project-card">
+                <a
+                    class="project-card-link"
+                    href="{{ proj.url | relative_url }}"
+                >
+                    <div class="project-image-wrap">
+                        {% if proj.cover_image %}
+                        <img
+                            class="project-image"
+                            src="{{ proj.cover_image }}"
+                            alt="{{ proj.project_name }}"
+                        />
+                        {% else %}
+                        <div class="project-image-placeholder">&#128300;</div>
+                        {% endif %}
+                        <span class="project-status-chip project-status-chip--active">Active</span>
+                    </div>
+                </a>
+                <div class="project-body">
+                    <h3 class="project-title">
+                        <a href="{{ proj.url | relative_url }}">{{ proj.project_name }}</a>
+                    </h3>
+                    <div class="project-meta-header">
+                        <span class="project-date-chip">{{ proj.start }}{% if proj.end %} &ndash; {{ proj.end }}{% else %} &ndash; present{% endif %}</span>
+                        {% if proj.funding %}<span class="project-funding-badge">{{ proj.funding }}</span>{% endif %}
+                    </div>
+                    <p class="project-description">{{ proj.short_summary }}</p>
+                    <div class="project-tags">
+                        {% for kw in proj.keywords limit:3 %}
+                        <span class="tag">{{ kw }}</span>
+                        {% endfor %}
+                    </div>
+                    {% if proj.content.size > 5 %}
+                    <div class="project-readmore">
+                        <a href="{{ proj.url | relative_url }}">Read more</a>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
-          </a>
-          <div class="project-body">
-            <div class="project-header">
-              <h3 class="project-title">
-                <a href="{{ proj.url | relative_url }}">{{ proj.title }}</a>
-              </h3>
-              <span class="badge badge--active">Active</span>
-            </div>
-            <p class="project-description">{{ proj.description }}</p>
-            <div class="project-tags">
-              {% for tag in proj.tags limit:3 %}
-                <span class="tag">{{ tag }}</span>
-              {% endfor %}
-            </div>
-            {% if proj.content.size > 5 %}
-            <div class="project-readmore">
-              <a href="{{ proj.url | relative_url }}">Read more &rarr;</a>
-            </div>
-            {% endif %}
-          </div>
+            {% endfor %}
         </div>
-      {% endfor %}
+        <p style="margin-top: 1.5rem">
+            <a href="{{ '/projects/' | relative_url }}" class="btn btn--outline"
+                >View all projects &rarr;</a
+            >
+        </p>
     </div>
-    <p style="margin-top:1.5rem;">
-      <a href="{{ '/projects/' | relative_url }}" class="btn btn--outline">View all projects &rarr;</a>
-    </p>
-  </div>
 </section>
 {% endif %}
 
 <!-- Recent publications -->
-{% assign recent_pubs = site.publications | sort: "year" | reverse %}
-
-{% if recent_pubs.size > 0 %}
+{% assign recent_pubs = site.publications | sort: "year" | reverse %} {% if
+recent_pubs.size > 0 %}
 <section class="section section--tinted">
-  <div class="container">
-    <h2 class="section-title">Recent Publications</h2>
-    <div class="publications-year-group publications-year-group--two-col">
-      {% for pub in recent_pubs limit:4 %}
-        <div class="publication-entry">
-          <div class="pub-type-col">
-            <span class="badge badge--{{ pub.type }}">{{ pub.type }}</span>
-          </div>
-          <div class="pub-body">
-            <div class="pub-title">
-              <a href="{{ pub.url | relative_url }}">{{ pub.title }}</a>
+    <div class="container">
+        <h2 class="section-title">Recent Publications</h2>
+        <div class="publications-year-group publications-year-group--two-col">
+            {% for pub in recent_pubs limit:4 %}
+            <div class="publication-entry">
+                <div class="pub-type-col">
+                    <span class="badge badge--{{ pub.type }}"
+                        >{{ pub.type }}</span
+                    >
+                </div>
+                <div class="pub-body">
+                    <div class="pub-title">
+                        <a href="{{ pub.url | relative_url }}"
+                            >{{ pub.title }}</a
+                        >
+                    </div>
+                    <div class="pub-authors">
+                        {{ pub.authors | join: ", " }}
+                    </div>
+                    <div class="pub-venue">{{ pub.venue }}, {{ pub.year }}</div>
+                    <div class="pub-links">
+                        {% if pub.doi %}{% assign paper_url = pub.doi | prepend:
+                        "https://doi.org/" %}{% elsif pub.arxiv %}{% assign
+                        paper_url = pub.arxiv | prepend:
+                        "https://arxiv.org/abs/" %}{% elsif pub.pdf %}{% assign
+                        paper_url = pub.pdf %}{% else %}{% assign paper_url =
+                        nil %}{% endif %} {% if paper_url %}<a
+                            href="{{ paper_url }}"
+                            target="_blank"
+                            rel="noopener"
+                            title="Paper"
+                            ><i class="fas fa-file-alt"></i> Paper</a
+                        >{% endif %} {% if pub.code %}<a
+                            href="{{ pub.code }}"
+                            target="_blank"
+                            rel="noopener"
+                            title="Code"
+                            ><i class="fab fa-github"></i> Code</a
+                        >{% endif %} {% if pub.content.size > 5 %}<a
+                            href="{{ pub.url | relative_url }}"
+                            >Read more</a>{% endif %}
+                    </div>
+                </div>
             </div>
-            <div class="pub-authors">{{ pub.authors | join: ", " }}</div>
-            <div class="pub-venue">{{ pub.venue }}, {{ pub.year }}</div>
-            <div class="pub-links">
-              {% if pub.doi %}{% assign paper_url = pub.doi | prepend: "https://doi.org/" %}{% elsif pub.arxiv %}{% assign paper_url = pub.arxiv | prepend: "https://arxiv.org/abs/" %}{% elsif pub.pdf %}{% assign paper_url = pub.pdf %}{% else %}{% assign paper_url = nil %}{% endif %}
-              {% if paper_url %}<a href="{{ paper_url }}" target="_blank" rel="noopener" title="Paper"><i class="fas fa-file-alt"></i> Paper</a>{% endif %}
-              {% if pub.code %}<a href="{{ pub.code }}" target="_blank" rel="noopener" title="Code"><i class="fab fa-github"></i> Code</a>{% endif %}
-              {% if pub.content.size > 5 %}<a href="{{ pub.url | relative_url }}">More info &rarr;</a>{% endif %}
-            </div>
-          </div>
+            {% endfor %}
         </div>
-      {% endfor %}
+        <p>
+            <a
+                href="{{ '/publications/' | relative_url }}"
+                class="btn btn--outline"
+                >All publications &rarr;</a
+            >
+        </p>
     </div>
-    <p>
-      <a href="{{ '/publications/' | relative_url }}" class="btn btn--outline">All publications &rarr;</a>
-    </p>
-  </div>
 </section>
 {% endif %}

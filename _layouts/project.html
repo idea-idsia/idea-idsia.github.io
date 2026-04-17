@@ -5,7 +5,7 @@ layout: default
 <div class="page-header">
   <div class="container">
     <div class="project-page-title-row">
-      <h1>{{ page.title }}</h1>
+      <h1>{{ page.project_name }}</h1>
       <span class="badge badge--{{ page.status }}">{{ page.status | capitalize }}</span>
     </div>
     <p class="project-page-dates">
@@ -16,18 +16,30 @@ layout: default
 
 <div class="project-meta-strip">
   <div class="container project-meta-strip-inner">
-    {% if page.tags %}
+    {% if page.keywords %}
     <div class="project-meta-item">
       <span class="project-meta-label">Topics</span>
       <div class="project-meta-tags">
-        {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+        {% for kw in page.keywords %}<span class="tag">{{ kw }}</span>{% endfor %}
       </div>
     </div>
     {% endif %}
-    {% if page.members %}
+    {% if page.contributors %}
     <div class="project-meta-item">
       <span class="project-meta-label">Team</span>
-      <span>{{ page.members | join: ", " }}</span>
+      <span>{{ page.contributors | join: ", " }}</span>
+    </div>
+    {% endif %}
+    {% if page.partners %}
+    <div class="project-meta-item">
+      <span class="project-meta-label">Partners</span>
+      <span>{{ page.partners | join: ", " }}</span>
+    </div>
+    {% endif %}
+    {% if page.project_coordinator %}
+    <div class="project-meta-item">
+      <span class="project-meta-label">Coordinator</span>
+      <span>{{ page.project_coordinator }}</span>
     </div>
     {% endif %}
     {% if page.funding %}
@@ -36,13 +48,27 @@ layout: default
       <span>{{ page.funding }}</span>
     </div>
     {% endif %}
+    {% if page.website or page.code_repository or page.aramis_url %}
+    <div class="project-meta-item">
+      <span class="project-meta-label">Links</span>
+      <span>
+        {% if page.website %}<a href="{{ page.website }}" target="_blank" rel="noopener">Website</a>{% endif %}
+        {% if page.code_repository %}{% if page.website %} &middot; {% endif %}<a href="{{ page.code_repository }}" target="_blank" rel="noopener">Code</a>{% endif %}
+        {% if page.aramis_url %}{% if page.website or page.code_repository %} &middot; {% endif %}<a href="{{ page.aramis_url }}" target="_blank" rel="noopener">ARAMIS</a>{% endif %}
+      </span>
+    </div>
+    {% endif %}
   </div>
 </div>
 
 <section class="section" style="padding-top: 2.5rem;">
   <div class="container">
     <div class="project-content">
-      {{ content }}
+      {% if page.description_markdown %}
+        {{ page.description_markdown | markdownify }}
+      {% else %}
+        {{ content }}
+      {% endif %}
     </div>
   </div>
 </section>

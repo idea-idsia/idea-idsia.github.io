@@ -1,9 +1,13 @@
 # Each field is optional except name and role.
 # Valid roles: Professor, Associate Professor, Assistant Professor,
-#              Postdoc, Research Scientist, PhD Student, Master Student, Visiting Researcher
+#              Postdoc, Research Scientist, PhD Student, Master Student
+# Set visiting: true  to show in the "Visiting Researchers" sub-section.
+# Set former: true    to move to the "Former Members" section.
 
 name: Jane Doe
 role: Professor
+visiting:     # true
+former:       # true
 email: jane.doe@example.com
 website: https://janedoe.example.com
 photo:        # /assets/images/people/jane_doe.jpg

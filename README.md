@@ -1,6 +1,6 @@
-# IDeA Research Group Website
+# IDeA — Industrial Decision Analytics — Research Group Website
 
-Static website for the IDeA research group, built with [Jekyll](https://jekyllrb.com/) and deployed to GitHub Pages.
+Static website for the IDeA (Industrial Decision Analytics) research group, built with [Jekyll](https://jekyllrb.com/) and deployed to GitHub Pages.
 
 ## Prerequisites
 

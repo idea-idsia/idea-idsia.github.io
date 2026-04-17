@@ -1,22 +1,27 @@
 ---
 layout: project
-title: Safe Reinforcement Learning
+project_name: Safe Reinforcement Learning
 status: active
 start: 2022
 end:
-description: >
+short_summary: >
   Developing constrained reinforcement learning algorithms that guarantee
   safety constraints during both training and deployment in robotics applications.
-image:        # /assets/images/projects/safe_rl.jpg
-tags:
+cover_image:        # /assets/images/projects/safe_rl.jpg
+website:
+code_repository:
+project_coordinator:
+funding: Swiss National Science Foundation
+aramis_url:
+plotly: false
+keywords:
   - Reinforcement Learning
   - Robotics
   - Safety
-members:
+contributors:
   - Jane Doe
   - John Smith
-funding: Swiss National Science Foundation
-plotly: false
+partners:
 ---
 
 ## Overview

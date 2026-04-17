@@ -68,6 +68,8 @@
         box-shadow 0.25s,
         transform 0.25s;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 
     &:hover {
         box-shadow: $shadow-hover;
@@ -106,6 +108,24 @@
         }
     }
 
+    .person-visiting-badge {
+        position: absolute;
+        bottom: $spacing-xs;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba($color-navy, 0.65);
+        color: $color-white;
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        border-radius: 20px;
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 2;
+    }
+
     .person-photo {
         width: 100%;
         aspect-ratio: 1 / 1;
@@ -127,6 +147,9 @@
 
     .person-info {
         padding: $spacing-sm;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
 
         .person-name {
             font-size: $font-size-md;
@@ -139,12 +162,42 @@
             font-size: $font-size-sm;
             color: $color-teal-dark;
             font-weight: 500;
-            margin-bottom: $spacing-xs;
+            margin-bottom: 6px;
         }
 
-        .person-bio {
+        .person-links {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: $spacing-sm;
+
+            a {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 26px;
+                height: 26px;
+                border-radius: 50%;
+                background-color: $color-gray-100;
+                color: $color-text-muted;
+                font-size: 0.75rem;
+                text-decoration: none;
+                transition:
+                    background-color 0.2s,
+                    color 0.2s;
+
+                &:hover {
+                    background-color: $color-teal;
+                    color: $color-white;
+                }
+            }
+        }
+
+        .person-affiliation {
             font-size: $font-size-sm;
             color: $color-text-muted;
+            font-style: italic;
             margin-bottom: $spacing-xs;
         }
 
@@ -153,14 +206,6 @@
             flex-wrap: wrap;
             gap: 4px;
             justify-content: center;
-            margin-bottom: $spacing-xs;
-        }
-
-        .person-links {
-            display: flex;
-            justify-content: center;
-            gap: $spacing-sm;
-            font-size: $font-size-sm;
         }
     }
 }
@@ -261,7 +306,24 @@
         font-size: 0.75rem;
         color: $color-teal-dark;
         font-weight: 500;
-        margin-bottom: $spacing-xs;
+        margin-bottom: 2px;
+    }
+
+    .team-visiting-badge {
+        position: absolute;
+        bottom: $spacing-xs;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba($color-navy, 0.65);
+        color: $color-white;
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        border-radius: 20px;
+        white-space: nowrap;
+        pointer-events: none;
     }
 
     .team-socials {
@@ -294,10 +356,25 @@
     }
 }
 
+// --- People Sub-section (Visiting) -------------------------------------------
+.people-subsection {
+    margin-top: $spacing-xl;
+    padding-top: $spacing-lg;
+    border-top: 1px solid rgba($color-navy, 0.12);
+}
+
+.subsection-title {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $color-navy;
+    margin-bottom: $spacing-md;
+    opacity: 0.75;
+}
+
 // --- Former Members ----------------------------------------------------------
 .former-members-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: $spacing-sm;
 }
 
@@ -305,8 +382,15 @@
     background: $color-white;
     border-radius: $border-radius;
     padding: $spacing-sm $spacing-md;
-    border-left: 4px solid $color-teal;
     box-shadow: $shadow-card;
+    transition:
+        box-shadow 0.25s,
+        transform 0.25s;
+
+    &:hover {
+        box-shadow: $shadow-hover;
+        transform: translateY(-3px);
+    }
 
     .former-member-name {
         font-weight: 600;
@@ -326,14 +410,26 @@
     .former-member-role {
         font-size: $font-size-sm;
         color: $color-text-muted;
-        margin-bottom: 4px;
+        margin-bottom: $spacing-sm;
     }
 
     .former-member-now {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
         font-size: $font-size-sm;
         color: $color-teal-dark;
         font-weight: 500;
         margin-bottom: 6px;
+    }
+
+    .former-member-label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: $color-text-muted;
+        opacity: 0.7;
     }
 
     .former-member-interests {
@@ -396,6 +492,31 @@
             z-index: 1;
             pointer-events: none;
         }
+
+        .project-status-chip {
+            position: absolute;
+            bottom: $spacing-xs;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 20px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 2;
+
+            &--active {
+                background: rgba(6, 95, 70, 0.8);
+                color: #d1fae5;
+            }
+            &--completed {
+                background: rgba($color-navy, 0.65);
+                color: rgba(255, 255, 255, 0.85);
+            }
+        }
     }
 
     .project-image {
@@ -422,25 +543,60 @@
         display: flex;
         flex-direction: column;
 
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: $spacing-xs;
-            gap: $spacing-xs;
-        }
-
         .project-title {
             font-size: $font-size-lg;
-            font-weight: 600;
+            font-weight: 700;
             color: $color-navy;
-            margin: 0;
-            flex: 1;
+            margin: 0 0 8px;
+            line-height: 1.3;
+
+            a {
+                color: $color-navy;
+                text-decoration: none;
+                &:hover { color: $color-teal-dark; }
+            }
+        }
+
+        .project-meta-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: $spacing-sm;
+        }
+
+        .project-date-chip {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: $color-teal-dark;
+            background: $color-teal-light;
+            padding: 3px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .project-funding-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: $color-text-muted;
+            background: $color-gray-100;
+            border: 1px solid $color-gray-200;
+            padding: 3px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 160px;
         }
 
         .project-description {
             font-size: $font-size-sm;
             color: $color-text-muted;
+            line-height: 1.6;
             margin-bottom: $spacing-sm;
             flex: 1;
         }
@@ -453,9 +609,11 @@
         }
 
         .project-readmore {
-            margin-top: $spacing-xs;
             font-size: $font-size-sm;
-            font-weight: 500;
+            font-weight: 600;
+            border-top: 1px solid $color-gray-200;
+            padding-top: $spacing-xs;
+            margin-top: auto;
 
             a {
                 color: $color-teal-dark;
@@ -464,18 +622,6 @@
                     color: $color-teal;
                     text-decoration: underline;
                 }
-            }
-        }
-
-        .project-meta {
-            font-size: $font-size-sm;
-            color: $color-text-muted;
-            border-top: 1px solid $color-gray-200;
-            padding-top: $spacing-xs;
-            margin-top: auto;
-
-            span {
-                margin-right: $spacing-sm;
             }
         }
     }
@@ -514,6 +660,7 @@
     &--two-col {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
+      align-items: start;
       gap: 0 $spacing-lg;
       margin-bottom: 0;
 
