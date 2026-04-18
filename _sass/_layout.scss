@@ -25,6 +25,10 @@
           display: flex;
           align-items: center;
           text-decoration: none;
+
+          &:last-child {
+            margin-top: -3px;
+          }
         }
 
         .logo-text {
@@ -32,6 +36,7 @@
             font-weight: 700;
             color: $color-white;
             letter-spacing: -0.03em;
+            line-height: 1;
 
             span {
                 color: $color-teal;
@@ -56,11 +61,9 @@
             opacity: 1;
             display: none;
             filter: brightness(0) invert(1);
-            align-self: center;
-            vertical-align: middle;
 
             @media (min-width: 600px) {
-                display: inline-flex;
+                display: block;
             }
         }
     }
@@ -154,6 +157,11 @@
         grid-template-columns: 1fr 1fr 1fr;
         gap: $spacing-lg;
         align-items: start;
+
+        @media (max-width: 640px) {
+            grid-template-columns: 1fr;
+            gap: $spacing-md;
+        }
     }
 
     .footer-brand {
@@ -184,6 +192,8 @@
         .footer-idsia-logo {
             height: 32px;
             width: auto;
+            filter: brightness(0) invert(1);
+            margin-top: -6px;
         }
     }
 

@@ -64,7 +64,8 @@ Create a new YAML file in `_data/people/` named `firstname_lastname.yml`:
 
 ```yaml
 name: Jane Doe
-role: PhD Student          # e.g. Professor, Postdoc, PhD Student, Research Engineer
+roles:
+  - PhD Student            # add more entries for dual roles, e.g. [Team Leader, Senior Researcher]
 email: jane.doe@example.com
 website: https://janedoe.example.com
 photo:                     # /assets/images/people/jane_doe.jpg  (leave blank if none)
@@ -79,7 +80,7 @@ interests:
 former: false              # Set to true to move person to the "Former Members" section
 ```
 
-The person will appear automatically on the People page. The page sorts members by role seniority (Professor → Postdoc → PhD Student → …) and separates current from former members.
+Valid roles (in seniority order): `Team Leader`, `Professor`, `Associate Professor`, `Assistant Professor`, `Senior Researcher`, `Postdoc`, `Research Scientist`, `PhD Student`, `Master Student`, `Visiting Researcher`. The first matching role determines sort position; all roles are shown on the card joined by `·`.
 
 Place profile photos in `assets/images/people/` and set the `photo` field to the relative path.
 

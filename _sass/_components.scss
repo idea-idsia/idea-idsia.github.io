@@ -331,6 +331,16 @@
         justify-content: center;
         gap: 6px;
         flex-wrap: wrap;
+        margin: 0 auto;
+
+        // exactly 4 icons → 2-2
+        &:has(> a:nth-child(4):last-child) {
+            max-width: calc(2 * 26px + 6px);
+        }
+        // 5+ icons → 3-2
+        &:has(> a:nth-child(5)) {
+            max-width: calc(3 * 26px + 2 * 6px);
+        }
 
         a {
             display: inline-flex;

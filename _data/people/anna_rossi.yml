@@ -1,5 +1,6 @@
 name: Anna Rossi
-role: Postdoc
+roles:
+  - Postdoc
 email: anna.rossi@example.com
 website: https://annarossi.example.com
 photo:        # /assets/images/people/anna_rossi.jpg

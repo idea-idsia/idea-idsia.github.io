@@ -32,6 +32,9 @@ sass:
     sass_dir: _sass
     style: compressed
 
+# How many team members to show in the home page preview (set to 0 to show all)
+home_team_limit: 6
+
 exclude:
     - Gemfile
     - Gemfile.lock

@@ -1,5 +1,6 @@
 name: Marco Bianchi
-role: PhD Student
+roles:
+  - PhD Student
 former: true
 years: "2019–2023"
 current_position: Research Scientist at DeepMind

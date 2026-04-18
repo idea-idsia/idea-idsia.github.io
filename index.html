@@ -49,18 +49,41 @@ title: Home
 </div>
 
 <!-- Team -->
-{% assign role_order = "Professor,Associate Professor,Assistant
-Professor,Postdoc,Research Scientist,PhD Student,Master Student,Visiting
-Researcher" | split: "," %} {% assign current_members = "" | split: "" %} {% for
-role in role_order %} {% for person_hash in site.data.people %} {% assign person
-= person_hash[1] %} {% if person.role == role and person.former != true %} {%
-assign current_members = current_members | push: person %} {% endif %} {% endfor
-%} {% endfor %} {% if current_members.size > 0 %}
+{% assign role_order = "Team Leader,Professor,Associate Professor,Assistant Professor,Senior Researcher,Postdoc,Research Scientist,PhD Student,Master Student,Visiting Researcher" | split: "," %}
+{% assign current_members = "" | split: "" %}
+{% assign processed_keys = "" | split: "" %}
+{% for role in role_order %}
+  {% for person_hash in site.data.people %}
+    {% assign person = person_hash[1] %}
+    {% assign person_key = person_hash[0] %}
+    {% if person.former != true %}
+      {% unless processed_keys contains person_key %}
+        {% if person.roles contains role %}
+          {% assign current_members = current_members | push: person %}
+          {% assign processed_keys = processed_keys | push: person_key %}
+        {% endif %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+{% comment %} Catch-all: unknown roles {% endcomment %}
+{% for person_hash in site.data.people %}
+  {% assign person = person_hash[1] %}
+  {% assign person_key = person_hash[0] %}
+  {% unless processed_keys contains person_key or person.former == true %}
+    {% assign current_members = current_members | push: person %}
+  {% endunless %}
+{% endfor %} {% if current_members.size > 0 %}
 <section class="section section--tinted">
     <div class="container">
         <h2 class="section-title">Our Team</h2>
         <div class="team-grid">
-            {% for person in current_members %}
+            {% if site.home_team_limit and site.home_team_limit > 0 %}
+              {% assign team_members_to_show = current_members | slice: 0, site.home_team_limit %}
+            {% else %}
+              {% assign team_members_to_show = current_members %}
+            {% endif %}
+            {% for person in team_members_to_show %}
             <div class="team-card">
                 <div class="team-photo-wrap">
                     {% if person.photo %}
@@ -87,7 +110,7 @@ assign current_members = current_members | push: person %} {% endif %} {% endfor
                         >
                         {% else %} {{ person.name }} {% endif %}
                     </div>
-                    <div class="team-role">{{ person.role }}</div>
+                    <div class="team-role">{% for r in person.roles %}<span style="white-space:nowrap">{{ r }}</span>{% unless forloop.last %} · {% endunless %}{% endfor %}</div>
                     <div class="team-socials">
                         {% if person.email %}<a
                             href="mailto:{{ person.email }}"
