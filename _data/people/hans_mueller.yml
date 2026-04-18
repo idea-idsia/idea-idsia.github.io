@@ -1,5 +1,6 @@
 name: Hans Müller
-role: Postdoc
+roles:
+  - Postdoc
 visiting: true
 former: true
 years: "2022–2023"

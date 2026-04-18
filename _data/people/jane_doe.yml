@@ -1,11 +1,14 @@
-# Each field is optional except name and role.
-# Valid roles: Professor, Associate Professor, Assistant Professor,
-#              Postdoc, Research Scientist, PhD Student, Master Student
+# Each field is optional except name and roles.
+# Valid roles: Team Leader, Professor, Associate Professor, Assistant Professor,
+#              Senior Researcher, Postdoc, Research Scientist, PhD Student,
+#              Master Student, Visiting Researcher
+# Use a roles array — one entry for a single role, multiple for dual roles.
 # Set visiting: true  to show in the "Visiting Researchers" sub-section.
 # Set former: true    to move to the "Former Members" section.
 
 name: Jane Doe
-role: Professor
+roles:
+  - Professor
 visiting:     # true
 former:       # true
 email: jane.doe@example.com

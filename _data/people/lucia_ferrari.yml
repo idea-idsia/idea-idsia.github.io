@@ -1,5 +1,6 @@
 name: Lucia Ferrari
-role: Associate Professor
+roles:
+  - Associate Professor
 visiting: true
 email: lucia.ferrari@example.com
 website: https://luciaferrari.example.com

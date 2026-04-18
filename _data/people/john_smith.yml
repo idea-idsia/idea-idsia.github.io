@@ -1,5 +1,6 @@
 name: John Smith
-role: PhD Student
+roles:
+  - PhD Student
 email: john.smith@example.com
 website:
 photo:        # /assets/images/people/john_smith.jpg

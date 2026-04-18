@@ -154,6 +154,11 @@
         grid-template-columns: 1fr 1fr 1fr;
         gap: $spacing-lg;
         align-items: start;
+
+        @media (max-width: 640px) {
+            grid-template-columns: 1fr;
+            gap: $spacing-md;
+        }
     }
 
     .footer-brand {

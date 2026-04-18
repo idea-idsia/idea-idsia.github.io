@@ -1,5 +1,7 @@
 name: Matteo Salani, PhD
-role: Team leader, Senior Researcher
+roles:
+  - Team Leader
+  - Senior Researcher
 email: matteo.salani@supsi.ch
 website: https://www.supsi.ch/en/matteo-salani
 photo: /assets/images/people/matteo_salani.png
