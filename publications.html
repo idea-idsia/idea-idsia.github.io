@@ -32,7 +32,9 @@ permalink: /publications/
           {% if pub.year == year %}
             <div class="publication-entry">
               <div class="pub-type-col">
-                <span class="badge badge--{{ pub.type }}">{{ pub.type | capitalize }}</span>
+                {% unless pub.type == blank %}
+                  <span class="badge badge--{{ pub.type }}">{{ pub.type | replace: "-", " " | capitalize }}</span>
+                {% endunless %}
               </div>
               <div class="pub-body">
                 <div class="pub-title">
