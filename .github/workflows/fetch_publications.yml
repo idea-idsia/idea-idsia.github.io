@@ -1,0 +1,35 @@
+name: Fetch Publications from OpenAlex
+
+on:
+    workflow_dispatch: # Allow manual runs only
+
+permissions:
+    contents: write # Required to commit new publication files
+
+jobs:
+    fetch:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@v5
+
+            - name: Fetch publications
+              run: uv run scripts/fetch_publications.py
+              env:
+                  OPENALEX_EMAIL: ${{ vars.OPENALEX_EMAIL }}
+
+            - name: Commit new publications
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+                  git add _publications/ scripts/fetch_state.json
+                  if git diff --staged --quiet; then
+                    echo "No new publications — nothing to commit."
+                  else
+                    git commit -m "chore: auto-fetch publications from OpenAlex"
+                    git push
+                  fi
