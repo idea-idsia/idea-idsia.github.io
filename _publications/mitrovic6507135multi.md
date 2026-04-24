@@ -12,6 +12,8 @@ authors:
   - Estela Saquete
   - Aitana Delgado
   - Mobyen Uddin Ahmed
+  - Matteo Salani
+  - et al.
 venue: "SSRN"
 year:
 type: preprint
@@ -19,6 +21,7 @@ abstract: >
   This reference guide surveys multi-agent systems (MAS) applied to software
   development, organizing the literature around multi-faceted research questions
   and providing a structured overview of the field for researchers and practitioners.
+  Full author list not retrievable from SSRN; Matteo Salani is listed among the contributors.
 pdf:
 code:
 arxiv: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6507135
