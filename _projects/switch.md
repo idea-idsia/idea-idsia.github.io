@@ -1,6 +1,6 @@
 ---
 layout: project
-published: false
+published: true
 
 project_name: "SWITCH – Shifting Ways of Intermodal Transport on Cross-border Haulage"
 status: active

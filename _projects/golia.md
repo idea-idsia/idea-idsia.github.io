@@ -1,6 +1,6 @@
 ---
 layout: project
-published: false
+published: true
 
 project_name: "GOLIA – Smart Mobility Governance for Inclusive and Resilient Cities"
 status: active
