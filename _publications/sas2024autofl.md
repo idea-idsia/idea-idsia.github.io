@@ -6,7 +6,7 @@ authors:
     - Andrea Capiluppi
 year: 2024
 type: preprint
-venue: arXiv (Cornell University)
+venue: arXiv
 abstract:
     'Software comprehension, especially of new code bases, is time consuming
     for developers, especially in large projects with multiple functionalities spanning

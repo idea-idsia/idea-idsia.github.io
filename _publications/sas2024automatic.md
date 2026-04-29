@@ -6,7 +6,7 @@ authors:
     - Andrea Capiluppi
 year: 2024
 type: preprint
-venue: arXiv (Cornell University)
+venue: arXiv
 abstract:
     "Previous research in software application domain classification has faced
     challenges due to the lack of a proper taxonomy that explicitly models relations
