@@ -16,7 +16,7 @@ ruby --version
 
 ```bash
 # Clone the repository
-git clone git@github.com:SasCezar/IDeA.git
+git clone git@github.com:idea-idsia/idea-idsia.github.io.git
 cd IDeA
 
 # Install dependencies
@@ -65,19 +65,19 @@ Create a new YAML file in `_data/people/` named `firstname_lastname.yml`:
 ```yaml
 name: Jane Doe
 roles:
-  - PhD Student            # add more entries for dual roles, e.g. [Team Leader, Senior Researcher]
+    - PhD Student # add more entries for dual roles, e.g. [Team Leader, Senior Researcher]
 email: jane.doe@example.com
 website: https://janedoe.example.com
-photo:                     # /assets/images/people/jane_doe.jpg  (leave blank if none)
-orcid:                     # https://orcid.org/0000-0000-0000-0001
-scholar:                   # https://scholar.google.com/citations?user=XXXXXXX
-linkedin:                  # https://linkedin.com/in/janedoe
-github:                    # https://github.com/janedoe
+photo: # /assets/images/people/jane_doe.jpg  (leave blank if none)
+orcid: # https://orcid.org/0000-0000-0000-0001
+scholar: # https://scholar.google.com/citations?user=XXXXXXX
+linkedin: # https://linkedin.com/in/janedoe
+github: # https://github.com/janedoe
 bio: Short biography in one or two sentences.
 interests:
-  - Machine Learning
-  - Natural Language Processing
-former: false              # Set to true to move person to the "Former Members" section
+    - Machine Learning
+    - Natural Language Processing
+former: false # Set to true to move person to the "Former Members" section
 ```
 
 Valid roles (in seniority order): `Team Leader`, `Professor`, `Associate Professor`, `Assistant Professor`, `Senior Researcher`, `Postdoc`, `Research Scientist`, `PhD Student`, `Master Student`, `Visiting Researcher`. The first matching role determines sort position; all roles are shown on the card joined by `·`.
@@ -86,42 +86,42 @@ Place profile photos in `assets/images/people/` and set the `photo` field to the
 
 ### Adding a project
 
-Create a new Markdown file in `_projects/` named after the project (use underscores, e.g. `my_project.md`). A complete template is available at [_projects/project_template.md](_projects/project_template.md):
+Create a new Markdown file in `_projects/` named after the project (use underscores, e.g. `my_project.md`). A complete template is available at [\_projects/project_template.md](_projects/project_template.md):
 
 ```markdown
 ---
 layout: project
-published: false           # Set to true when ready to publish
+published: false # Set to true when ready to publish
 
 project_name: "My Project Title"
-status: active             # active | completed
-start: 2024                # Start year (or YYYY-MM-DD)
-end:                       # End year — leave blank if ongoing
+status: active # active | completed
+start: 2024 # Start year (or YYYY-MM-DD)
+end: # End year — leave blank if ongoing
 
 short_summary: >
     One or two sentence summary shown on project cards and in search previews.
 
-cover_image:               # /assets/images/projects/my_project.jpg (or a URL)
+cover_image: # /assets/images/projects/my_project.jpg (or a URL)
 
-website:                   # Official project website, if any
-code_repository:           # URL to the code repository (GitHub, GitLab, etc.)
-project_coordinator:       # Name of the coordinator if not IDeA
+website: # Official project website, if any
+code_repository: # URL to the code repository (GitHub, GitLab, etc.)
+project_coordinator: # Name of the coordinator if not IDeA
 
-funding:                   # Funding source, e.g. Swiss National Science Foundation
-aramis_url:                # URL to the ARAMIS project page
+funding: # Funding source, e.g. Swiss National Science Foundation
+aramis_url: # URL to the ARAMIS project page
 
-plotly: false              # Set to true to enable Plotly chart support
+plotly: false # Set to true to enable Plotly chart support
 
 keywords:
     - Keyword One
     - Keyword Two
 
 contributors:
-    - Contributor One      # IDeA team members
+    - Contributor One # IDeA team members
     - Contributor Two
 
 partners:
-    - Partner One          # External partners, if any
+    - Partner One # External partners, if any
 ---
 
 Write the detailed project description here using standard Markdown.
@@ -138,19 +138,19 @@ Create a new Markdown file in `_publications/` using a citation-key style name (
 layout: publication
 title: "Full Paper Title"
 authors:
-  - Jane Doe
-  - John Smith
+    - Jane Doe
+    - John Smith
 venue: ICML 2024
 year: 2024
-type: conference           # conference | journal | workshop | preprint
+type: conference # conference | journal | workshop | preprint
 abstract: >
-  Abstract text shown on the publications listing page.
-pdf:                       # URL to PDF (arXiv link works)
-code:                      # URL to code repository
-arxiv: "2401.00000"        # arXiv ID only (no URL prefix)
-doi:                       # DOI string
+    Abstract text shown on the publications listing page.
+pdf: # URL to PDF (arXiv link works)
+code: # URL to code repository
+arxiv: "2401.00000" # arXiv ID only (no URL prefix)
+doi: # DOI string
 tags:
-  - Machine Learning
+    - Machine Learning
 plotly: false
 ---
 
@@ -172,6 +172,50 @@ plotly: false
 ````
 
 The publication will appear on the Publications listing page, grouped by year, and get its own page at `/publications/doe2024mywork/`. The Markdown content below the front matter is optional.
+
+## Fetching publications automatically
+
+The interactive TUI (`scripts/fetch_publications_tui.py`) queries [OpenAlex](https://openalex.org) for each team member's publications and writes ready-to-commit Markdown files into `_publications/`.
+
+### Prerequisites
+
+Python 3.11+ and [`uv`](https://docs.astral.sh/uv/) (recommended) or pip.
+
+### Running the TUI
+
+```bash
+uv run scripts/fetch_publications_tui.py
+```
+
+### Workflow
+
+| Step       | What to do                                                                                                                          |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| 1. Authors | All authors are pre-selected in the left panel. Deselect any you want to skip.                                                      |
+| 2. Fetch   | Press **F** — the right panel fills with new publications not yet in `_publications/`.                                              |
+| 3. Review  | Deselect any papers you don't want. Rows marked `↳` are duplicate alternatives for the same work.                                   |
+| 4. Promote | Navigate to a `↳` alt row and press **P** to swap it with the current main entry (useful when a preprint has since been published). |
+| 5. Write   | Press **W** to write all selected (main) entries to disk as Markdown front-matter files.                                            |
+
+### Keyboard shortcuts
+
+| Key | Action                                          |
+| --- | ----------------------------------------------- |
+| `F` | Fetch publications from OpenAlex                |
+| `W` | Write selected publications to `_publications/` |
+| `P` | Promote the focused `↳` alt to main             |
+| `A` | Select all publications                         |
+| `N` | Deselect all publications                       |
+| `Q` | Quit                                            |
+
+### CLI flags
+
+| Flag              | Effect                                                                        |
+| ----------------- | ----------------------------------------------------------------------------- |
+| `--force`         | Ignore the last-run date and fetch all publications from scratch.             |
+| `--no-save-state` | Do not update `scripts/fetch_state.json` after writing (useful for dry runs). |
+
+After writing, review the generated files in `_publications/`, fill in any missing fields (e.g. `pdf`, `code`, `tags`), and commit.
 
 ## Deployment
 
