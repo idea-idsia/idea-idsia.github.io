@@ -4,7 +4,7 @@ title: Multi-granular software annotation using file-level weak labelling
 authors:
     - Cezar Sas
     - Andrea Capiluppi
-year: 2023
+year: 2024
 type: journal
 venue: Empirical Software Engineering
 doi: 10.1007/s10664-023-10423-7

@@ -10,8 +10,8 @@ authors:
     - Matteo Palmonari
     - Cezar Sas
 year: 2016
-type: book-chapter
-venue: Accademia University Press eBooks
+type: workshop
+venue: "CLiC-it 2016 & EVALITA 2016"
 abstract:
     "This paper describes the framework proposed by the UNIMIB Team for the
     task of Named Entity Recognition and Linking of Italian tweets (NEEL-IT). The proposed
