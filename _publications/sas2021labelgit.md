@@ -7,12 +7,12 @@ authors:
     - Cezar Sas
     - Andrea Capiluppi
 year: 2021
-type: other
-venue: Figshare
+type: preprint
+venue: arXiv
 abstract:
     A dataset for software repositories classification using attributed dependency
     graphs
-doi: https://doi.org/10.48550/arXiv.2103.08890
+doi: 10.48550/arXiv.2103.08890
 arxiv: "2103.08890"
 pdf: https://arxiv.org/pdf/2103.08890
 tags:

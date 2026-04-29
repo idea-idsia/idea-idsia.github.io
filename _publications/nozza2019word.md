@@ -7,8 +7,8 @@ authors:
     - Elisabetta Fersini
     - Enza Messina
 year: 2019
-type: book-chapter
-venue: Knowledge Science, Engineering and Management
+type: conference
+venue: "Knowledge Science, Engineering and Management (KSEM 2019)"
 doi: 10.1007/978-3-030-29563-9_13
 pdf: https://doi.org/10.1007/978-3-030-29563-9_13
 tags:
