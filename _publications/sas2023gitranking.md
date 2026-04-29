@@ -11,7 +11,7 @@ authors:
     - Davide Di Ruscio
 year: 2023
 type: journal
-venue: Software Practice and Experience
+venue: "Software: Practice and Experience"
 abstract:
     "Abstract Context GitHub is the world's most prominent host of source code,
     with more than 327M repositories. However, most of these repositories are not labelled

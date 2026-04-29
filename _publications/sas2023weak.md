@@ -6,6 +6,7 @@ authors:
     - Andrea Capiluppi
 year: 2023
 type: conference
+venue: 2023 IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER)
 abstract:
     Software repository hosting services contain large amounts of open-source
     software, with GitHub hosting over 200 million repositories, from new to established
