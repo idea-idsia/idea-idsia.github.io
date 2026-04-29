@@ -173,6 +173,50 @@ plotly: false
 
 The publication will appear on the Publications listing page, grouped by year, and get its own page at `/publications/doe2024mywork/`. The Markdown content below the front matter is optional.
 
+## Fetching publications automatically
+
+The interactive TUI (`scripts/fetch_publications_tui.py`) queries [OpenAlex](https://openalex.org) for each team member's publications and writes ready-to-commit Markdown files into `_publications/`.
+
+### Prerequisites
+
+Python 3.11+ and [`uv`](https://docs.astral.sh/uv/) (recommended) or pip.
+
+### Running the TUI
+
+```bash
+uv run scripts/fetch_publications_tui.py
+```
+
+### Workflow
+
+| Step       | What to do                                                                                                                          |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| 1. Authors | All authors are pre-selected in the left panel. Deselect any you want to skip.                                                      |
+| 2. Fetch   | Press **F** — the right panel fills with new publications not yet in `_publications/`.                                              |
+| 3. Review  | Deselect any papers you don't want. Rows marked `↳` are duplicate alternatives for the same work.                                   |
+| 4. Promote | Navigate to a `↳` alt row and press **P** to swap it with the current main entry (useful when a preprint has since been published). |
+| 5. Write   | Press **W** to write all selected (main) entries to disk as Markdown front-matter files.                                            |
+
+### Keyboard shortcuts
+
+| Key | Action                                          |
+| --- | ----------------------------------------------- |
+| `F` | Fetch publications from OpenAlex                |
+| `W` | Write selected publications to `_publications/` |
+| `P` | Promote the focused `↳` alt to main             |
+| `A` | Select all publications                         |
+| `N` | Deselect all publications                       |
+| `Q` | Quit                                            |
+
+### CLI flags
+
+| Flag              | Effect                                                                        |
+| ----------------- | ----------------------------------------------------------------------------- |
+| `--force`         | Ignore the last-run date and fetch all publications from scratch.             |
+| `--no-save-state` | Do not update `scripts/fetch_state.json` after writing (useful for dry runs). |
+
+After writing, review the generated files in `_publications/`, fill in any missing fields (e.g. `pdf`, `code`, `tags`), and commit.
+
 ## Deployment
 
 The site deploys automatically to GitHub Pages on every push to `main` via the GitHub Actions workflow defined in [.github/workflows/deploy.yml](.github/workflows/deploy.yml). No manual steps are required.
