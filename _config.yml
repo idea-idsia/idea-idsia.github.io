@@ -27,6 +27,13 @@ collections:
 # Build settings
 plugins:
     - jekyll-feed
+    - jekyll-wikilinks
+
+wikilinks:
+    enabled: true
+
+d3_graph_data:
+    enabled: false
 
 sass:
     sass_dir: _sass

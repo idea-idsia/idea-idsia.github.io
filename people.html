@@ -48,7 +48,13 @@ permalink: /people/
 
     <div class="people-grid">
       {% for person in current_members %}
-        <div class="person-card">
+        {% assign person_anchor = "" %}
+        {% for ph in site.data.people %}
+          {% if ph[1].name == person.name %}
+            {% assign person_anchor = ph[0] | replace: "_", "-" %}
+          {% endif %}
+        {% endfor %}
+        <div class="person-card"{% if person_anchor != "" %} id="{{ person_anchor }}"{% endif %}>
           <div class="person-photo-wrap">
             {% if person.photo %}
               <img class="person-photo" src="{{ person.photo }}" alt="{{ person.name }}">
