@@ -5,34 +5,24 @@ title: Home
 
 <!-- Hero -->
 <section class="hero">
+    <img class="hero-bg-photo" src="{{ '/assets/images/group.jpg' | relative_url }}" alt="IDeA team" />
     <div class="hero-center">
         <div class="hero-logo-large">I<span>D</span>eA</div>
         <div class="hero-full-name">Industrial Decision Analytics</div>
         <p class="hero-tagline">Pragmatic Approaches to Fundamental Research</p>
-        <p class="hero-description">
-            We develop algorithms and systems that enable machines to perceive,
-            reason, and act intelligently in complex real-world environments.
-        </p>
         <div class="hero-actions">
-            <a href="{{ '/projects/' | relative_url }}" class="btn btn--primary"
-                >Our Projects</a
-            >
-            <a href="{{ '/people/' | relative_url }}" class="btn btn--outline"
-                >Meet the Team</a
-            >
+            <a href="{{ '/projects/' | relative_url }}" class="btn btn--primary">Our Projects</a>
+            <a href="{{ '/people/' | relative_url }}" class="btn btn--outline">Meet the Team</a>
         </div>
-    </div>
-    <div class="hero-scroll-hint">
-        <span></span>
     </div>
 </section>
 
 <!-- Stat strip -->
 <div class="stat-strip">
     <div class="container stat-strip-inner">
-        {% assign total_people = site.data.people | size %} {% assign
-        total_projects = site.projects | size %} {% assign total_pubs =
-        site.publications | size %}
+        {% assign total_people = site.data.people | size %}
+        {% assign total_projects = site.projects | size %}
+        {% assign total_pubs = site.publications | size %}
         <div class="stat-item">
             <div class="stat-number">{{ total_people }}</div>
             <div class="stat-label">Researchers</div>
@@ -47,142 +37,6 @@ title: Home
         </div>
     </div>
 </div>
-
-<!-- Team -->
-{% assign role_order = "Team Leader,Professor,Associate Professor,Assistant Professor,Senior Researcher,Researcher,Postdoc,Research Scientist,PhD Student,Master Student,Visiting Researcher" | split: "," %}
-{% assign all_people_raw = "" | split: "" %}
-{% for person_hash in site.data.people %}
-  {% assign all_people_raw = all_people_raw | push: person_hash[1] %}
-{% endfor %}
-{% assign last_name_keys = "" | split: "" %}
-{% for person in all_people_raw %}
-  {% assign base_name = person.name | split: "," | first %}
-  {% assign last_name = base_name | split: " " | last | downcase %}
-  {% assign sort_key = last_name | append: "|||" | append: person.name %}
-  {% assign last_name_keys = last_name_keys | push: sort_key %}
-{% endfor %}
-{% assign last_name_keys = last_name_keys | sort %}
-{% assign all_people = "" | split: "" %}
-{% for key in last_name_keys %}
-  {% assign target_name = key | split: "|||" | last %}
-  {% for person in all_people_raw %}
-    {% if person.name == target_name %}
-      {% assign all_people = all_people | push: person %}
-    {% endif %}
-  {% endfor %}
-{% endfor %}
-{% assign current_members = "" | split: "" %}
-{% assign processed_names = "" | split: "" %}
-{% for role in role_order %}
-  {% for person in all_people %}
-    {% if person.former != true %}
-      {% unless processed_names contains person.name %}
-        {% if person.roles contains role %}
-          {% assign current_members = current_members | push: person %}
-          {% assign processed_names = processed_names | push: person.name %}
-        {% endif %}
-      {% endunless %}
-    {% endif %}
-  {% endfor %}
-{% endfor %}
-{% comment %} Catch-all: unknown roles {% endcomment %}
-{% for person in all_people %}
-  {% unless processed_names contains person.name or person.former == true %}
-    {% assign current_members = current_members | push: person %}
-  {% endunless %}
-{% endfor %} {% if current_members.size > 0 %}
-<section class="section section--tinted">
-    <div class="container">
-        <h2 class="section-title">Our Team</h2>
-        <div class="team-grid">
-            {% if site.home_team_limit and site.home_team_limit > 0 %}
-              {% assign team_members_to_show = current_members | slice: 0, site.home_team_limit %}
-            {% else %}
-              {% assign team_members_to_show = current_members %}
-            {% endif %}
-            {% for person in team_members_to_show %}
-            <div class="team-card">
-                <div class="team-photo-wrap">
-                    {% if person.photo %}
-                    <img
-                        class="team-photo"
-                        src="{{ person.photo }}"
-                        alt="{{ person.name }}"
-                    />
-                    {% else %}
-                    <div class="team-photo-placeholder">
-                        {{ person.name | slice: 0 }}
-                    </div>
-                    {% endif %}
-                    {% if person.visiting == true %}<span class="team-visiting-badge">Visiting</span>{% endif %}
-                </div>
-                <div class="team-info">
-                    <div class="team-name">
-                        {% if person.website %}
-                        <a
-                            href="{{ person.website }}"
-                            target="_blank"
-                            rel="noopener"
-                            >{{ person.name }}</a
-                        >
-                        {% else %} {{ person.name }} {% endif %}
-                    </div>
-                    <div class="team-role">{% for r in person.roles %}<span style="white-space:nowrap">{{ r }}</span>{% unless forloop.last %} · {% endunless %}{% endfor %}</div>
-                    <div class="team-socials">
-                        {% if person.email %}<a
-                            href="mailto:{{ person.email }}"
-                            title="Email"
-                            ><i class="fas fa-envelope"></i></a
-                        >{% endif %} {% if person.orcid %}<a
-                            href="{{ person.orcid }}"
-                            target="_blank"
-                            rel="noopener"
-                            title="ORCID"
-                            ><i class="ai ai-orcid"></i></a
-                        >{% endif %} {% if person.scholar %}<a
-                            href="{{ person.scholar }}"
-                            target="_blank"
-                            rel="noopener"
-                            title="Google Scholar"
-                            ><i class="ai ai-google-scholar"></i></a
-                        >{% endif %} {% if person.linkedin %}<a
-                            href="{{ person.linkedin }}"
-                            target="_blank"
-                            rel="noopener"
-                            title="LinkedIn"
-                            ><i class="fab fa-linkedin"></i></a
-                        >{% endif %} {% if person.github %}<a
-                            href="{{ person.github }}"
-                            target="_blank"
-                            rel="noopener"
-                            title="GitHub"
-                            ><i class="fab fa-github"></i></a
-                        >{% endif %} {% if person.twitter %}<a
-                            href="{{ person.twitter }}"
-                            target="_blank"
-                            rel="noopener"
-                            title="Twitter / X"
-                            ><i class="fab fa-x-twitter"></i></a
-                        >{% endif %} {% if person.website %}<a
-                            href="{{ person.website }}"
-                            target="_blank"
-                            rel="noopener"
-                            title="Website"
-                            ><i class="fas fa-globe"></i></a
-                        >{% endif %}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        <p style="margin-top: 1.5rem">
-            <a href="{{ '/people/' | relative_url }}" class="btn btn--outline"
-                >Meet the full team &rarr;</a
-            >
-        </p>
-    </div>
-</section>
-{% endif %}
 
 <!-- Featured projects -->
 {% assign active_projects = site.projects | where: "status", "active" %} {% if
