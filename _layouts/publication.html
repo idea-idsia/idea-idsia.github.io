@@ -9,7 +9,17 @@ layout: default
       <span class="pub-page-venue">{{ page.venue }}, {{ page.year }}</span>
     </div>
     <h1 class="pub-page-title">{{ page.title }}</h1>
-    <p class="pub-page-authors">{{ page.authors | join: " &middot; " }}</p>
+    <p class="pub-page-authors">
+      {% for author in page.authors %}
+        {% assign author_anchor = "" %}
+        {% for ph in site.data.people %}
+          {% if ph[1].name == author or ph[1].name contains author %}
+            {% assign author_anchor = ph[0] | replace: "_", "-" %}
+          {% endif %}
+        {% endfor %}
+        {% if author_anchor != "" %}<a href="/people/#{{ author_anchor }}">{{ author }}</a>{% else %}{{ author }}{% endif %}{% unless forloop.last %} &middot; {% endunless %}
+      {% endfor %}
+    </p>
   </div>
 </div>
 
