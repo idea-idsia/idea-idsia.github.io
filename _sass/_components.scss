@@ -810,8 +810,10 @@
     .hero-center {
         position: relative;
         z-index: 2;
-        max-width: 720px;
-        padding: $spacing-xl $spacing-lg;
+        width: 100%;
+        max-width: $max-width;
+        margin: 0 auto;
+        padding: $spacing-xl $spacing-md;
     }
 
     .hero-logo-large {
@@ -870,9 +872,40 @@
 
     .stat-strip-inner {
         display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        gap: $spacing-sm;
+        align-items: center;
+        gap: $spacing-xl;
+
+        @media (max-width: 700px) {
+            flex-direction: column;
+            gap: $spacing-md;
+        }
+    }
+
+    .stat-strip-about {
+        flex: 1;
+
+        p {
+            font-size: $font-size-md;
+            color: $color-navy;
+            line-height: 1.6;
+            margin: 0;
+        }
+    }
+
+    .stat-strip-label {
+        display: inline-block;
+        font-size: $font-size-2xl;
+        font-weight: 700;
+        color: $color-navy;
+        margin-bottom: $spacing-sm;
+        padding-bottom: 4px;
+        border-bottom: 3px solid $color-white;
+    }
+
+    .stat-strip-numbers {
+        display: flex;
+        gap: $spacing-lg;
+        flex-shrink: 0;
     }
 
     .stat-item {

@@ -17,23 +17,29 @@ title: Home
     </div>
 </section>
 
-<!-- Stat strip -->
+<!-- About + Stats -->
 <div class="stat-strip">
     <div class="container stat-strip-inner">
-        {% assign total_people = site.data.people | size %}
-        {% assign total_projects = site.projects | size %}
-        {% assign total_pubs = site.publications | size %}
-        <div class="stat-item">
-            <div class="stat-number">{{ total_people }}</div>
-            <div class="stat-label">Researchers</div>
+        <div class="stat-strip-about">
+            <span class="stat-strip-label">About Us</span>
+            <p>We develop algorithms and systems that enable machines to perceive, reason, and act intelligently in complex real-world environments.</p>
         </div>
-        <div class="stat-item">
-            <div class="stat-number">{{ total_projects }}</div>
-            <div class="stat-label">Projects</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">{{ total_pubs }}</div>
-            <div class="stat-label">Publications</div>
+        <div class="stat-strip-numbers">
+            {% assign total_people = site.data.people | size %}
+            {% assign total_projects = site.projects | size %}
+            {% assign total_pubs = site.publications | size %}
+            <div class="stat-item">
+                <div class="stat-number">{{ total_people }}</div>
+                <div class="stat-label">Researchers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ total_projects }}</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ total_pubs }}</div>
+                <div class="stat-label">Publications</div>
+            </div>
         </div>
     </div>
 </div>
