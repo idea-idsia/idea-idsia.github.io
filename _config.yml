@@ -13,6 +13,8 @@ nav_links:
       url: /people/
     - title: Projects
       url: /projects/
+    - title: Software
+      url: /software/
     - title: Publications
       url: /publications/
 
@@ -20,6 +22,9 @@ collections:
     projects:
         output: true
         permalink: /projects/:name/
+    software:
+        output: true
+        permalink: /software/:name/
     publications:
         output: true
         permalink: /publications/:name/
