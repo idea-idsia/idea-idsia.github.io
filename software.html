@@ -1,0 +1,74 @@
+---
+layout: default
+title: Software
+description: Our software tools and libraries
+permalink: /software/
+---
+
+<div class="page-header">
+  <div class="container">
+    <h1>Software</h1>
+    <p>Our software tools and libraries</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <div class="projects-grid" id="projects-grid">
+      {% assign sorted_software = site.software | sort: "name" %}
+      {% assign active_software = sorted_software | where_exp: "item", "item.status != 'archived'" %}
+      {% assign archived_software = sorted_software | where_exp: "item", "item.status == 'archived'" %}
+      {% assign sorted_software = active_software | concat: archived_software %}
+
+      {% for item in sorted_software %}
+        <div class="project-card">
+          {% if item.content.size > 5 %}
+          <a class="project-card-link" href="{{ item.url | relative_url }}">
+          {% else %}
+          <div class="project-card-link">
+          {% endif %}
+            <div class="project-image-wrap">
+              {% if item.cover_image %}
+                <img class="project-image" src="{{ item.cover_image }}" alt="{{ item.project_name }}">
+              {% else %}
+                <div class="project-image-placeholder">&#128187;</div>
+              {% endif %}
+              {% if item.status == "archived" %}
+                <span class="project-status-chip project-status-chip--archived">Archived</span>
+              {% endif %}
+            </div>
+          {% if item.content.size > 5 %}
+          </a>
+          {% else %}
+          </div>
+          {% endif %}
+          <div class="project-body">
+            <h3 class="project-title">
+              {% if item.content.size > 5 %}
+              <a href="{{ item.url | relative_url }}">{{ item.project_name }}</a>
+              {% else %}
+              {{ item.project_name }}
+              {% endif %}
+            </h3>
+            <div class="project-meta-header">
+              {% if item.funding %}<span class="project-funding-badge">{{ item.funding }}</span>{% endif %}
+            </div>
+            <p class="project-description">{{ item.short_summary }}</p>
+            <div class="project-tags">
+              {% for kw in item.keywords %}
+                <span class="tag">{{ kw }}</span>
+              {% endfor %}
+            </div>
+            {% if item.content.size > 5 %}
+            <div class="project-readmore">
+              <a href="{{ item.url | relative_url }}">Read more</a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>

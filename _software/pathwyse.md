@@ -1,5 +1,5 @@
 ---
-layout: project
+layout: software
 project_name: PathWyse
 status: active
 start: 2021
@@ -7,7 +7,7 @@ end:
 short_summary:
   A C++ and Python framework to model and solve Resource Constrained Shortest Path Problems.
    
-cover_image: /assets/images/projects/pathwyse.png     
+cover_image: /assets/images/software/pathwyse.png     
 website: https://github.com/pathwyse/pathwyse 
 project_coordinator: Matteo Salani
 
