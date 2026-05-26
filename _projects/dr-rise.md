@@ -15,7 +15,7 @@ short_summary: >
 cover_image: /assets/images/projects/dr-rise.png
 website: https://dr-rise.eu/
 code_repository:
-project_coordinator: IDENER Research & Development AIE
+project_coordinator: IDENER (Spain)
 funding: EU Horizon Europe
 aramis_url: https://www.aramis.admin.ch/Grunddaten/?ProjectID=54726
 cordis_url: https://cordis.europa.eu/project/id/101104154
@@ -34,7 +34,23 @@ contributors:
   - Marco Derboni
 
 partners:
-  - 13 European partners (research organizations and industry stakeholders)
+  - IDENER (Spain)
+  - SUPSI (Switzerland)
+  - Elektra Energy (Greece)
+  - Stamp S.r.l. (Italy)
+  - Crowdhelix (Ireland)
+  - Technische Universitat Dortmund (Germany)
+  - DGS S.p.a. (Italy)
+  - AdvanticSYS (Spain)
+  - Trilateral Research Ltd (UK)
+  - Voltalis SA (France)
+  - Smart Energy Europe (Belgium)
+  - CTIC centro tecnologico (Spain)
+  - Southeast European Technological Company Ltd (Bulgaria)
+  - Electrodustribution Grid West AD (Bulgaria)
+  
+  
+  
 ---
 
 ## Overview
