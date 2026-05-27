@@ -30,9 +30,30 @@ contributors:
     - Matteo Salani, Vincenzo Giuffrida
 
 partners:
-    - SUPSI
-    - Azienda Elettrica di Massagno (AEM)
-    - Hive Power
+    - CIRCE (Spain)
+    - CERTH (Greece)
+    - UBITECH ENERGY (Belgium)
+    - CTIC (Spain)
+    - ENCO (Italy)
+    - Agifly (Belgium)
+    - APC (France)
+    - SDU (Denmark)
+    - Ayuntamiento de Langreo (Spain)
+    - FAEN (Spain)
+    - VIPASA (Spain)
+    - HUNOSA (Spain)
+    - Fundación Cruz de los Ángeles (Spain)
+    - AEM (Switzerland)
+    - SUPSI (Switzerland)
+    - Hive Power (Switzerland)
+    - Energy Agency of Plovdiv (Bulgaria)
+    - Obshtina Plovdiv (Bulgaria)
+    - MY Energia Oner (Spain)
+    - Ayuntamiento de Murcia (Spain)
+    - Fondazione Bio-Distretto della Via Amerina e delle Forre (Italy)
+    - Comune di Orte (Italy)
+    - Rimond (Italy)
+    - ICONS (Italy)
 ---
 
 ## Overview
