@@ -3,7 +3,7 @@ email: idea@idsia.ch
 description: >-
     IDeA (Industrial Decision Analytics) is a research group working on .....
 baseurl: ""
-url: ""
+url: "https://idea.idsia.ch"
 
 # Navigation links (order matters)
 nav_links:
@@ -32,6 +32,7 @@ collections:
 # Build settings
 plugins:
     - jekyll-feed
+    - jekyll-seo-tag
     - jekyll-wikilinks
 
 wikilinks:

@@ -1,5 +1,6 @@
 ---
 layout: project
+title: SWITCH
 published: true
 
 project_name: "SWITCH – Shifting Ways of Intermodal Transport on Cross-border Haulage"
@@ -13,7 +14,7 @@ short_summary: >
     to rail and reducing congestion and environmental impact in the Alpine region.
     The platform is powered by PathWyse project, check it out.
 
-cover_image: /assets/images/projects/switch.png
+image: /assets/images/projects/switch.png
 website: https://www.project-switch.eu/
 code_repository:
 project_coordinator: LIUC – Università Cattaneo

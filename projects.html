@@ -32,8 +32,8 @@ permalink: /projects/
           <div class="project-card-link">
           {% endif %}
             <div class="project-image-wrap">
-              {% if proj.cover_image %}
-                <img class="project-image" src="{{ proj.cover_image }}" alt="{{ proj.project_name }}">
+              {% if proj.image %}
+                <img class="project-image" src="{{ proj.image }}" alt="{{ proj.project_name }}">
               {% else %}
                 <div class="project-image-placeholder">&#128300;</div>
               {% endif %}

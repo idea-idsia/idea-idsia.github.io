@@ -1,5 +1,6 @@
 ---
 layout: project
+title: DR-RISE
 published: true
 
 project_name: "DR-RISE – Demand Response: Residential Innovation for a Sustainable Energy system"
@@ -12,7 +13,7 @@ short_summary: >
   optimise energy consumption in households while enhancing flexibility,
   user engagement, and system-wide efficiency in the European energy system.
 
-cover_image: /assets/images/projects/dr-rise.png
+image: /assets/images/projects/dr-rise.png
 website: https://dr-rise.eu/
 code_repository:
 project_coordinator: IDENER (Spain)
