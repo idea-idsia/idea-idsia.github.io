@@ -1,5 +1,6 @@
 ---
 layout: software
+title: ANT-AI
 published: true
 
 project_name: "ANT-AI – Lightweight Framework for Multi-Agent AI Systems"
@@ -10,7 +11,7 @@ short_summary: >
   from a single tool-driven agent to a full colony of collaborating peers communicating
   via the A2A protocol, on top of an LLM-agnostic core.
 
-cover_image: /assets/images/software/ant_ai.png
+image: /assets/images/software/ant_ai.png
 website: https://idea-idsia.github.io/ant-ai/
 code_repository: https://github.com/idea-idsia/ant-ai
 

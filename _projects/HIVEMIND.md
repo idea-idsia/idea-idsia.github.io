@@ -1,5 +1,6 @@
 ---
 layout: project
+title: HIVEMIND
 project_name: Human-centred collaboratIVE MultI-ageNt framework for accelerating software Development and maintenance (HIVEMIND)
 status: active
 start: 2025
@@ -7,7 +8,7 @@ end:
 short_summary:
   Building AI-driven multi-agent framework for responsible, human-centric software development.
    
-cover_image:        /assets/images/projects/HIVEMINED_v-pos.png
+image:        /assets/images/projects/HIVEMINED_v-pos.png
 website:     https://hivemind-project.eu/           
 project_coordinator: Daniel García Guirao (IDENER.AI, Spain)
 

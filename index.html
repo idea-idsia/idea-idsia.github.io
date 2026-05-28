@@ -58,10 +58,10 @@ active_projects.size > 0 %}
                     href="{{ proj.url | relative_url }}"
                 >
                     <div class="project-image-wrap">
-                        {% if proj.cover_image %}
+                        {% if proj.image %}
                         <img
                             class="project-image"
-                            src="{{ proj.cover_image }}"
+                            src="{{ proj.image }}"
                             alt="{{ proj.project_name }}"
                         />
                         {% else %}

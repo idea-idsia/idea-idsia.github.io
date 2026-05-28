@@ -93,7 +93,8 @@ Create a new Markdown file in `_projects/` named after the project (use undersco
 layout: project
 published: false # Set to true when ready to publish
 
-project_name: "My Project Title"
+project_name: "My Project Full Title"
+title: "My Project" # Short name — used for browser tab, social cards, and SEO
 status: active # active | completed
 start: 2024 # Start year (or YYYY-MM-DD)
 end: # End year — leave blank if ongoing
@@ -101,7 +102,7 @@ end: # End year — leave blank if ongoing
 short_summary: >
     One or two sentence summary shown on project cards and in search previews.
 
-cover_image: # /assets/images/projects/my_project.jpg (or a URL)
+image: # /assets/images/projects/my_project.jpg — used as the social card image
 
 website: # Official project website, if any
 code_repository: # URL to the code repository (GitHub, GitLab, etc.)

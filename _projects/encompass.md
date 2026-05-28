@@ -1,5 +1,6 @@
 ---
 layout: project
+title: enCOMPASS
 published: true
 
 project_name: "enCOMPASS – Collaborative Recommendations and Adaptive Control for Personalised Energy Saving"
@@ -12,7 +13,7 @@ short_summary: >
   innovative user-friendly digital tools to make energy consumption data available and understandable for different stakeholders to empower them to achieve 
   energy savings and manage their needs in energy efficient, cost-effective and comfortable ways.
 
-cover_image: /assets/images/projects/encompass.png
+image: /assets/images/projects/encompass.png
 website: https://www.encompass-project.eu/
 code_repository:
 project_coordinator: Politecnico di Milano (Italy)

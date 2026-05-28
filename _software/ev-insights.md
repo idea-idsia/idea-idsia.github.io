@@ -1,5 +1,6 @@
 ---
 layout: software
+title: EV-Insights
 published: true
 
 project_name: "EV-Insights – Open-Source Framework for EV Charging Data Processing, Analysis, and Forecasting"
@@ -13,7 +14,7 @@ short_summary: >
   data generation, designed to support research and operational applications
   in smart mobility and energy systems.
 
-cover_image: /assets/images/software/ev-insights.png
+image: /assets/images/software/ev-insights.png
 website: https://link.springer.com/article/10.1186/s42162-025-00615-4
 code_repository: https://github.com/EV-Insights
 publication: https://link.springer.com/article/10.1186/s42162-025-00615-4

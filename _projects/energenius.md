@@ -1,5 +1,6 @@
 ---
 layout: project
+title: ENERGENIUS
 published: true
 
 project_name: "ENERGENIUS – Leveraging the energy transition by gamified learning and AI, guided by cross sectoral integrated services and digital twin models to foster accessible and human-centered energy saving experiences"
@@ -12,7 +13,7 @@ short_summary: >
   enabling intelligent recommendations for energy efficiency, demand flexibility, and
   decarbonisation through data-driven modelling of consumption patterns and building characteristics.
 
-cover_image: /assets/images/projects/energenius.png
+image: /assets/images/projects/energenius.png
 website: https://energenius-project.eu/
 code_repository:
 project_coordinator: Voltiva Energy (Spain)

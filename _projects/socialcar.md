@@ -1,5 +1,6 @@
 ---
 layout: project
+title: SocialCar
 published: true
 
 project_name: "SocialCar – Open social transport network for urban approach to carpooling"
@@ -11,7 +12,7 @@ short_summary: >
   SocialCar is an Intelligent Transport System based on an innovative approach to transport demand management, and more specifically to carpooling in urban and 
   peri-urban areas.
 
-cover_image: /assets/images/projects/socialcar.png
+image: /assets/images/projects/socialcar.png
 website: https://github.com/socialcar-project-eu
 code_repository:
 project_coordinator: FIT Consulting S.r.l. (Italy)

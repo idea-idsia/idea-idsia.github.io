@@ -1,5 +1,6 @@
 ---
 layout: project
+title: GOLIA
 published: true
 
 project_name: "GOLIA – Smart Mobility Governance for Inclusive and Resilient Cities"
@@ -12,7 +13,7 @@ short_summary: >
     to support inclusive, resilient, and sustainable urban transport systems
     aligned with European policy goals.
 
-cover_image: /assets/images/projects/golia.png
+image: /assets/images/projects/golia.png
 website: https://www.golia-project.eu/
 code_repository:
 project_coordinator: FIT Consulting
