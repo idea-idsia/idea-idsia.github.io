@@ -11,11 +11,29 @@ Create a new branch for every change. Use a short, descriptive name prefixed by 
 | `docs/` | README or documentation updates |
 | `chore/` | dependencies, config, or tooling |
 
+When a GitHub issue exists, prefix the branch name with the issue number:
+
+```bash
+git checkout -b feat/42-add-jane-doe
+```
+
+If there is no associated issue:
+
 ```bash
 git checkout -b feat/add-jane-doe
 ```
 
 Open a pull request against `main` when ready.
+
+## Closing issues automatically
+
+Reference the related issue in your pull request description using a [closing keyword](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) so GitHub closes it automatically when the PR is merged:
+
+```
+Closes #42
+```
+
+Supported keywords: `Closes`, `Fixes`, `Resolves` (case-insensitive). Place the reference in the PR body, not in a commit message.
 
 ## Commit messages
 
