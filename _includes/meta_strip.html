@@ -1,0 +1,50 @@
+<div class="project-meta-strip">
+  <div class="container project-meta-strip-inner">
+    {% if page.keywords %}
+    <div class="project-meta-item">
+      <span class="project-meta-label">Topics</span>
+      <div class="project-meta-tags">
+        {% for kw in page.keywords %}<span class="tag">{{ kw }}</span>{% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% if page.contributors %}
+    <div class="project-meta-item">
+      <span class="project-meta-label">Team</span>
+      <span>
+        {% for contributor in page.contributors %}{% include person_link.html name=contributor %}{% unless forloop.last %}, {% endunless %}{% endfor %}
+      </span>
+    </div>
+    {% endif %}
+    {% if page.partners %}
+    <div class="project-meta-item">
+      <span class="project-meta-label">Partners</span>
+      <span>{{ page.partners | join: ", " }}</span>
+    </div>
+    {% endif %}
+    {% if page.project_coordinator %}
+    <div class="project-meta-item">
+      <span class="project-meta-label">Coordinator</span>
+      <span>{{ page.project_coordinator }}</span>
+    </div>
+    {% endif %}
+    {% if page.funding %}
+    <div class="project-meta-item">
+      <span class="project-meta-label">Funding</span>
+      <span>{{ page.funding }}</span>
+    </div>
+    {% endif %}
+    {% if page.website or page.code_repository or page.aramis_url or page.cordis_url %}
+    <div class="project-meta-item">
+      <span class="project-meta-label">Links</span>
+      <span>
+        {% assign _link_sep = "" %}
+        {% if page.website %}{{ _link_sep }}<a href="{{ page.website }}" target="_blank" rel="noopener">Website</a>{% assign _link_sep = " &middot; " %}{% endif %}
+        {% if page.code_repository %}{{ _link_sep }}<a href="{{ page.code_repository }}" target="_blank" rel="noopener">Code</a>{% assign _link_sep = " &middot; " %}{% endif %}
+        {% if page.aramis_url %}{{ _link_sep }}<a href="{{ page.aramis_url }}" target="_blank" rel="noopener">ARAMIS</a>{% assign _link_sep = " &middot; " %}{% endif %}
+        {% if page.cordis_url %}{{ _link_sep }}<a href="{{ page.cordis_url }}" target="_blank" rel="noopener">CORDIS</a>{% endif %}
+      </span>
+    </div>
+    {% endif %}
+  </div>
+</div>

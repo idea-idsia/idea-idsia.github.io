@@ -1,0 +1,1 @@
+{% if include.doi %}https://doi.org/{{ include.doi }}{% elsif include.arxiv %}https://arxiv.org/abs/{{ include.arxiv }}{% elsif include.pdf %}{{ include.pdf }}{% endif %}

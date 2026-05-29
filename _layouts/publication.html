@@ -28,22 +28,14 @@ layout: default
     </div>
     <h1 class="pub-page-title">{{ page.title }}</h1>
     <p class="pub-page-authors">
-      {% for author in page.authors %}
-        {% assign author_anchor = "" %}
-        {% for ph in site.data.people %}
-          {% if ph[1].name == author or ph[1].name contains author %}
-            {% assign author_anchor = ph[0] | replace: "_", "-" %}
-          {% endif %}
-        {% endfor %}
-        {% if author_anchor != "" %}<a href="/people/#{{ author_anchor }}">{{ author }}</a>{% else %}{{ author }}{% endif %}{% unless forloop.last %} &middot; {% endunless %}
-      {% endfor %}
+      {% for author in page.authors %}{% include person_link.html name=author %}{% unless forloop.last %} &middot; {% endunless %}{% endfor %}
     </p>
   </div>
 </div>
 
 <div class="pub-links-bar">
   <div class="container pub-links-bar-inner">
-    {% if page.doi %}{% assign paper_url = page.doi | prepend: "https://doi.org/" %}{% elsif page.arxiv %}{% assign paper_url = page.arxiv | prepend: "https://arxiv.org/abs/" %}{% elsif page.pdf %}{% assign paper_url = page.pdf %}{% else %}{% assign paper_url = nil %}{% endif %}
+    {% capture paper_url %}{% include pub_paper_url.html doi=page.doi arxiv=page.arxiv pdf=page.pdf %}{% endcapture %}{% assign paper_url = paper_url | strip %}
     {% if paper_url %}
       <a href="{{ paper_url }}" target="_blank" rel="noopener" class="btn btn--primary">
         <i class="fas fa-file-alt"></i> Paper
@@ -82,13 +74,4 @@ layout: default
   </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-<script>
-  document.querySelectorAll('pre code.language-mermaid').forEach(function (el) {
-    var pre = document.createElement('pre');
-    pre.className = 'mermaid';
-    pre.textContent = el.textContent;
-    el.parentNode.replaceWith(pre);
-  });
-  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-</script>
+{% include mermaid.html %}
