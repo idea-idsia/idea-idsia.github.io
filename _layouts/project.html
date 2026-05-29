@@ -77,13 +77,14 @@ layout: default
       <span>{{ page.funding }}</span>
     </div>
     {% endif %}
-    {% if page.website or page.code_repository or page.aramis_url %}
+    {% if page.website or page.code_repository or page.aramis_url or page.cordis_url %}
     <div class="project-meta-item">
       <span class="project-meta-label">Links</span>
       <span>
         {% if page.website %}<a href="{{ page.website }}" target="_blank" rel="noopener">Website</a>{% endif %}
         {% if page.code_repository %}{% if page.website %} &middot; {% endif %}<a href="{{ page.code_repository }}" target="_blank" rel="noopener">Code</a>{% endif %}
         {% if page.aramis_url %}{% if page.website or page.code_repository %} &middot; {% endif %}<a href="{{ page.aramis_url }}" target="_blank" rel="noopener">ARAMIS</a>{% endif %}
+        {% if page.cordis_url %}{% if page.website or page.code_repository or page.aramis_url %} &middot; {% endif %}<a href="{{ page.cordis_url }}" target="_blank" rel="noopener">CORDIS</a>{% endif %}
       </span>
     </div>
     {% endif %}
