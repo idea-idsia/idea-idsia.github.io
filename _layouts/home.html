@@ -1,4 +1,17 @@
 ---
 layout: default
 ---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ResearchOrganization",
+  "name": {{ site.title | jsonify }},
+  "url": {{ site.url | jsonify }},
+  "description": {{ site.description | jsonify }},
+  "email": {{ site.email | jsonify }},
+  "parentOrganization": {% include jsonld/idsia_org.html %}
+}
+</script>
+
 {{ content }}
