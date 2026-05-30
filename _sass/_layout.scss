@@ -48,23 +48,13 @@
             font-weight: 300;
             font-size: 1.25rem;
             margin: 0 $spacing-xs;
-            display: none;
-
-            @media (min-width: 600px) {
-                display: block;
-            }
         }
 
         .logo-idsia-img {
             height: 22px;
             width: auto;
             opacity: 1;
-            display: none;
             filter: brightness(0) invert(1);
-
-            @media (min-width: 600px) {
-                display: block;
-            }
         }
     }
 
