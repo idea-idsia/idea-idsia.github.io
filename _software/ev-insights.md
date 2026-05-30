@@ -14,7 +14,7 @@ short_summary: >
   data generation, designed to support research and operational applications
   in smart mobility and energy systems.
 
-image: /assets/images/software/ev-insights.png
+image: /assets/images/software/ev-insights.jpg
 website: https://link.springer.com/article/10.1186/s42162-025-00615-4
 code_repository: https://github.com/EV-Insights
 publication: https://link.springer.com/article/10.1186/s42162-025-00615-4

@@ -8,7 +8,7 @@ end:
 short_summary:
   A C++ and Python framework to model and solve Resource Constrained Shortest Path Problems.
    
-image: /assets/images/software/pathwyse.png     
+image: /assets/images/software/pathwyse.jpg
 website: https://github.com/pathwyse/pathwyse 
 project_coordinator: Matteo Salani
 
