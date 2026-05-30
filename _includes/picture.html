@@ -1,28 +1,15 @@
 {% comment %}
-  Reusable responsive image with WebP source and original fallback.
-  The WebP counterpart is generated automatically in CI (deploy.yml).
+  Reusable image include with sensible defaults.
 
-  Required:
-    src      — absolute asset path, e.g. /assets/images/foo.jpg
-    alt      — descriptive alt text
-
-  Optional:
-    class          — CSS class(es) applied to <img>
-    loading        — "lazy" (default) or "eager"
-    fetchpriority  — "high" for LCP images, omit otherwise
-    width          — intrinsic width (prevents layout shift)
-    height         — intrinsic height (prevents layout shift)
+  Required:  src, alt
+  Optional:  class, loading (default: lazy), fetchpriority, width, height
 {% endcomment %}
-{% assign _src  = include.src | strip %}
-{% assign _webp = _src | replace: '.jpg', '.webp' | replace: '.jpeg', '.webp' | replace: '.png', '.webp' %}
-<picture>
-  <source type="image/webp" srcset="{{ _webp | relative_url }}">
-  <img
-    src="{{ _src | relative_url }}"
-    alt="{{ include.alt }}"
-    {% if include.class %}class="{{ include.class }}"{% endif %}
-    loading="{{ include.loading | default: 'lazy' }}"
-    {% if include.fetchpriority %}fetchpriority="{{ include.fetchpriority }}"{% endif %}
-    {% if include.width %}width="{{ include.width }}"{% endif %}
-    {% if include.height %}height="{{ include.height }}"{% endif %}>
-</picture>
+{% assign _src = include.src | strip %}
+<img
+  src="{{ _src | relative_url }}"
+  alt="{{ include.alt }}"
+  {% if include.class %}class="{{ include.class }}"{% endif %}
+  loading="{{ include.loading | default: 'lazy' }}"
+  {% if include.fetchpriority %}fetchpriority="{{ include.fetchpriority }}"{% endif %}
+  {% if include.width %}width="{{ include.width }}"{% endif %}
+  {% if include.height %}height="{{ include.height }}"{% endif %}>
