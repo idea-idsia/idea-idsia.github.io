@@ -76,7 +76,7 @@ permalink: /people/
         <div class="person-card"{% if person_anchor != "" %} id="{{ person_anchor }}"{% endif %}>
           <div class="person-photo-wrap">
             {% if person.photo %}
-              <img class="person-photo" src="{{ person.photo }}" alt="{{ person.name }}" loading="lazy" width="400" height="400">
+              {% include picture.html src=person.photo alt=person.name class="person-photo" width="400" height="400" %}
             {% else %}
               <div class="person-photo-placeholder">{{ person.name | slice: 0 }}</div>
             {% endif %}

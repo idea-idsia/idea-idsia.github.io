@@ -11,7 +11,7 @@ end:
 short_summary: >
     GINNGER project develops digital solutions for neighbourhood regeneration through collaborative processes, involving heterogeneous stakeholder communities.
   
-image: ../assets/images/projects/ginnger.jpg
+image: /assets/images/projects/ginnger.jpg
 
 website:
 code_repository:
