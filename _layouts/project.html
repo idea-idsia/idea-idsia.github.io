@@ -10,13 +10,12 @@ layout: default
   "url": {{ page.url | absolute_url | jsonify }}{% if page.short_summary %},
   "description": {{ page.short_summary | strip_html | strip_newlines | jsonify }}{% endif %}{% if page.image %},
   "image": {{ page.image | absolute_url | jsonify }}{% endif %}{% if page.start %},
-  "startDate": {{ page.start | jsonify }}{% endif %}{% if page.end %},
-  "endDate": {{ page.end | jsonify }}{% endif %}{% if page.funding %},
-  "funder": { "@type": "Organization", "name": {{ page.funding | jsonify }} }{% endif %}{% if page.contributors %},
-  "member": [{% for contributor in page.contributors %}{ "@type": "Person", "name": {{ contributor | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}{% if page.partners %},
-  "participant": [{% for partner in page.partners %}{ "@type": "Organization", "name": {{ partner | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}{% if page.website %},
+  "foundingDate": {{ page.start | jsonify }}{% endif %}{% if page.end %},
+  "dissolutionDate": {{ page.end | jsonify }}{% endif %}{% if page.funding %},
+  "funder": { "@type": "Organization", "name": {{ page.funding | jsonify }} }{% endif %}{% if page.contributors or page.partners %},
+  "member": [{% for contributor in page.contributors %}{ "@type": "Person", "name": {{ contributor | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}{% if page.contributors and page.partners %},{% endif %}{% for partner in page.partners %}{ "@type": "Organization", "name": {{ partner | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}{% if page.website %},
   "sameAs": {{ page.website | jsonify }}{% endif %},
-  "sourceOrganization": {% include jsonld/idea_org.html %}
+  "parentOrganization": {% include jsonld/idea_org.html %}
 }
 </script>
 {% include jsonld/breadcrumb.html section_name="Projects" section_url="/projects/" page_name=page.project_name %}
