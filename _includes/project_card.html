@@ -7,7 +7,7 @@
   {% endif %}
     <div class="project-image-wrap">
       {% if _item.image %}
-        <img class="project-image" src="{{ _item.image }}" alt="{{ _item.project_name }}">
+        <img class="project-image" src="{{ _item.image }}" alt="{{ _item.project_name }}" loading="lazy">
       {% else %}
         <div class="project-image-placeholder">{{ include.default_icon }}</div>
       {% endif %}

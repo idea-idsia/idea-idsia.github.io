@@ -5,7 +5,7 @@ title: Home
 
 <!-- Hero -->
 <section class="hero">
-    <img class="hero-bg-photo" src="{{ '/assets/images/group.jpg' | relative_url }}" alt="IDeA team" />
+    <img class="hero-bg-photo" src="{{ '/assets/images/group.jpg' | relative_url }}" alt="IDeA team" fetchpriority="high" />
     <div class="hero-center">
         <div class="hero-logo-large">I<span>D</span>eA</div>
         <div class="hero-full-name">Industrial Decision Analytics</div>
@@ -63,6 +63,7 @@ active_projects.size > 0 %}
                             class="project-image"
                             src="{{ proj.image }}"
                             alt="{{ proj.project_name }}"
+                            loading="lazy"
                         />
                         {% else %}
                         <div class="project-image-placeholder">&#128300;</div>
