@@ -36,9 +36,6 @@ jobs:
         id: pages
         uses: actions/configure-pages@v6
 
-      - name: Install image tools
-        run: sudo apt-get install -y --no-install-recommends webp
-
       - name: Build with Jekyll
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
