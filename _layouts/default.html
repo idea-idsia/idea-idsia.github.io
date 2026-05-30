@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
   </noscript>
   {% if page.url == "/" %}
-  <link rel="preload" as="image" href="{{ '/assets/images/group.webp' | relative_url }}" type="image/webp">
+  <link rel="preload" as="image" href="{{ '/assets/images/group.webp' | relative_url }}" type="image/webp" fetchpriority="high">
   {% endif %}
   {% if page.plotly %}
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
