@@ -1,0 +1,1 @@
+{% assign _person_anchor = "" %}{% for ph in site.data.people %}{% if ph[1].name == include.name or ph[1].name contains include.name %}{% assign _person_anchor = ph[0] | replace: "_", "-" %}{% endif %}{% endfor %}{% if _person_anchor != "" %}<a href="/people/#{{ _person_anchor }}">{{ include.name }}</a>{% else %}{{ include.name }}{% endif %}

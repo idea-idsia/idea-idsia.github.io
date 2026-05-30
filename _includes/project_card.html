@@ -1,0 +1,51 @@
+{% assign _item = include.item %}
+<div class="project-card"{% if include.show_status_filter %} data-status="{{ _item.status }}"{% endif %}>
+  {% if _item.content.size > 5 %}
+  <a class="project-card-link" href="{{ _item.url | relative_url }}">
+  {% else %}
+  <div class="project-card-link">
+  {% endif %}
+    <div class="project-image-wrap">
+      {% if _item.image %}
+        <img class="project-image" src="{{ _item.image }}" alt="{{ _item.project_name }}">
+      {% else %}
+        <div class="project-image-placeholder">{{ include.default_icon }}</div>
+      {% endif %}
+      {% if include.show_status_filter %}
+        <span class="project-status-chip project-status-chip--{{ _item.status }}">{{ _item.status | capitalize }}</span>
+      {% elsif _item.status == "archived" %}
+        <span class="project-status-chip project-status-chip--archived">Archived</span>
+      {% endif %}
+    </div>
+  {% if _item.content.size > 5 %}
+  </a>
+  {% else %}
+  </div>
+  {% endif %}
+  <div class="project-body">
+    <h3 class="project-title">
+      {% if _item.content.size > 5 %}
+      <a href="{{ _item.url | relative_url }}">{{ _item.project_name }}</a>
+      {% else %}
+      {{ _item.project_name }}
+      {% endif %}
+    </h3>
+    <div class="project-meta-header">
+      {% if include.show_date %}
+        <span class="project-date-chip">{{ _item.start }}{% if _item.end %} &ndash; {{ _item.end }}{% else %} &ndash; present{% endif %}</span>
+      {% endif %}
+      {% if _item.funding %}<span class="project-funding-badge">{{ _item.funding }}</span>{% endif %}
+    </div>
+    <p class="project-description">{{ _item.short_summary }}</p>
+    <div class="project-tags">
+      {% for kw in _item.keywords %}
+        <span class="tag">{{ kw }}</span>
+      {% endfor %}
+    </div>
+    {% if _item.content.size > 5 %}
+    <div class="project-readmore">
+      <a href="{{ _item.url | relative_url }}">Read more</a>
+    </div>
+    {% endif %}
+  </div>
+</div>

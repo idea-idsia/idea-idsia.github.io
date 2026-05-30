@@ -77,7 +77,7 @@ permalink: /publications/
                   </div>
                 {% endif %}
                 <div class="pub-links">
-                  {% if pub.doi %}{% assign paper_url = pub.doi | prepend: "https://doi.org/" %}{% elsif pub.arxiv %}{% assign paper_url = pub.arxiv | prepend: "https://arxiv.org/abs/" %}{% elsif pub.pdf %}{% assign paper_url = pub.pdf %}{% else %}{% assign paper_url = nil %}{% endif %}
+                  {% capture paper_url %}{% include pub_paper_url.html doi=pub.doi arxiv=pub.arxiv pdf=pub.pdf %}{% endcapture %}{% assign paper_url = paper_url | strip %}
                   {% if paper_url %}
                     <a href="{{ paper_url }}" target="_blank" rel="noopener" title="Paper"><i class="fas fa-file-alt"></i> Paper</a>
                   {% endif %}
