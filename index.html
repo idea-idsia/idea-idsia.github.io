@@ -110,43 +110,32 @@ recent_pubs.size > 0 %}
         <h2 class="section-title">Recent Publications</h2>
         <div class="publications-year-group publications-year-group--two-col">
             {% for pub in recent_pubs limit:4 %}
+            {% capture paper_url %}{% include pub_paper_url.html doi=pub.doi arxiv=pub.arxiv pdf=pub.pdf %}{% endcapture %}
+            {% assign paper_url = paper_url | strip %}
             <div class="publication-entry">
                 <div class="pub-type-col">
-                    <span class="badge badge--{{ pub.type }}"
-                        >{{ pub.type }}</span
-                    >
+                    <div class="pub-col-group">
+                        {% unless pub.type == blank %}
+                        <span class="badge badge--{{ pub.type | replace: "_", "-" }}">{{ pub.type | replace: "_", " " | replace: "-", " " | capitalize }}</span>
+                        {% endunless %}
+                        {% if paper_url %}
+                        <a href="{{ paper_url }}" target="_blank" rel="noopener"><i class="fas fa-file-alt"></i> Paper</a>
+                        {% endif %}
+                        {% if pub.code %}
+                        <a href="{{ pub.code }}" target="_blank" rel="noopener"><i class="fab fa-github"></i> Code</a>
+                        {% endif %}
+                        {% if pub.content.size > 5 %}
+                        <a href="{{ pub.url | relative_url }}">Read more</a>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="pub-body">
                     <div class="pub-title">
-                        <a href="{{ pub.url | relative_url }}"
-                            >{{ pub.title }}</a
-                        >
+                        <a href="{{ pub.url | relative_url }}">{{ pub.title }}</a>
                     </div>
-                    <div class="pub-authors">
-                        {{ pub.authors | join: ", " }}
-                    </div>
-                    <div class="pub-venue">{{ pub.venue }}, {{ pub.year }}</div>
-                    <div class="pub-links">
-                        {% if pub.doi %}{% assign paper_url = pub.doi | prepend:
-                        "https://doi.org/" %}{% elsif pub.arxiv %}{% assign
-                        paper_url = pub.arxiv | prepend:
-                        "https://arxiv.org/abs/" %}{% elsif pub.pdf %}{% assign
-                        paper_url = pub.pdf %}{% else %}{% assign paper_url =
-                        nil %}{% endif %} {% if paper_url %}<a
-                            href="{{ paper_url }}"
-                            target="_blank"
-                            rel="noopener"
-                            title="Paper"
-                            ><i class="fas fa-file-alt"></i> Paper</a
-                        >{% endif %} {% if pub.code %}<a
-                            href="{{ pub.code }}"
-                            target="_blank"
-                            rel="noopener"
-                            title="Code"
-                            ><i class="fab fa-github"></i> Code</a
-                        >{% endif %} {% if pub.content.size > 5 %}<a
-                            href="{{ pub.url | relative_url }}"
-                            >Read more</a>{% endif %}
+                    <div class="pub-meta">
+                        <span class="pub-authors">{{ pub.authors | join: ", " }}</span>
+                        {% if pub.venue %}<span class="pub-venue">{{ pub.venue }}</span>{% endif %}
                     </div>
                 </div>
             </div>

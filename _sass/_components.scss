@@ -51,13 +51,23 @@
         background-color: #fee2e2;
         color: #991b1b;
     }
-    &--book-chapter {
+    &--book-chapter,
+    &--book_chapter {
         background-color: #d1fae5;
         color: #065f46;
     }
+    &--thesis {
+        background-color: $color-white;
+        color: $color-navy;
+    }
+    &--misc,
     &--other {
         background-color: #f3f4f6;
         color: #374151;
+    }
+    &--patent {
+        background-color: #e0f2fe;
+        color: #0369a1;
     }
 }
 
@@ -656,6 +666,7 @@
     gap: $spacing-xs;
     margin-bottom: $spacing-lg;
     flex-wrap: wrap;
+    align-items: center;
 
     .filter-btn {
         padding: 6px 18px;
@@ -673,12 +684,187 @@
             background: $color-teal;
             color: $color-white;
         }
+
+        &--reset {
+            border-color: #ccc;
+            color: #666;
+
+            &:hover {
+                background: #eee;
+                color: #333;
+            }
+        }
+    }
+
+}
+
+// Custom multi-select dropdown
+.filter-multiselect {
+    position: relative;
+    display: inline-block;
+
+    &__toggle {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        border: 2px solid $color-teal;
+        background: transparent;
+        color: $color-teal-dark;
+        border-radius: 20px;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.2s;
+
+        &:hover,
+        &.is-active {
+            background: $color-teal-light;
+        }
+
+        .arrow {
+            font-size: 0.65rem;
+            transition: transform 0.2s;
+        }
+
+        &.is-open .arrow {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__panel {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        z-index: 100;
+        min-width: 180px;
+        max-height: 260px;
+        overflow-y: auto;
+        background: #fff;
+        border: 2px solid $color-teal;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        padding: 6px 0;
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            font-size: $font-size-sm;
+            cursor: pointer;
+            white-space: nowrap;
+            color: #333;
+
+            &:hover {
+                background: $color-teal-light;
+            }
+
+            input[type="checkbox"] {
+                accent-color: $color-teal;
+                width: 14px;
+                height: 14px;
+                cursor: pointer;
+                flex-shrink: 0;
+            }
+        }
+    }
+
+    &--active &__toggle {
+        background: $color-teal;
+        color: $color-white;
+    }
+}
+
+// Year range slider
+.year-range-widget {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: 4px 14px;
+    border: 2px solid $color-teal;
+    border-radius: 20px;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $color-teal-dark;
+
+    &__label {
+        white-space: nowrap;
+    }
+
+    &__track-wrap {
+        position: relative;
+        width: 140px;
+        height: 20px;
+    }
+
+    &__track {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: #ddd;
+        border-radius: 2px;
+        transform: translateY(-50%);
+    }
+
+    &__fill {
+        position: absolute;
+        top: 50%;
+        height: 4px;
+        background: $color-teal;
+        border-radius: 2px;
+        transform: translateY(-50%);
+    }
+
+    &__thumb {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        appearance: none;
+        -webkit-appearance: none;
+        background: transparent;
+        pointer-events: none;
+        margin: 0;
+
+        &::-webkit-slider-thumb {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: $color-teal;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+            cursor: pointer;
+            pointer-events: all;
+        }
+
+        &::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: $color-teal;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+            cursor: pointer;
+            pointer-events: all;
+        }
+    }
+
+    &__values {
+        white-space: nowrap;
+        font-size: $font-size-sm;
+        color: $color-teal-dark;
     }
 }
 
 // --- Publications ------------------------------------------------------------
 .publications-year-group {
-    margin-bottom: $spacing-xl;
+    margin-bottom: $spacing-xs;
 
     &--two-col {
       display: grid;
@@ -711,15 +897,53 @@
     gap: $spacing-md;
     padding: $spacing-md 0;
     border-bottom: 1px solid $color-gray-200;
-
     &:last-child {
         border-bottom: none;
     }
 
     .pub-type-col {
         flex-shrink: 0;
-        width: 90px;
+        width: 100px;
         padding-top: 3px;
+    }
+
+    .pub-col-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border: 1.5px solid rgba($color-navy, 0.15);
+        border-radius: $border-radius;
+        overflow: hidden;
+
+        .badge {
+            display: block;
+            text-align: center;
+            border-radius: 0;
+            padding: 5px 8px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: $color-text-muted;
+            background: $color-white;
+            text-decoration: none;
+            border-top: 1.5px solid rgba($color-navy, 0.1);
+            transition: background-color 0.15s, color 0.15s;
+
+            &:hover {
+                background-color: $color-gray-100;
+                color: $color-navy;
+                text-decoration: none;
+            }
+        }
     }
 
     .pub-body {
@@ -740,39 +964,30 @@
             }
         }
 
-        .pub-authors {
-            font-size: $font-size-sm;
-            color: $color-text-muted;
-            margin-bottom: 4px;
-        }
-
-        .pub-venue {
-            font-size: $font-size-sm;
-            color: $color-text;
-            font-style: italic;
+        .pub-meta {
             margin-bottom: $spacing-xs;
-        }
 
-        .pub-links {
-            display: flex;
-            gap: $spacing-sm;
-            flex-wrap: wrap;
-
-            a {
+            .pub-authors {
+                display: block;
                 font-size: $font-size-sm;
-                font-weight: 500;
-                color: $color-teal-dark;
-                display: flex;
-                align-items: center;
-                gap: 3px;
-                text-decoration: none;
+                color: $color-text-muted;
+            }
 
-                &:hover {
-                    color: $color-teal;
-                    text-decoration: underline;
-                }
+            .pub-venue {
+                display: block;
+                font-size: $font-size-sm;
+                color: $color-text;
+                font-style: italic;
             }
         }
+
+        .pub-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin: 4px 0 8px;
+        }
+
     }
 }
 
