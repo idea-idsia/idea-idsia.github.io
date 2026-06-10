@@ -1,9 +1,12 @@
-title: IDeA Research Group
+title: IDeA @ IDSIA
 email: idea@idsia.ch
 description: >-
-    IDeA (Industrial Decision Analytics) is a research group working on .....
+    IDeA (Industrial Decision Analytics) is a research group at IDSIA working on
+    optimization, multi-agent AI, and decision-support systems for energy,
+    mobility, and industrial applications.
 baseurl: ""
-url: ""
+url: "https://idea.idsia.ch"
+google_site_verification: xKyje9TcL_v0v7elV7mKlESppgxt6HZZ0Dv2MSP46wM
 
 # Navigation links (order matters)
 nav_links:
@@ -13,6 +16,8 @@ nav_links:
       url: /people/
     - title: Projects
       url: /projects/
+    - title: Software
+      url: /software/
     - title: Publications
       url: /publications/
 
@@ -20,6 +25,9 @@ collections:
     projects:
         output: true
         permalink: /projects/:name/
+    software:
+        output: true
+        permalink: /software/:name/
     publications:
         output: true
         permalink: /publications/:name/
@@ -27,10 +35,22 @@ collections:
 # Build settings
 plugins:
     - jekyll-feed
+    - jekyll-seo-tag
+    - jekyll-sitemap
+    - jekyll-wikilinks
+
+wikilinks:
+    enabled: true
+
+d3_graph_data:
+    enabled: false
 
 sass:
     sass_dir: _sass
     style: compressed
+
+# How many team members to show in the home page preview (set to 0 to show all)
+home_team_limit: 0
 
 exclude:
     - Gemfile

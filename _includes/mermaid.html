@@ -1,0 +1,12 @@
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  // Kramdown renders ```mermaid as <pre><code class="language-mermaid">
+  // Replace each such <pre> with <pre class="mermaid"> for Mermaid to pick up
+  document.querySelectorAll('pre code.language-mermaid').forEach(function (el) {
+    var pre = document.createElement('pre');
+    pre.className = 'mermaid';
+    pre.textContent = el.textContent;
+    el.parentNode.replaceWith(pre);
+  });
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+</script>

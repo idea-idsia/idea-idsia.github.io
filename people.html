@@ -18,32 +18,71 @@ permalink: /people/
   <div class="container">
 
     {% comment %} Seniority order {% endcomment %}
-    {% assign role_order = "Professor,Associate Professor,Assistant Professor,Postdoc,Research Scientist,PhD Student,Master Student,Visiting Researcher" | split: "," %}
+    {% assign role_order = "Team Leader,Professor,Associate Professor,Assistant Professor,Senior Researcher,Researcher,Postdoc,Research Scientist,PhD Student,Master Student,Visiting Researcher" | split: "," %}
 
-    {% comment %} All current members — visiting badge shown inline {% endcomment %}
-    {% assign current_members = "" | split: "" %}
-    {% for role in role_order %}
-      {% for person_hash in site.data.people %}
-        {% assign person = person_hash[1] %}
-        {% if person.role == role and person.former != true %}
-          {% assign current_members = current_members | push: person %}
+    {% comment %} Pre-build a flat array sorted by last name (extracted from name field) {% endcomment %}
+    {% assign all_people_raw = "" | split: "" %}
+    {% for person_hash in site.data.people %}
+      {% assign all_people_raw = all_people_raw | push: person_hash[1] %}
+    {% endfor %}
+    {% assign last_name_keys = "" | split: "" %}
+    {% for person in all_people_raw %}
+      {% assign base_name = person.name | split: "," | first %}
+      {% assign last_name = base_name | split: " " | last | downcase %}
+      {% assign sort_key = last_name | append: "|||" | append: person.name %}
+      {% assign last_name_keys = last_name_keys | push: sort_key %}
+    {% endfor %}
+    {% assign last_name_keys = last_name_keys | sort %}
+    {% assign all_people = "" | split: "" %}
+    {% for key in last_name_keys %}
+      {% assign target_name = key | split: "|||" | last %}
+      {% for person in all_people_raw %}
+        {% if person.name == target_name %}
+          {% assign all_people = all_people | push: person %}
         {% endif %}
       {% endfor %}
     {% endfor %}
-    {% comment %} Catch-all: unknown roles {% endcomment %}
-    {% for person_hash in site.data.people %}
-      {% assign person = person_hash[1] %}
-      {% unless role_order contains person.role or person.former == true %}
+
+    {% comment %} All current members — visiting badge shown inline {% endcomment %}
+    {% assign current_members = "" | split: "" %}
+    {% assign processed_names = "" | split: "" %}
+    {% for role in role_order %}
+      {% for person in all_people %}
+        {% if person.former != true %}
+          {% unless processed_names contains person.name %}
+            {% if person.roles contains role %}
+              {% assign current_members = current_members | push: person %}
+              {% assign processed_names = processed_names | push: person.name %}
+            {% endif %}
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+    {% comment %} Catch-all: people whose roles don't match any known role {% endcomment %}
+    {% for person in all_people %}
+      {% unless processed_names contains person.name or person.former == true %}
         {% assign current_members = current_members | push: person %}
       {% endunless %}
     {% endfor %}
 
     <div class="people-grid">
       {% for person in current_members %}
-        <div class="person-card">
+        {% assign person_anchor = "" %}
+        {% for ph in site.data.people %}
+          {% if ph[1].name == person.name %}
+            {% assign person_anchor = ph[0] | replace: "_", "-" %}
+          {% endif %}
+        {% endfor %}
+        <div class="person-card"{% if person_anchor != "" %} id="{{ person_anchor }}"{% endif %}>
           <div class="person-photo-wrap">
             {% if person.photo %}
-              <img class="person-photo" src="{{ person.photo }}" alt="{{ person.name }}">
+              {% if forloop.index == 1 %}
+                {% include picture.html src=person.photo alt=person.name class="person-photo" width="400" height="400" loading="eager" fetchpriority="high" %}
+              {% elsif forloop.index <= 4 %}
+                {% include picture.html src=person.photo alt=person.name class="person-photo" width="400" height="400" loading="eager" %}
+              {% else %}
+                {% include picture.html src=person.photo alt=person.name class="person-photo" width="400" height="400" %}
+              {% endif %}
             {% else %}
               <div class="person-photo-placeholder">{{ person.name | slice: 0 }}</div>
             {% endif %}
@@ -57,7 +96,7 @@ permalink: /people/
                 {{ person.name }}
               {% endif %}
             </div>
-            <div class="person-role">{{ person.role }}</div>
+            <div class="person-role">{% for r in person.roles %}<span style="white-space:nowrap">{{ r }}</span>{% unless forloop.last %} · {% endunless %}{% endfor %}</div>
             <div class="person-links">
               {% if person.email %}<a href="mailto:{{ person.email }}" title="Email"><i class="fas fa-envelope"></i></a>{% endif %}
               {% if person.website %}<a href="{{ person.website }}" target="_blank" rel="noopener" title="Website"><i class="fas fa-globe"></i></a>{% endif %}
@@ -78,24 +117,51 @@ permalink: /people/
       {% endfor %}
     </div>
 
+    {% comment %} JSON-LD Person structured data for Google Knowledge Panel / sameAs linking {% endcomment %}
+    {% for person in current_members %}
+      {% assign _pk = "" %}{% for ph in site.data.people %}{% if ph[1].name == person.name %}{% assign _pk = ph[0] | replace: "_", "-" %}{% endif %}{% endfor %}
+      {% assign _pn = person.name | split: "," | first %}
+      {% assign _pu = site.url | append: "/people/#" | append: _pk %}
+      {% assign _sa = "" | split: "" %}{% if person.website %}{% assign _sa = _sa | push: person.website %}{% endif %}{% if person.orcid %}{% assign _sa = _sa | push: person.orcid %}{% endif %}{% if person.scholar %}{% assign _sa = _sa | push: person.scholar %}{% endif %}{% if person.linkedin %}{% assign _sa = _sa | push: person.linkedin %}{% endif %}{% if person.github %}{% assign _sa = _sa | push: person.github %}{% endif %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": {{ _pn | jsonify }},
+  "url": {{ _pu | jsonify }},
+  "jobTitle": {{ person.roles | first | jsonify }},
+  "worksFor": {% include jsonld/idea_org.html %}{% if person.name contains ", PhD" %},
+  "honorificSuffix": "PhD"{% endif %}{% if person.email %},
+  "email": {{ person.email | jsonify }}{% endif %}{% if person.photo %},
+  "image": {{ person.photo | absolute_url | jsonify }}{% endif %}{% if person.interests %},
+  "knowsAbout": [{% for interest in person.interests %}{{ interest | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}{% if _sa.size > 0 %},
+  "sameAs": [{% for u in _sa %}{{ u | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}
+}
+</script>
+    {% endfor %}
+
   </div>
 </section>
 
 {% comment %} Former members {% endcomment %}
 {% assign former_members = "" | split: "" %}
+{% assign former_names = "" | split: "" %}
 {% for role in role_order %}
-  {% for person_hash in site.data.people %}
-    {% assign person = person_hash[1] %}
-    {% if person.former == true and person.visiting != true and person.role == role %}
-      {% assign former_members = former_members | push: person %}
+  {% for person in all_people %}
+    {% if person.former == true and person.visiting != true %}
+      {% unless former_names contains person.name %}
+        {% if person.roles contains role %}
+          {% assign former_members = former_members | push: person %}
+          {% assign former_names = former_names | push: person.name %}
+        {% endif %}
+      {% endunless %}
     {% endif %}
   {% endfor %}
 {% endfor %}
 {% comment %} Catch-all: former, non-visiting, unknown roles {% endcomment %}
-{% for person_hash in site.data.people %}
-  {% assign person = person_hash[1] %}
+{% for person in all_people %}
   {% if person.former == true and person.visiting != true %}
-    {% unless role_order contains person.role %}
+    {% unless former_names contains person.name %}
       {% assign former_members = former_members | push: person %}
     {% endunless %}
   {% endif %}
@@ -103,19 +169,23 @@ permalink: /people/
 
 {% comment %} Former visiting {% endcomment %}
 {% assign former_visiting = "" | split: "" %}
+{% assign former_visiting_names = "" | split: "" %}
 {% for role in role_order %}
-  {% for person_hash in site.data.people %}
-    {% assign person = person_hash[1] %}
-    {% if person.former == true and person.visiting == true and person.role == role %}
-      {% assign former_visiting = former_visiting | push: person %}
+  {% for person in all_people %}
+    {% if person.former == true and person.visiting == true %}
+      {% unless former_visiting_names contains person.name %}
+        {% if person.roles contains role %}
+          {% assign former_visiting = former_visiting | push: person %}
+          {% assign former_visiting_names = former_visiting_names | push: person.name %}
+        {% endif %}
+      {% endunless %}
     {% endif %}
   {% endfor %}
 {% endfor %}
 {% comment %} Catch-all: former, visiting, unknown roles {% endcomment %}
-{% for person_hash in site.data.people %}
-  {% assign person = person_hash[1] %}
+{% for person in all_people %}
   {% if person.former == true and person.visiting == true %}
-    {% unless role_order contains person.role %}
+    {% unless former_visiting_names contains person.name %}
       {% assign former_visiting = former_visiting | push: person %}
     {% endunless %}
   {% endif %}
@@ -137,7 +207,7 @@ permalink: /people/
               {{ person.name }}
             {% endif %}
           </div>
-          <div class="former-member-role">{{ person.role }}{% if person.years %} &middot; {{ person.years }}{% endif %}</div>
+          <div class="former-member-role">{{ person.roles | join: " · " }}{% if person.years %} &middot; {{ person.years }}{% endif %}</div>
           {% if person.current_position %}
           <div class="former-member-now">
             <span class="former-member-label">Now</span>
@@ -169,7 +239,7 @@ permalink: /people/
                 {{ person.name }}
               {% endif %}
             </div>
-            <div class="former-member-role">{{ person.role }}{% if person.years %} &middot; {{ person.years }}{% endif %}</div>
+            <div class="former-member-role">{{ person.roles | join: " · " }}{% if person.years %} &middot; {{ person.years }}{% endif %}</div>
             {% if person.current_position %}
               <div class="former-member-now">{{ person.current_position }}</div>
             {% endif %}

@@ -5,6 +5,27 @@ description: Our research projects
 permalink: /projects/
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "IDeA Research Group Projects",
+  "url": {{ '/projects/' | absolute_url | jsonify }},
+  "itemListElement": [{% assign _proj_i = 0 %}{% for proj in site.projects %}{% assign _proj_i = _proj_i | plus: 1 %}
+    {
+      "@type": "ListItem",
+      "position": {{ _proj_i }},
+      "item": {
+        "@type": "ResearchProject",
+        "name": {{ proj.project_name | jsonify }},
+        "url": {{ proj.url | absolute_url | jsonify }}{% if proj.short_summary %},
+        "description": {{ proj.short_summary | strip_html | strip_newlines | jsonify }}{% endif %}
+      }
+    }{% unless forloop.last %},{% endunless %}{% endfor %}
+  ]
+}
+</script>
+
 <div class="page-header">
   <div class="container">
     <h1>Projects</h1>
@@ -25,50 +46,7 @@ permalink: /projects/
       {% assign sorted_projects = site.projects | sort: "start" | reverse %}
 
       {% for proj in sorted_projects %}
-        <div class="project-card" data-status="{{ proj.status }}">
-          {% if proj.content.size > 5 %}
-          <a class="project-card-link" href="{{ proj.url | relative_url }}">
-          {% else %}
-          <div class="project-card-link">
-          {% endif %}
-            <div class="project-image-wrap">
-              {% if proj.cover_image %}
-                <img class="project-image" src="{{ proj.cover_image }}" alt="{{ proj.project_name }}">
-              {% else %}
-                <div class="project-image-placeholder">&#128300;</div>
-              {% endif %}
-              <span class="project-status-chip project-status-chip--{{ proj.status }}">{{ proj.status | capitalize }}</span>
-            </div>
-          {% if proj.content.size > 5 %}
-          </a>
-          {% else %}
-          </div>
-          {% endif %}
-          <div class="project-body">
-            <h3 class="project-title">
-              {% if proj.content.size > 5 %}
-              <a href="{{ proj.url | relative_url }}">{{ proj.project_name }}</a>
-              {% else %}
-              {{ proj.project_name }}
-              {% endif %}
-            </h3>
-            <div class="project-meta-header">
-              <span class="project-date-chip">{{ proj.start }}{% if proj.end %} &ndash; {{ proj.end }}{% else %} &ndash; present{% endif %}</span>
-              {% if proj.funding %}<span class="project-funding-badge">{{ proj.funding }}</span>{% endif %}
-            </div>
-            <p class="project-description">{{ proj.short_summary }}</p>
-            <div class="project-tags">
-              {% for kw in proj.keywords %}
-                <span class="tag">{{ kw }}</span>
-              {% endfor %}
-            </div>
-            {% if proj.content.size > 5 %}
-            <div class="project-readmore">
-              <a href="{{ proj.url | relative_url }}">Read more</a>
-            </div>
-            {% endif %}
-          </div>
-        </div>
+        {% include project_card.html item=proj show_status_filter="true" show_date="true" default_icon="&#128300;" %}
       {% endfor %}
     </div>
 

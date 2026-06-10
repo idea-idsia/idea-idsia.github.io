@@ -1,0 +1,15 @@
+{% comment %}
+  Reusable image include with sensible defaults.
+
+  Required:  src, alt
+  Optional:  class, loading (default: lazy), fetchpriority, width, height
+{% endcomment %}
+{% assign _src = include.src | strip %}
+<img
+  src="{{ _src | relative_url }}"
+  alt="{{ include.alt }}"
+  {% if include.class %}class="{{ include.class }}"{% endif %}
+  loading="{{ include.loading | default: 'lazy' }}"
+  {% if include.fetchpriority %}fetchpriority="{{ include.fetchpriority }}"{% endif %}
+  {% if include.width %}width="{{ include.width }}"{% endif %}
+  {% if include.height %}height="{{ include.height }}"{% endif %}>

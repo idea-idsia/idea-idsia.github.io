@@ -1,0 +1,30 @@
+---
+layout: default
+title: Software
+description: Our software tools and libraries
+permalink: /software/
+---
+
+<div class="page-header">
+  <div class="container">
+    <h1>Software</h1>
+    <p>Our software tools and libraries</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <div class="projects-grid" id="projects-grid">
+      {% assign sorted_software = site.software | sort: "name" %}
+      {% assign active_software = sorted_software | where_exp: "item", "item.status != 'archived'" %}
+      {% assign archived_software = sorted_software | where_exp: "item", "item.status == 'archived'" %}
+      {% assign sorted_software = active_software | concat: archived_software %}
+
+      {% for item in sorted_software %}
+        {% include project_card.html item=item default_icon="&#128187;" %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>

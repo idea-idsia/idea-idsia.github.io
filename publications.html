@@ -5,6 +5,29 @@ description: Our research publications
 permalink: /publications/
 ---
 
+{% assign _pubs = site.publications | sort: "year" | reverse %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "IDeA Research Group Publications",
+  "url": {{ '/publications/' | absolute_url | jsonify }},
+  "itemListElement": [{% for pub in _pubs %}
+    {
+      "@type": "ListItem",
+      "position": {{ forloop.index }},
+      "item": {
+        "@type": "ScholarlyArticle",
+        "name": {{ pub.title | jsonify }},
+        "url": {{ pub.url | absolute_url | jsonify }}{% if pub.year %},
+        "datePublished": {{ pub.year | jsonify }}{% endif %}{% if pub.authors %},
+        "author": [{% for a in pub.authors %}{ "@type": "Person", "name": {{ a | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}
+      }
+    }{% unless forloop.last %},{% endunless %}{% endfor %}
+  ]
+}
+</script>
+
 <div class="page-header">
   <div class="container">
     <h1>Publications</h1>
@@ -17,22 +40,141 @@ permalink: /publications/
 
     {% assign sorted_pubs = site.publications | sort: "year" | reverse %}
 
-    {% comment %} Get unique years {% endcomment %}
+    {% comment %} Collect unique types {% endcomment %}
+    {% assign pub_types = "" | split: "" %}
+    {% for pub in sorted_pubs %}
+      {% unless pub_types contains pub.type %}
+        {% if pub.type %}{% assign pub_types = pub_types | push: pub.type %}{% endif %}
+      {% endunless %}
+    {% endfor %}
+
+    {% comment %} Collect unique years (sorted newest-first) {% endcomment %}
     {% assign years = "" | split: "" %}
     {% for pub in sorted_pubs %}
       {% unless years contains pub.year %}
-        {% assign years = years | push: pub.year %}
+        {% if pub.year %}{% assign years = years | push: pub.year %}{% endif %}
       {% endunless %}
     {% endfor %}
+    {% assign year_max = years | first %}
+    {% assign year_min = years | last %}
+
+    {% comment %} Collect unique tags {% endcomment %}
+    {% assign all_tags = "" | split: "" %}
+    {% for pub in sorted_pubs %}
+      {% for tag in pub.tags %}
+        {% unless all_tags contains tag %}
+          {% assign all_tags = all_tags | push: tag %}
+        {% endunless %}
+      {% endfor %}
+    {% endfor %}
+    {% assign all_tags = all_tags | sort %}
+
+    {% comment %} IDeA member names (strip honorifics after comma) {% endcomment %}
+    {% assign member_names = "" | split: "" %}
+    {% for member_entry in site.data.people %}
+      {% assign member = member_entry[1] %}
+      {% assign member_name = member.name | split: ", " | first %}
+      {% assign member_names = member_names | push: member_name %}
+    {% endfor %}
+    {% assign member_names = member_names | sort %}
+
+    <div class="filter-bar">
+
+      {% comment %} Type multi-select {% endcomment %}
+      <div class="filter-multiselect" id="ms-type">
+        <button type="button" class="filter-multiselect__toggle" data-placeholder="All types">
+          <span class="filter-multiselect__label">All types</span>
+          <span class="arrow">&#9660;</span>
+        </button>
+        <div class="filter-multiselect__panel" hidden>
+          {% for pt in pub_types %}
+            <label>
+              <input type="checkbox" value="{{ pt }}">
+              {{ pt | replace: "_", " " | replace: "-", " " | capitalize }}
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% comment %} Author multi-select {% endcomment %}
+      <div class="filter-multiselect" id="ms-author">
+        <button type="button" class="filter-multiselect__toggle" data-placeholder="All authors">
+          <span class="filter-multiselect__label">All authors</span>
+          <span class="arrow">&#9660;</span>
+        </button>
+        <div class="filter-multiselect__panel" hidden>
+          {% for name in member_names %}
+            <label>
+              <input type="checkbox" value="{{ name }}">
+              {{ name }}
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% comment %} Year range slider {% endcomment %}
+      <div class="year-range-widget">
+        <span class="year-range-widget__label">Year</span>
+        <div class="year-range-widget__track-wrap">
+          <div class="year-range-widget__track"></div>
+          <div class="year-range-widget__fill" id="year-range-fill"></div>
+          <input type="range" class="year-range-widget__thumb" id="filter-year-min"
+                 min="{{ year_min }}" max="{{ year_max }}" value="{{ year_min }}">
+          <input type="range" class="year-range-widget__thumb" id="filter-year-max"
+                 min="{{ year_min }}" max="{{ year_max }}" value="{{ year_max }}">
+        </div>
+        <span class="year-range-widget__values" id="year-range-values">{{ year_min }} – {{ year_max }}</span>
+      </div>
+
+      {% comment %} Keyword multi-select {% endcomment %}
+      <div class="filter-multiselect" id="ms-keyword">
+        <button type="button" class="filter-multiselect__toggle" data-placeholder="All keywords">
+          <span class="filter-multiselect__label">All keywords</span>
+          <span class="arrow">&#9660;</span>
+        </button>
+        <div class="filter-multiselect__panel" hidden>
+          {% for tag in all_tags %}
+            <label>
+              <input type="checkbox" value="{{ tag }}">
+              {{ tag }}
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <button id="filter-reset" class="filter-btn filter-btn--reset" style="display:none">Clear all</button>
+
+    </div>
 
     {% for year in years %}
       <div class="publications-year-group">
         <div class="year-label">{{ year }}</div>
         {% for pub in sorted_pubs %}
           {% if pub.year == year %}
-            <div class="publication-entry">
+            {% capture paper_url %}{% include pub_paper_url.html doi=pub.doi arxiv=pub.arxiv pdf=pub.pdf %}{% endcapture %}
+            {% assign paper_url = paper_url | strip %}
+            {% capture data_authors %}{% for a in pub.authors %}{{ a }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endcapture %}
+            {% capture data_tags %}{% for t in pub.tags %}{{ t }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endcapture %}
+            <div class="publication-entry"
+                 data-type="{{ pub.type }}"
+                 data-year="{{ pub.year }}"
+                 data-authors="{{ data_authors }}"
+                 data-tags="{{ data_tags }}">
               <div class="pub-type-col">
-                <span class="badge badge--{{ pub.type }}">{{ pub.type | capitalize }}</span>
+                <div class="pub-col-group">
+                  {% unless pub.type == blank %}
+                    <span class="badge badge--{{ pub.type | replace: "_", "-" }}">{{ pub.type | replace: "_", " " | replace: "-", " " | capitalize }}</span>
+                  {% endunless %}
+                  {% if paper_url %}
+                    <a href="{{ paper_url }}" target="_blank" rel="noopener"><i class="fas fa-file-alt"></i> Paper</a>
+                  {% endif %}
+                  {% if pub.code %}
+                    <a href="{{ pub.code }}" target="_blank" rel="noopener"><i class="fab fa-github"></i> Code</a>
+                  {% endif %}
+                  {% if pub.content.size > 5 %}
+                    <a href="{{ pub.url | relative_url }}">Read more</a>
+                  {% endif %}
+                </div>
               </div>
               <div class="pub-body">
                 <div class="pub-title">
@@ -42,27 +184,17 @@ permalink: /publications/
                   {{ pub.title }}
                   {% endif %}
                 </div>
-                <div class="pub-authors">{{ pub.authors | join: ", " }}</div>
-                <div class="pub-venue">{{ pub.venue }}</div>
+                <div class="pub-meta">
+                  <span class="pub-authors">{{ pub.authors | join: ", " }}</span>
+                  {% if pub.venue %}<span class="pub-venue">{{ pub.venue }}</span>{% endif %}
+                </div>
                 {% if pub.tags %}
-                  <div style="margin: 4px 0 6px;">
+                  <div class="pub-tags">
                     {% for tag in pub.tags %}
                       <span class="tag">{{ tag }}</span>
                     {% endfor %}
                   </div>
                 {% endif %}
-                <div class="pub-links">
-                  {% if pub.doi %}{% assign paper_url = pub.doi | prepend: "https://doi.org/" %}{% elsif pub.arxiv %}{% assign paper_url = pub.arxiv | prepend: "https://arxiv.org/abs/" %}{% elsif pub.pdf %}{% assign paper_url = pub.pdf %}{% else %}{% assign paper_url = nil %}{% endif %}
-                  {% if paper_url %}
-                    <a href="{{ paper_url }}" target="_blank" rel="noopener" title="Paper"><i class="fas fa-file-alt"></i> Paper</a>
-                  {% endif %}
-                  {% if pub.code %}
-                    <a href="{{ pub.code }}" target="_blank" rel="noopener" title="Code"><i class="fab fa-github"></i> Code</a>
-                  {% endif %}
-                  {% if pub.content.size > 5 %}
-                    <a href="{{ pub.url | relative_url }}">Read more</a>
-                  {% endif %}
-                </div>
               </div>
             </div>
           {% endif %}
@@ -72,3 +204,149 @@ permalink: /publications/
 
   </div>
 </section>
+
+<script>
+(function () {
+  var YEAR_MIN = parseInt(document.getElementById('filter-year-min').min);
+  var YEAR_MAX = parseInt(document.getElementById('filter-year-max').max);
+
+  // --- Multi-select -----------------------------------------------------------
+  function initMultiSelect(containerId) {
+    var container = document.getElementById(containerId);
+    var toggle    = container.querySelector('.filter-multiselect__toggle');
+    var labelEl   = container.querySelector('.filter-multiselect__label');
+    var panel     = container.querySelector('.filter-multiselect__panel');
+    var boxes     = container.querySelectorAll('input[type="checkbox"]');
+    var placeholder = toggle.dataset.placeholder;
+
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var opening = panel.hidden;
+      panel.hidden = !opening;
+      toggle.classList.toggle('is-open', opening);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!container.contains(e.target)) {
+        panel.hidden = true;
+        toggle.classList.remove('is-open');
+      }
+    });
+
+    boxes.forEach(function (cb) {
+      cb.addEventListener('change', function () {
+        updateLabel();
+        container.classList.toggle('filter-multiselect--active', getValues().length > 0);
+        applyFilters();
+      });
+    });
+
+    function updateLabel() {
+      var checked = Array.from(boxes).filter(function (c) { return c.checked; });
+      if (checked.length === 0) {
+        labelEl.textContent = placeholder;
+      } else if (checked.length === 1) {
+        labelEl.textContent = checked[0].parentElement.textContent.trim();
+      } else {
+        labelEl.textContent = checked.length + ' selected';
+      }
+    }
+
+    function getValues() {
+      return Array.from(boxes).filter(function (c) { return c.checked; }).map(function (c) { return c.value; });
+    }
+
+    function reset() {
+      boxes.forEach(function (cb) { cb.checked = false; });
+      labelEl.textContent = placeholder;
+      container.classList.remove('filter-multiselect--active');
+    }
+
+    return { getValues: getValues, reset: reset };
+  }
+
+  var msType    = initMultiSelect('ms-type');
+  var msAuthor  = initMultiSelect('ms-author');
+  var msKeyword = initMultiSelect('ms-keyword');
+
+  // --- Year range slider ------------------------------------------------------
+  var sliderMin  = document.getElementById('filter-year-min');
+  var sliderMax  = document.getElementById('filter-year-max');
+  var fill       = document.getElementById('year-range-fill');
+  var valDisplay = document.getElementById('year-range-values');
+
+  function updateSliderUI() {
+    var lo = parseInt(sliderMin.value);
+    var hi = parseInt(sliderMax.value);
+    var pctLo = (lo - YEAR_MIN) / (YEAR_MAX - YEAR_MIN) * 100;
+    var pctHi = (hi - YEAR_MIN) / (YEAR_MAX - YEAR_MIN) * 100;
+    fill.style.left  = pctLo + '%';
+    fill.style.right = (100 - pctHi) + '%';
+    valDisplay.textContent = (lo === YEAR_MIN && hi === YEAR_MAX)
+      ? YEAR_MIN + ' – ' + YEAR_MAX
+      : lo + ' – ' + hi;
+  }
+
+  sliderMin.addEventListener('input', function () {
+    if (parseInt(sliderMin.value) > parseInt(sliderMax.value)) {
+      sliderMin.value = sliderMax.value;
+    }
+    updateSliderUI();
+    applyFilters();
+  });
+
+  sliderMax.addEventListener('input', function () {
+    if (parseInt(sliderMax.value) < parseInt(sliderMin.value)) {
+      sliderMax.value = sliderMin.value;
+    }
+    updateSliderUI();
+    applyFilters();
+  });
+
+  updateSliderUI();
+
+  // --- Apply filters ----------------------------------------------------------
+  var resetBtn = document.getElementById('filter-reset');
+
+  function applyFilters() {
+    var types    = msType.getValues();
+    var authors  = msAuthor.getValues();
+    var keywords = msKeyword.getValues();
+    var lo = parseInt(sliderMin.value);
+    var hi = parseInt(sliderMax.value);
+    var yearFiltered = lo > YEAR_MIN || hi < YEAR_MAX;
+
+    resetBtn.style.display = (types.length || authors.length || keywords.length || yearFiltered) ? '' : 'none';
+
+    document.querySelectorAll('.publication-entry').forEach(function (entry) {
+      var yr = parseInt(entry.dataset.year);
+      var entryAuthors = entry.dataset.authors ? entry.dataset.authors.split('|') : [];
+      var entryTags    = entry.dataset.tags    ? entry.dataset.tags.split('|')    : [];
+
+      var ok = (!types.length    || types.indexOf(entry.dataset.type) !== -1)
+            && (yr >= lo && yr <= hi)
+            && (!authors.length  || authors.some(function (a) { return entryAuthors.indexOf(a) !== -1; }))
+            && (!keywords.length || keywords.some(function (k) { return entryTags.indexOf(k) !== -1; }));
+
+      entry.style.display = ok ? '' : 'none';
+    });
+
+    document.querySelectorAll('.publications-year-group').forEach(function (group) {
+      var has = Array.from(group.querySelectorAll('.publication-entry')).some(function (e) {
+        return e.style.display !== 'none';
+      });
+      group.style.display = has ? '' : 'none';
+    });
+  }
+
+  resetBtn.addEventListener('click', function () {
+    msType.reset();
+    msAuthor.reset();
+    msKeyword.reset();
+    sliderMin.value = YEAR_MIN;
+    sliderMax.value = YEAR_MAX;
+    updateSliderUI();
+    applyFilters();
+  });
+})();
+</script>
