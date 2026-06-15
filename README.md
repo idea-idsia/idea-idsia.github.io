@@ -42,9 +42,9 @@ bundle exec jekyll serve --livereload
 ```
 IDeA/
 ├── _config.yml          # Site configuration and navigation
-├── _data/
-│   └── people/          # One YAML file per person
+├── _people/             # One Markdown file per person
 ├── _projects/           # One Markdown file per project
+├── _software/           # One Markdown file per software tool
 ├── _publications/       # One Markdown file per publication
 ├── _layouts/            # HTML page templates
 ├── _includes/           # Reusable HTML components (header, footer)
@@ -53,6 +53,7 @@ IDeA/
 ├── index.html           # Home page
 ├── people.html          # People listing page
 ├── projects.html        # Projects listing page
+├── software.html        # Software listing page
 └── publications.html    # Publications listing page
 ```
 
@@ -60,29 +61,34 @@ IDeA/
 
 ### Adding a person
 
-Create a new YAML file in `_data/people/` named `firstname_lastname.yml`:
+Create a new Markdown file in `_people/` named `firstname-lastname.md`:
 
-```yaml
-name: Jane Doe
+```markdown
+---
+layout: person
+title: "Jane Doe – Researcher" # Used for browser tab, social cards, and SEO
+name: Jane Doe # Display name (append ", PhD" if applicable)
 roles:
     - PhD Student # add more entries for dual roles, e.g. [Team Leader, Senior Researcher]
 email: jane.doe@example.com
 website: https://janedoe.example.com
-photo: # /assets/images/people/jane_doe.jpg  (leave blank if none)
+image: # /assets/images/people/jane_doe.jpg  (leave blank if none)
 orcid: # https://orcid.org/0000-0000-0000-0001
 scholar: # https://scholar.google.com/citations?user=XXXXXXX
 linkedin: # https://linkedin.com/in/janedoe
 github: # https://github.com/janedoe
-bio: Short biography in one or two sentences.
+description: "One or two sentence bio used in search previews and social cards."
+bio: Longer biography shown on the person's page.
 interests:
     - Machine Learning
     - Natural Language Processing
 former: false # Set to true to move person to the "Former Members" section
+---
 ```
 
 Valid roles (in seniority order): `Team Leader`, `Professor`, `Associate Professor`, `Assistant Professor`, `Senior Researcher`, `Postdoc`, `Research Scientist`, `PhD Student`, `Master Student`, `Visiting Researcher`. The first matching role determines sort position; all roles are shown on the card joined by `·`.
 
-Place profile photos in `assets/images/people/` and set the `photo` field to the relative path.
+Place profile photos in `assets/images/people/` and set the `image` field to the relative path.
 
 ### Adding a project
 
@@ -99,7 +105,7 @@ status: active # active | completed
 start: 2024 # Start year (or YYYY-MM-DD)
 end: # End year — leave blank if ongoing
 
-short_summary: >
+description: >
     One or two sentence summary shown on project cards and in search previews.
 
 image: # /assets/images/projects/my_project.jpg — used as the social card image

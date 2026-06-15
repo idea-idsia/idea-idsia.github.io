@@ -1,13 +1,14 @@
 ---
 layout: person
-title: Matteo Salani
+title: "Matteo Salani, PhD – Team Leader"
 name: Matteo Salani, PhD
 roles:
   - Team Leader
   - Senior Researcher
 email: matteo.salani@supsi.ch
 website: https://www.supsi.ch/en/matteo-salani
-photo: /assets/images/people/matteo_salani.png
+image: /assets/images/people/matteo_salani.png
+description: "Team Leader and Senior Researcher at IDSIA since 2010, specializing in combinatorial optimization, vehicle routing, transportation, and energy management."
 orcid: https://orcid.org/0000-0003-2809-4347
 scholar: https://scholar.google.com/citations?user=PZpURJwAAAAJ&hl=en
 linkedin: https://ch.linkedin.com/in/matteo-salani-6a363113

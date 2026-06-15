@@ -1,11 +1,11 @@
 ---
 layout: project
-title: HIVEMIND
+title: "HIVEMIND – Multi-Agent Framework for Software Dev"
 project_name: Human-centred collaboratIVE MultI-ageNt framework for accelerating software Development and maintenance (HIVEMIND)
 status: active
 start: 2025
 end:
-short_summary:
+description:
   Building AI-driven multi-agent framework for responsible, human-centric software development.
    
 image:        /assets/images/projects/HIVEMINED_v-pos.png

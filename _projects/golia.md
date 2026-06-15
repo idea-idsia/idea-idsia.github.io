@@ -1,6 +1,6 @@
 ---
 layout: project
-title: GOLIA
+title: "GOLIA – Smart Mobility for Inclusive Cities"
 published: true
 
 project_name: "GOLIA – Smart Mobility Governance for Inclusive and Resilient Cities"
@@ -8,7 +8,7 @@ status: active
 start: 2025
 end: 2028
 
-short_summary: >
+description: >
     GOLIA develops a data-driven and socially optimised mobility governance model
     to support inclusive, resilient, and sustainable urban transport systems
     aligned with European policy goals.

@@ -74,7 +74,7 @@ active_projects.size > 0 %}
                         <span class="project-date-chip">{{ proj.start }}{% if proj.end %} &ndash; {{ proj.end }}{% else %} &ndash; present{% endif %}</span>
                         {% if proj.funding %}<span class="project-funding-badge">{{ proj.funding }}</span>{% endif %}
                     </div>
-                    <p class="project-description">{{ proj.short_summary }}</p>
+                    <p class="project-description">{{ proj.description }}</p>
                     <div class="project-tags">
                         {% for kw in proj.keywords limit:3 %}
                         <span class="tag">{{ kw }}</span>

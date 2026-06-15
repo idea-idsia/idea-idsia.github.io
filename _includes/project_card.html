@@ -37,7 +37,7 @@
       {% if _item.funding %}<span class="project-funding-badge">{{ _item.funding }}</span>{% endif %}
     </div>
     {% unless include.hide_details %}
-    <p class="project-description">{{ _item.short_summary }}</p>
+    <p class="project-description">{{ _item.description }}</p>
     <div class="project-tags">
       {% for kw in _item.keywords %}
         <span class="tag">{{ kw }}</span>

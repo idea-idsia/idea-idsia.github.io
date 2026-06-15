@@ -1,6 +1,6 @@
 ---
 layout: project
-title: DR-RISE
+title: "DR-RISE – Demand Response for Residential Energy"
 published: true
 
 project_name: "DR-RISE – Demand Response: Residential Innovation for a Sustainable Energy system"
@@ -8,7 +8,7 @@ status: active
 start: 2023
 end: 2027
 
-short_summary: >
+description: >
   DR-RISE develops an integrated residential demand response framework to
   optimise energy consumption in households while enhancing flexibility,
   user engagement, and system-wide efficiency in the European energy system.

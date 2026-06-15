@@ -1,6 +1,6 @@
 ---
 layout: project
-title: GINNGER
+title: "GINNGER – Digital Neighbourhood Regeneration"
 published: true
 
 project_name: GINNGER
@@ -8,7 +8,7 @@ status: active
 start: 2023
 end:
 
-short_summary: >
+description: >
     GINNGER project develops digital solutions for neighbourhood regeneration through collaborative processes, involving heterogeneous stakeholder communities.
   
 image: /assets/images/projects/ginnger.jpg
