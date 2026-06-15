@@ -1,6 +1,6 @@
 ---
 layout: project
-title: ENERGENIUS
+title: "ENERGENIUS – AI-Driven Building Energy Efficiency"
 published: true
 
 project_name: "ENERGENIUS – Leveraging the energy transition by gamified learning and AI, guided by cross sectoral integrated services and digital twin models to foster accessible and human-centered energy saving experiences"
@@ -8,7 +8,7 @@ status: active
 start: 2024
 end: 2028
 
-short_summary: >
+description: >
   ENERGENIUS develops AI-driven methods for energy analysis and decision support in buildings,
   enabling intelligent recommendations for energy efficiency, demand flexibility, and
   decarbonisation through data-driven modelling of consumption patterns and building characteristics.

@@ -67,13 +67,13 @@ permalink: /people/
         {% assign person_anchor = person.url | remove: "/people/" | remove: "/" %}
         <div class="person-card" id="{{ person_anchor }}">
           <div class="person-photo-wrap">
-            {% if person.photo %}
+            {% if person.image %}
               {% if forloop.index == 1 %}
-                {% include picture.html src=person.photo alt=person.name class="person-photo" width="400" height="400" loading="eager" fetchpriority="high" %}
+                {% include picture.html src=person.image alt=person.name class="person-photo" width="400" height="400" loading="eager" fetchpriority="high" %}
               {% elsif forloop.index <= 4 %}
-                {% include picture.html src=person.photo alt=person.name class="person-photo" width="400" height="400" loading="eager" %}
+                {% include picture.html src=person.image alt=person.name class="person-photo" width="400" height="400" loading="eager" %}
               {% else %}
-                {% include picture.html src=person.photo alt=person.name class="person-photo" width="400" height="400" %}
+                {% include picture.html src=person.image alt=person.name class="person-photo" width="400" height="400" %}
               {% endif %}
             {% else %}
               <div class="person-photo-placeholder">{{ person.name | slice: 0 }}</div>
@@ -119,8 +119,8 @@ permalink: /people/
   "jobTitle": {{ person.roles | first | jsonify }},
   "worksFor": {% include jsonld/idea_org.html %}{% if person.name contains ", PhD" %},
   "honorificSuffix": "PhD"{% endif %}{% if person.email %},
-  "email": {{ person.email | jsonify }}{% endif %}{% if person.photo %},
-  "image": {{ person.photo | absolute_url | jsonify }}{% endif %}{% if person.interests %},
+  "email": {{ person.email | jsonify }}{% endif %}{% if person.image %},
+  "image": {{ person.image | absolute_url | jsonify }}{% endif %}{% if person.interests %},
   "knowsAbout": [{% for interest in person.interests %}{{ interest | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}{% if _sa.size > 0 %},
   "sameAs": [{% for u in _sa %}{{ u | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}
 }

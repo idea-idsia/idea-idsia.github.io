@@ -1,12 +1,12 @@
 ---
 layout: software
-title: ANT-AI
+title: "ANT-AI – Lightweight Multi-Agent AI Framework"
 published: true
 
 project_name: "ANT-AI – Lightweight Framework for Multi-Agent AI Systems"
 status: active
 
-short_summary: >
+description: >
   ANT-AI makes it easy to design, deploy, and experiment with multi-agent AI systems —
   from a single tool-driven agent to a full colony of collaborating peers communicating
   via the A2A protocol, on top of an LLM-agnostic core.

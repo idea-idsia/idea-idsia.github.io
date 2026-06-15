@@ -1,6 +1,6 @@
 ---
 layout: project
-title: SWITCH
+title: "SWITCH – AI for Cross-Border Intermodal Freight"
 published: true
 
 project_name: "SWITCH – Shifting Ways of Intermodal Transport on Cross-border Haulage"
@@ -8,7 +8,7 @@ status: active
 start: 2024
 end: 2027
 
-short_summary: >
+description: >
     SWITCH develops OptiModal AI, an AI-powered platform to optimise cross-border
     freight flows between Italy and Switzerland, promoting a modal shift from road
     to rail and reducing congestion and environmental impact in the Alpine region.

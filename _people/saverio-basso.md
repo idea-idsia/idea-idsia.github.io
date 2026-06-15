@@ -1,12 +1,13 @@
 ---
 layout: person
-title: Saverio Basso
+title: "Saverio Basso, PhD – Researcher"
 name: Saverio Basso, PhD
 roles:
   - Researcher
 email: saverio.basso@supsi.ch
 website: https://www.supsi.ch/en/saverio-basso
-photo: /assets/images/people/saverio_basso.jpg
+image: /assets/images/people/saverio_basso.jpg
+description: "Researcher at IDSIA since 2021, specializing in combinatorial optimization, data-driven decomposition methods, and shortest path problems."
 orcid: https://orcid.org/0000-0001-9533-9530
 scholar: https://scholar.google.com/citations?user=mX8KQK0AAAAJ&hl=en
 linkedin: https://www.linkedin.com/in/saverio-basso-23268999/

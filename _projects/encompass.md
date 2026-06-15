@@ -1,6 +1,6 @@
 ---
 layout: project
-title: enCOMPASS
+title: "enCOMPASS – Collaborative Energy Saving Platform"
 published: true
 
 project_name: "enCOMPASS – Collaborative Recommendations and Adaptive Control for Personalised Energy Saving"
@@ -8,7 +8,7 @@ status: completed
 start: 2016
 end: 2019
 
-short_summary: >
+description: >
   The enCOMPASS project implements and validates an integrated socio-technical approach to behavioural change for energy saving, by developing
   innovative user-friendly digital tools to make energy consumption data available and understandable for different stakeholders to empower them to achieve 
   energy savings and manage their needs in energy efficient, cost-effective and comfortable ways.

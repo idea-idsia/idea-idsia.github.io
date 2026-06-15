@@ -1,11 +1,11 @@
 ---
 layout: software
-title: PathWyse
+title: "PathWyse – Resource Constrained Shortest Path Solver"
 project_name: PathWyse
 status: active
 start: 2021
 end:
-short_summary:
+description:
   A C++ and Python framework to model and solve Resource Constrained Shortest Path Problems.
    
 image: /assets/images/software/pathwyse.png

@@ -1,6 +1,6 @@
 ---
 layout: project
-title: SocialCar
+title: "SocialCar – Social Urban Carpooling Network"
 published: true
 
 project_name: "SocialCar – Open social transport network for urban approach to carpooling"
@@ -8,7 +8,7 @@ status: completed
 start: 2015
 end: 2018
 
-short_summary: >
+description: >
   SocialCar is an Intelligent Transport System based on an innovative approach to transport demand management, and more specifically to carpooling in urban and 
   peri-urban areas.
 

@@ -1,6 +1,6 @@
 ---
 layout: software
-title: EV-Insights
+title: "EV-Insights – Open-Source EV Charging Data Framework"
 published: true
 
 project_name: "EV-Insights – Open-Source Framework for EV Charging Data Processing, Analysis, and Forecasting"
@@ -8,7 +8,7 @@ status: active
 start: 2025
 end:
 
-short_summary: >
+description: >
   EV-Insights is an open-source Python framework for electric vehicle
   charging data ingestion, management, analysis, forecasting, and synthetic
   data generation, designed to support research and operational applications
