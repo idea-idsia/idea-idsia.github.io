@@ -22,6 +22,9 @@ nav_links:
       url: /publications/
 
 collections:
+    people:
+        output: true
+        permalink: /people/:name/
     projects:
         output: true
         permalink: /projects/:name/

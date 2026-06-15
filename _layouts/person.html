@@ -1,0 +1,197 @@
+---
+layout: default
+---
+
+{% assign _person_base = page.name | split: ", " | first %}
+{% assign _same_as = "" | split: "" %}
+{% if page.website %}{% assign _same_as = _same_as | push: page.website %}{% endif %}
+{% if page.orcid %}{% assign _same_as = _same_as | push: page.orcid %}{% endif %}
+{% if page.scholar %}{% assign _same_as = _same_as | push: page.scholar %}{% endif %}
+{% if page.linkedin %}{% assign _same_as = _same_as | push: page.linkedin %}{% endif %}
+{% if page.github %}{% assign _same_as = _same_as | push: page.github %}{% endif %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": {{ _person_base | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "jobTitle": {{ page.roles | first | jsonify }},
+  "worksFor": {% include jsonld/idea_org.html %}{% if page.name contains ", PhD" %},
+  "honorificSuffix": "PhD"{% endif %}{% if page.email %},
+  "email": {{ page.email | jsonify }}{% endif %}{% if page.photo %},
+  "image": {{ page.photo | absolute_url | jsonify }}{% endif %}{% if page.interests %},
+  "knowsAbout": [{% for interest in page.interests %}{{ interest | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}{% if _same_as.size > 0 %},
+  "sameAs": [{% for u in _same_as %}{{ u | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}
+}
+</script>
+{% include jsonld/breadcrumb.html section_name="People" section_url="/people/" page_name=_person_base %}
+
+<div class="page-header">
+  <div class="container">
+    <div class="person-page-header">
+      <div class="person-page-photo-wrap">
+        {% if page.photo %}
+          {% include picture.html src=page.photo alt=page.name class="person-page-photo" width="220" height="220" loading="eager" fetchpriority="high" %}
+        {% else %}
+          <div class="person-page-photo-placeholder">{{ page.name | slice: 0 }}</div>
+        {% endif %}
+        {% if page.visiting == true %}<span class="person-visiting-badge">Visiting</span>{% endif %}
+      </div>
+      <div class="person-page-meta">
+        <div class="person-page-name-row">
+          <h1 class="person-page-name">{{ page.name }}</h1>
+          {% if page.email %}{% assign _email_obf = page.email | replace: "@", "&#64;" | replace: ".", "&#46;" %}<span class="person-page-email">{{ _email_obf }}</span>{% endif %}
+        </div>
+        <div class="person-page-roles">{% for r in page.roles %}<span>{{ r }}</span>{% unless forloop.last %} &middot; {% endunless %}{% endfor %}</div>
+        <div class="person-page-links">
+          {% if page.website %}<a href="{{ page.website }}" target="_blank" rel="noopener" class="person-page-link"><i class="fas fa-globe"></i> Website</a>{% endif %}
+          {% if page.scholar %}<a href="{{ page.scholar }}" target="_blank" rel="noopener" class="person-page-link"><i class="ai ai-google-scholar"></i> Scholar</a>{% endif %}
+          {% if page.orcid %}<a href="{{ page.orcid }}" target="_blank" rel="noopener" class="person-page-link"><i class="ai ai-orcid"></i> ORCID</a>{% endif %}
+          {% if page.linkedin %}<a href="{{ page.linkedin }}" target="_blank" rel="noopener" class="person-page-link"><i class="fab fa-linkedin"></i> LinkedIn</a>{% endif %}
+          {% if page.github %}<a href="{{ page.github }}" target="_blank" rel="noopener" class="person-page-link"><i class="fab fa-github"></i> GitHub</a>{% endif %}
+        </div>
+        {% if page.interests %}
+          <div class="person-interests">
+            {% for interest in page.interests %}
+              <span class="tag">{{ interest }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if page.bio %}
+<section class="section" style="padding-top: 1.25rem; padding-bottom: 1rem;">
+  <div class="container">
+    <h2 class="section-title section-title--left">About</h2>
+    <p class="person-page-bio">{{ page.bio }}</p>
+  </div>
+</section>
+{% endif %}
+
+{% comment %} Auto-populate projects by matching contributor name, active first {% endcomment %}
+{% assign _person_projects_all = "" | split: "" %}
+{% for proj in site.projects %}
+  {% assign _proj_contrib_str = proj.contributors | join: "|" %}
+  {% if _proj_contrib_str contains _person_base %}
+    {% assign _person_projects_all = _person_projects_all | push: proj %}
+  {% endif %}
+{% endfor %}
+{% assign _person_projects = "" | split: "" %}
+{% for proj in _person_projects_all %}{% unless proj.status == "completed" or proj.status == "archived" %}{% assign _person_projects = _person_projects | push: proj %}{% endunless %}{% endfor %}
+{% for proj in _person_projects_all %}{% if proj.status == "completed" or proj.status == "archived" %}{% assign _person_projects = _person_projects | push: proj %}{% endif %}{% endfor %}
+
+{% comment %} Auto-populate software by matching contributor name, active first {% endcomment %}
+{% assign _person_software_all = "" | split: "" %}
+{% for sw in site.software %}
+  {% assign _sw_contrib_str = sw.contributors | join: "|" %}
+  {% if _sw_contrib_str contains _person_base %}
+    {% assign _person_software_all = _person_software_all | push: sw %}
+  {% endif %}
+{% endfor %}
+{% assign _person_software = "" | split: "" %}
+{% for sw in _person_software_all %}{% unless sw.status == "completed" or sw.status == "archived" %}{% assign _person_software = _person_software | push: sw %}{% endunless %}{% endfor %}
+{% for sw in _person_software_all %}{% if sw.status == "completed" or sw.status == "archived" %}{% assign _person_software = _person_software | push: sw %}{% endif %}{% endfor %}
+
+{% if _person_projects.size > 0 or _person_software.size > 0 %}
+<section class="section" style="padding-top: 1.25rem; padding-bottom: 1.25rem;">
+  <div class="container">
+
+    {% if _person_projects.size > 0 %}
+    <h2 class="section-title section-title--left">Projects</h2>
+    <ul class="person-item-list">
+      {% for proj in _person_projects %}
+        <li class="person-item-list__entry">
+          {% if proj.content.size > 5 %}
+            <a href="{{ proj.url | relative_url }}" class="person-item-list__title">{{ proj.project_name }}</a>
+          {% else %}
+            <span class="person-item-list__title">{{ proj.project_name }}</span>
+          {% endif %}
+          {% if proj.status %}<span class="badge badge--{{ proj.status }}">{{ proj.status | capitalize }}</span>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if _person_software.size > 0 %}
+    <h2 class="section-title section-title--left" {% if _person_projects.size > 0 %}style="margin-top: 1rem;"{% endif %}>Software</h2>
+    <ul class="person-item-list">
+      {% for sw in _person_software %}
+        <li class="person-item-list__entry">
+          {% if sw.content.size > 5 %}
+            <a href="{{ sw.url | relative_url }}" class="person-item-list__title">{{ sw.project_name }}</a>
+          {% else %}
+            <span class="person-item-list__title">{{ sw.project_name }}</span>
+          {% endif %}
+          {% if sw.status %}<span class="badge badge--{{ sw.status }}">{{ sw.status | capitalize }}</span>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+  </div>
+</section>
+{% endif %}
+
+{% comment %} Auto-populate publications by matching author name {% endcomment %}
+{% assign _person_pubs = "" | split: "" %}
+{% for pub in site.publications %}
+  {% assign _pub_authors_str = pub.authors | join: "|" %}
+  {% if _pub_authors_str contains _person_base %}
+    {% assign _person_pubs = _person_pubs | push: pub %}
+  {% endif %}
+{% endfor %}
+{% assign _person_pubs = _person_pubs | sort: "year" | reverse %}
+
+{% if _person_pubs.size > 0 %}
+<section class="section" style="padding-top: 1.25rem; padding-bottom: 1.25rem;">
+  <div class="container">
+    <h2 class="section-title section-title--left">Publications</h2>
+    {% for pub in _person_pubs %}
+      {% capture _paper_url %}{% include pub_paper_url.html doi=pub.doi arxiv=pub.arxiv pdf=pub.pdf %}{% endcapture %}
+      {% assign _paper_url = _paper_url | strip %}
+      <div class="publication-entry">
+        <div class="pub-type-col">
+          <div class="pub-col-group">
+            {% unless pub.type == blank %}
+              <span class="badge badge--{{ pub.type | replace: "_", "-" }}">{{ pub.type | replace: "_", " " | replace: "-", " " | capitalize }}</span>
+            {% endunless %}
+            {% if _paper_url %}
+              <a href="{{ _paper_url }}" target="_blank" rel="noopener"><i class="fas fa-file-alt"></i> Paper</a>
+            {% endif %}
+            {% if pub.code %}
+              <a href="{{ pub.code }}" target="_blank" rel="noopener"><i class="fab fa-github"></i> Code</a>
+            {% endif %}
+            {% if pub.content.size > 5 %}
+              <a href="{{ pub.url | relative_url }}">Read more</a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="pub-body">
+          <div class="pub-title">
+            {% if pub.content.size > 5 %}
+              <a href="{{ pub.url | relative_url }}">{{ pub.title }}</a>
+            {% else %}
+              {{ pub.title }}
+            {% endif %}
+          </div>
+          <div class="pub-meta">
+            <span class="pub-authors">{{ pub.authors | join: ", " }}</span>
+            {% if pub.venue %}<span class="pub-venue">{{ pub.venue }}{% if pub.year %}, {{ pub.year }}{% endif %}</span>{% endif %}
+          </div>
+          {% if pub.tags %}
+            <div class="pub-tags">
+              {% for tag in pub.tags %}
+                <span class="tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

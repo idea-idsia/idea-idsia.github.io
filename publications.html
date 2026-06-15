@@ -71,8 +71,7 @@ permalink: /publications/
 
     {% comment %} IDeA member names (strip honorifics after comma) {% endcomment %}
     {% assign member_names = "" | split: "" %}
-    {% for member_entry in site.data.people %}
-      {% assign member = member_entry[1] %}
+    {% for member in site.people %}
       {% assign member_name = member.name | split: ", " | first %}
       {% assign member_names = member_names | push: member_name %}
     {% endfor %}

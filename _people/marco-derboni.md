@@ -1,3 +1,6 @@
+---
+layout: person
+title: Marco Derboni
 name: Marco Derboni
 roles:
   - Researcher
@@ -12,3 +15,4 @@ interests:
   - Machine Learning
   - Energy Systems Management
   - Smart Mobility Systems
+---

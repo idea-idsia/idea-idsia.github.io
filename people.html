@@ -21,10 +21,7 @@ permalink: /people/
     {% assign role_order = "Team Leader,Professor,Associate Professor,Assistant Professor,Senior Researcher,Researcher,Postdoc,Research Scientist,PhD Student,Master Student,Visiting Researcher" | split: "," %}
 
     {% comment %} Pre-build a flat array sorted by last name (extracted from name field) {% endcomment %}
-    {% assign all_people_raw = "" | split: "" %}
-    {% for person_hash in site.data.people %}
-      {% assign all_people_raw = all_people_raw | push: person_hash[1] %}
-    {% endfor %}
+    {% assign all_people_raw = site.people %}
     {% assign last_name_keys = "" | split: "" %}
     {% for person in all_people_raw %}
       {% assign base_name = person.name | split: "," | first %}
@@ -67,13 +64,8 @@ permalink: /people/
 
     <div class="people-grid">
       {% for person in current_members %}
-        {% assign person_anchor = "" %}
-        {% for ph in site.data.people %}
-          {% if ph[1].name == person.name %}
-            {% assign person_anchor = ph[0] | replace: "_", "-" %}
-          {% endif %}
-        {% endfor %}
-        <div class="person-card"{% if person_anchor != "" %} id="{{ person_anchor }}"{% endif %}>
+        {% assign person_anchor = person.url | remove: "/people/" | remove: "/" %}
+        <div class="person-card" id="{{ person_anchor }}">
           <div class="person-photo-wrap">
             {% if person.photo %}
               {% if forloop.index == 1 %}
@@ -90,11 +82,7 @@ permalink: /people/
           </div>
           <div class="person-info">
             <div class="person-name">
-              {% if person.website %}
-                <a href="{{ person.website }}" target="_blank" rel="noopener">{{ person.name }}</a>
-              {% else %}
-                {{ person.name }}
-              {% endif %}
+              <a href="{{ person.url }}">{{ person.name }}</a>
             </div>
             <div class="person-role">{% for r in person.roles %}<span style="white-space:nowrap">{{ r }}</span>{% unless forloop.last %} · {% endunless %}{% endfor %}</div>
             <div class="person-links">
@@ -119,9 +107,8 @@ permalink: /people/
 
     {% comment %} JSON-LD Person structured data for Google Knowledge Panel / sameAs linking {% endcomment %}
     {% for person in current_members %}
-      {% assign _pk = "" %}{% for ph in site.data.people %}{% if ph[1].name == person.name %}{% assign _pk = ph[0] | replace: "_", "-" %}{% endif %}{% endfor %}
       {% assign _pn = person.name | split: "," | first %}
-      {% assign _pu = site.url | append: "/people/#" | append: _pk %}
+      {% assign _pu = person.url | absolute_url %}
       {% assign _sa = "" | split: "" %}{% if person.website %}{% assign _sa = _sa | push: person.website %}{% endif %}{% if person.orcid %}{% assign _sa = _sa | push: person.orcid %}{% endif %}{% if person.scholar %}{% assign _sa = _sa | push: person.scholar %}{% endif %}{% if person.linkedin %}{% assign _sa = _sa | push: person.linkedin %}{% endif %}{% if person.github %}{% assign _sa = _sa | push: person.github %}{% endif %}
 <script type="application/ld+json">
 {
