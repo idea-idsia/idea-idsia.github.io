@@ -18,6 +18,44 @@
     }
 }
 
+.section--tinted .tag {
+    background-color: $color-white;
+    color: $color-teal-dark;
+}
+
+// --- Person page compact project/software list -------------------------------
+
+.person-item-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &__entry {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        padding: 0.65rem 0;
+        border-bottom: 1px solid $color-gray-200;
+
+        &:first-child {
+            border-top: 1px solid $color-gray-200;
+        }
+    }
+
+    &__title {
+        flex: 1;
+        font-size: $font-size-md;
+        font-weight: 500;
+        color: $color-navy;
+        text-decoration: none;
+
+        &:hover {
+            color: $color-teal-dark;
+        }
+    }
+}
+
+
 .badge {
     display: inline-block;
     padding: 3px 10px;
@@ -466,6 +504,162 @@
         flex-wrap: wrap;
         gap: 4px;
     }
+}
+
+// --- Individual Person Page --------------------------------------------------
+
+.person-page-header {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-lg;
+
+    @media (max-width: 640px) {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+.person-page-photo-wrap {
+    position: relative;
+    flex-shrink: 0;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 32px;
+        height: 32px;
+        border-top: 6px solid $color-teal;
+        border-left: 6px solid $color-teal;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 32px;
+        height: 32px;
+        border-bottom: 6px solid $color-teal;
+        border-right: 6px solid $color-teal;
+        z-index: 1;
+        pointer-events: none;
+    }
+}
+
+.person-page-photo {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: $border-radius;
+    display: block;
+
+    @media (max-width: 640px) {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+.person-page-photo-placeholder {
+    width: 180px;
+    height: 180px;
+    border-radius: $border-radius;
+    background: linear-gradient(135deg, $color-navy 0%, $color-teal 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 700;
+}
+
+.person-page-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.person-page-name {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $color-white;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.person-page-roles {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    font-size: $font-size-md;
+    color: $color-teal;
+    font-weight: 500;
+}
+
+.person-page-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    @media (max-width: 640px) {
+        justify-content: center;
+    }
+}
+
+.person-page-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    border: 1.5px solid rgba($color-teal, 0.5);
+    color: $color-teal;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+    &:hover {
+        background-color: $color-teal;
+        border-color: $color-teal;
+        color: $color-navy;
+        text-decoration: none;
+    }
+}
+
+.person-page-name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.person-page-email {
+    font-size: 0.95rem;
+    color: $color-white;
+    font-family: $font-mono;
+    letter-spacing: 0.01em;
+    user-select: all;
+    white-space: nowrap;
+    padding-left: 0.75rem;
+    border-left: 2px solid rgba($color-teal, 0.5);
+    line-height: 1;
+}
+
+.person-page-bio {
+    font-size: $font-size-lg;
+    color: $color-text;
+    line-height: $line-height;
+}
+
+.section-title--left {
+    text-align: left;
+    margin-bottom: 0.75rem;
 }
 
 // --- Project Card ------------------------------------------------------------

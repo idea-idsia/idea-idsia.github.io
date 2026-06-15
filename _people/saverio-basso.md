@@ -1,3 +1,6 @@
+---
+layout: person
+title: Saverio Basso
 name: Saverio Basso, PhD
 roles:
   - Researcher
@@ -14,3 +17,4 @@ interests:
   - Routing Problems
   - Decomposition methods
   - Heuristic and Exact Algorithms
+---

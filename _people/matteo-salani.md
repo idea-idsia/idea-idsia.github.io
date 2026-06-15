@@ -1,3 +1,6 @@
+---
+layout: person
+title: Matteo Salani
 name: Matteo Salani, PhD
 roles:
   - Team Leader
@@ -15,3 +18,4 @@ interests:
   - Transportation and Logistics
   - Energy Management
   - Heuristic and Exact Algorithms
+---

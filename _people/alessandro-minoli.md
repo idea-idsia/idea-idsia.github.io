@@ -1,3 +1,6 @@
+---
+layout: person
+title: Alessandro Minoli
 name: Alessandro Minoli
 roles:
   - PhD Student
@@ -13,3 +16,4 @@ interests:
   - Machine Learning
   - Heuristic and Exact Algorithms
   - Routing Problems
+---

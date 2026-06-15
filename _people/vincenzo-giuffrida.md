@@ -1,12 +1,16 @@
+---
+layout: person
+title: Vincenzo Giuffrida
 name: Vincenzo Giuffrida
 roles:
-    - Researcher
+  - Researcher
 email: vincenzo.giuffrida@supsi.ch
 website: https://www.supsi.ch/en/vincenzo-giuffrida
 photo: /assets/images/people/vincenzo_giuffrida.jpg
 orcid: https://orcid.org/0009-0009-4627-7391
 linkedin: https://www.linkedin.com/in/vincenzo-giuffrida/
 interests:
-    - Software Engineering
-    - Multi Agent Systems
-    - Machine Learning
+  - Software Engineering
+  - Multi-Agent Systems
+  - Machine Learning
+---

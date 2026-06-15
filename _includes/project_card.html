@@ -36,12 +36,14 @@
       {% endif %}
       {% if _item.funding %}<span class="project-funding-badge">{{ _item.funding }}</span>{% endif %}
     </div>
+    {% unless include.hide_details %}
     <p class="project-description">{{ _item.short_summary }}</p>
     <div class="project-tags">
       {% for kw in _item.keywords %}
         <span class="tag">{{ kw }}</span>
       {% endfor %}
     </div>
+    {% endunless %}
     {% if _item.content.size > 5 %}
     <div class="project-readmore">
       <a href="{{ _item.url | relative_url }}">Read more</a>
