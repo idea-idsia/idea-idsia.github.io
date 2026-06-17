@@ -1,6 +1,6 @@
 ---
 layout: publication
-title: "Automated pain spots recognition algorithm provided by a web service-based platform (Preprint)"
+title: "Automated Pain Spots Recognition Algorithm Provided by a Web Service–Based Platform: Instrument Validation Study"
 authors:
     - Corrado Cescon
     - Giuseppe Landolfi
@@ -28,28 +28,32 @@ abstract: >
   this study demonstrates that a web platform can accurately analyze pain drawings acquired through various digital scanners. The findings support the use of 
   simple and cost-effective mobile devices for pain drawing acquisition, without compromising the quality of data. Standardizing the scanning process using 
   the proposed platform can contribute to more efficient and consistent pain drawing analysis in clinical and research settings.
-year: 2023
-type: preprint
+year: 2024
+type: journal
 venue: JMIR Preprints
-pdf: http://dx.doi.org/10.2196/preprints.53119
+pdf: http://dx.doi.org/10.2196/53119
 tags:
-    - mHealth
-    - Pain Recognition
-    - Web Service
-    - Preprint
+    - Pain Drawing
+    - Image Processing
+    - Body Charts
+
 ---
 
 ## BibTeX
 
 ```bibtex
-    @article{Cescon2023,
-      title = {Automated pain spots recognition algorithm provided by a web service-based platform (Preprint)},
-      url = {http://dx.doi.org/10.2196/preprints.53119},
-      DOI = {10.2196/preprints.53119},
+    @article{Cescon2024,
+      title = {Automated Pain Spots Recognition Algorithm Provided by a Web Service–Based Platform: Instrument Validation Study},
+      volume = {12},
+      ISSN = {2291-5222},
+      url = {http://dx.doi.org/10.2196/53119},
+      DOI = {10.2196/53119},
+      journal = {JMIR mHealth and uHealth},
       publisher = {JMIR Publications Inc.},
       author = {Cescon,  Corrado and Landolfi,  Giuseppe and Bonomi,  Niko and Derboni,  Marco and Giuffrida,  Vincenzo and Rizzoli,  Andrea Emilio and Maino,  Paolo and Koetsier,  Eva and Barbero,  Marco},
-      year = {2023},
-      month = Sept 
+      year = {2024},
+      month = Aug,
+      pages = {e53119–e53119}
     }
 
 ```
