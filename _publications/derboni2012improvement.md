@@ -1,6 +1,6 @@
 ---
 layout: publication
-title: "Improvement of algorithms for image processing from 3D scanners using Simulated Annealing"
+title: "Miglioramento di algoritmi di elaborazione di immagini da scanner 3D tramite Simulated Annealing"
 authors:
     - Marco Derboni
     - Evelina Lamma

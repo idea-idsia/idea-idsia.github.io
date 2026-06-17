@@ -36,12 +36,12 @@ tags:
 ## BibTeX
 
 ```bibtex
-@article{derboni2021flexible,
-  title   = {Flexible Scheduling of Residential Energy Loads, the Optiflex concept},
-  author  = {Derboni, Marco and Salani, Matteo and Rizzoli, Andrea Emilio},
-  year    = {2021},
-  url     = {https://ceur-ws.org/Vol-3116/Paper_11.pdf},
-  journal = {CEUR Workshop Proceedings},
-  volume  = {3116}    
-}
+    @article{derboni2021flexible,
+      title   = {Flexible Scheduling of Residential Energy Loads, the Optiflex concept},
+      author  = {Derboni, Marco and Salani, Matteo and Rizzoli, Andrea Emilio},
+      year    = {2021},
+      url     = {https://ceur-ws.org/Vol-3116/Paper_11.pdf},
+      journal = {CEUR Workshop Proceedings},
+      volume  = {3116}    
+    }
 ```
