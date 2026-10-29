@@ -34,7 +34,7 @@ keywords:
 contributors:
     - Matteo Salani
     - Gianpiero Mattei (ISTEPS - SUPSI)
-    - Fabian Tomasovic
+    - Fabian Tomasović
 
 partners:
     - LIUC – Università Cattaneo (coordinator italian side)
