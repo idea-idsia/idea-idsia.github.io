@@ -4,7 +4,7 @@ title: "A Comparative Study of Community Detection Techniques for Large Evolving
 authors:
   - Lauranne Coppens
   - Jonathan De Venter
-  - Sandra Mitrovi{\'{c}}
+  - Sandra Mitrović
 venue: "Machine Learning and Knowledge Discovery in Databases"
 year: 2020
 type: conference

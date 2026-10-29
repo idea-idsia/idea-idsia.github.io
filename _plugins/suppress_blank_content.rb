@@ -17,6 +17,8 @@ module Jekyll
           next unless doc.content.strip.empty?
 
           doc.define_singleton_method(:write?) { false }
+          # Keep the unwritten page out of jekyll-sitemap, which would otherwise list a 404.
+          doc.data['sitemap'] = false
         end
       end
     end

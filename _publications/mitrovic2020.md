@@ -2,7 +2,7 @@
 layout: publication
 title: "Representation Learning in Graphs for Credit Card Fraud Detection"
 authors:
-  - Raffa\"el Van Belle
+  - Raffaël Van Belle
   - Sandra Mitrović
   - Jochen De Weerdt
 venue: "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)"
