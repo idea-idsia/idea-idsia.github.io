@@ -4,7 +4,7 @@ title: "Neural machine translation for conditional generation of novel procedure
 authors:
   - Joppe Geluykens
   - Sandra Mitrović
-  - Carlos Ortega-V{\'a}zquez
+  - Carlos Ortega-Vázquez
   - Teodoro Laino
   - Alain Vaucher
   - Jochen de Weerdt

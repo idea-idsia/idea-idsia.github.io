@@ -1,8 +1,8 @@
 ---
 layout: publication
-title: "tcc2vec: {RFM}-informed representation learning on call graphs for churn prediction"
+title: "tcc2vec: RFM-informed representation learning on call graphs for churn prediction"
 authors:
-  - Sandra Mitrovi{\'{c}}
+  - Sandra Mitrović
   - Bart Baesens
   - Wilfried Lemahieu
   - Jochen De Weerdt

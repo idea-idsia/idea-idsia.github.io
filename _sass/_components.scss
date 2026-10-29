@@ -1254,6 +1254,7 @@
     .hero-full-name {
         font-size: clamp(0.75rem, 1.8vw, 1rem);
         font-weight: 500;
+        line-height: inherit;
         color: $color-white;
         letter-spacing: 0.18em;
         text-transform: uppercase;
@@ -1311,6 +1312,10 @@
             color: $color-navy;
             line-height: 1.6;
             margin: 0;
+        }
+
+        p + p {
+            margin-top: $spacing-xs;
         }
     }
 

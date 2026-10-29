@@ -2,7 +2,7 @@
 layout: publication
 title: "A Preliminary Study on {NLP}-Based Personalized Support for Type 1 Diabetes Management"
 authors:
-  - Sandra Mitrovi{\'c}
+  - Sandra Mitrović
   - Federico Fontana
   - Andrea Zignoli
   - Felipe Mattioni Maturana

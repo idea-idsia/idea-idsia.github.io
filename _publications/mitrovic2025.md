@@ -1,6 +1,6 @@
 ---
 layout: publication
-title: "Assessing the~Trustworthiness of~Large Language Models on~Domain-Specific Questions"
+title: "Assessing the Trustworthiness of Large Language Models on Domain-Specific Questions"
 authors:
   - Sandra Mitrović
   - Matteo Mazzola

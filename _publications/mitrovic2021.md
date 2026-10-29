@@ -1,6 +1,6 @@
 ---
 layout: publication
-title: "AngryBERT: Joint Learning Target and~Emotion for Hate Speech Detection"
+title: "AngryBERT: Joint Learning Target and Emotion for Hate Speech Detection"
 authors:
   - Md Rabiul Awal
   - Rui Cao
